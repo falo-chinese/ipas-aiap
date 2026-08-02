@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iPAS 圖片題人工校對台</title>
+<style>
+:root{
+  --bg:#f6f7f9; --panel:#fff; --ink:#16181d; --dim:#5f6673; --line:#e2e5ea;
+  --accent:#2563eb; --ok:#0f9d58; --warn:#e8a33d; --bad:#d93b3b; --purple:#7c3aed;
+  --ins:#d7f5dd; --del:#ffdce0; --code:#f2f4f7;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0e1014;--panel:#171a21;--ink:#e6e8ec;--dim:#9aa3b2;--line:#272c36;
+        --ins:#173d28;--del:#4a1f24;--code:#1d212a;}
+}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.65 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+     background:var(--bg);color:var(--ink)}
+button{font:inherit;cursor:pointer;border-radius:7px;border:1px solid var(--line);
+       background:var(--panel);color:var(--ink);padding:6px 12px}
+button:hover{border-color:var(--accent)}
+button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* ---------- layout ---------- */
+header{position:sticky;top:0;z-index:30;background:var(--panel);border-bottom:1px solid var(--line);
+       padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+h1{font-size:15px;margin:0;font-weight:700;letter-spacing:.02em}
+.bar{flex:1;min-width:160px;height:7px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .25s}
+.wrap{display:grid;grid-template-columns:224px 1fr;gap:0;align-items:start}
+nav{position:sticky;top:53px;max-height:calc(100vh - 53px);overflow:auto;
+    border-right:1px solid var(--line);background:var(--panel);padding:8px}
+main{padding:18px 22px 120px;max-width:1180px}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}nav{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line)}}
+
+/* ---------- nav list ---------- */
+.navitem{display:flex;gap:7px;align-items:center;padding:5px 8px;border-radius:6px;cursor:pointer;font-size:12.5px}
+.navitem:hover{background:var(--code)}
+.navitem.cur{background:var(--accent);color:#fff}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none}
+.dot.v1{background:var(--ok)}.dot.v2{background:var(--warn)}
+.dot.v3{background:var(--bad)}.dot.v4{background:var(--purple)}
+.navitem .t{margin-left:auto;font-size:10px;opacity:.65;font-weight:700}
+
+/* ---------- card ---------- */
+.meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.qid{font-size:24px;font-weight:800;letter-spacing:.01em}
+.tag{font-size:11px;padding:2px 8px;border-radius:20px;border:1px solid var(--line);color:var(--dim)}
+.tag.A{background:var(--del);color:var(--bad);border-color:transparent;font-weight:700}
+.tag.B{background:#fdf0d5;color:#9a6b12;border-color:transparent;font-weight:700}
+.tag.C{background:var(--code)}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--dim);
+   margin:22px 0 8px;font-weight:700}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.shot{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block;
+      margin-bottom:10px;cursor:zoom-in;background:#fff}
+.pgl{font-size:11px;color:var(--dim);margin:0 0 4px}
+
+/* ---------- compare ---------- */
+table.cmp{width:100%;border-collapse:collapse;table-layout:fixed}
+table.cmp th{font-size:11px;color:var(--dim);text-align:left;padding:4px 8px;font-weight:700;
+             text-transform:uppercase;letter-spacing:.07em}
+table.cmp td{vertical-align:top;padding:7px 8px;border-top:1px solid var(--line);font-size:13.5px}
+table.cmp td.lab{width:62px;color:var(--dim);font-size:11.5px;white-space:nowrap}
+ins{background:var(--ins);text-decoration:none;border-radius:3px}
+del{background:var(--del);text-decoration:line-through;border-radius:3px;opacity:.85}
+.same{color:var(--dim)}
+.ansbadge{display:inline-block;min-width:22px;text-align:center;font-weight:800;border-radius:5px;padding:1px 6px}
+.ansbadge.eq{background:var(--ins)}.ansbadge.ne{background:var(--del)}
+
+/* ---------- verdict + edit ---------- */
+.verdicts{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
+.vbtn{padding:9px 14px;font-weight:600;font-size:13px}
+.vbtn[data-v="1"].on{background:var(--ok);border-color:var(--ok);color:#fff}
+.vbtn[data-v="2"].on{background:var(--warn);border-color:var(--warn);color:#231a05}
+.vbtn[data-v="3"].on{background:var(--bad);border-color:var(--bad);color:#fff}
+.vbtn[data-v="4"].on{background:var(--purple);border-color:var(--purple);color:#fff}
+.fieldrow{display:grid;grid-template-columns:62px 1fr;gap:8px;align-items:start;margin-bottom:7px}
+.fieldrow label{font-size:11.5px;color:var(--dim);padding-top:8px}
+textarea,input[type=text]{width:100%;font:inherit;padding:7px 9px;border:1px solid var(--line);
+  border-radius:7px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea:focus,input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.mini{font-size:11.5px;padding:4px 9px}
+.hint{font-size:11.5px;color:var(--dim)}
+.footbar{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);
+   padding:9px 16px;display:flex;gap:10px;align-items:center;z-index:30;flex-wrap:wrap}
+kbd{font:11px ui-monospace,monospace;background:var(--code);border:1px solid var(--line);
+    border-radius:4px;padding:1px 5px}
+#lb{position:fixed;inset:0;background:#000c;z-index:100;display:none;overflow:auto;padding:20px;cursor:zoom-out}
+#lb img{max-width:none;width:auto;display:block;margin:0 auto;background:#fff;border-radius:6px}
+.warnbox{background:var(--del);border-radius:8px;padding:9px 12px;font-size:12.5px;margin-bottom:12px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>iPAS 圖片題人工校對台</h1>
+  <span class="hint" id="cnt"></span>
+  <div class="bar"><i id="prog"></i></div>
+  <span id="filters"></span>
+  <button class="mini" id="expJson">匯出 JSON</button>
+  <button class="mini" id="expCsv">匯出修正 CSV</button>
+  <button class="mini" id="impBtn">載入進度</button>
+  <input type="file" id="imp" accept=".json" hidden>
+</header>
+
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+
+<div class="footbar">
+  <button id="prev">← 上一題</button>
+  <button id="next">下一題 →</button>
+  <span class="hint">
+    <kbd>←</kbd><kbd>→</kbd> 換題 ·
+    <kbd>1</kbd> CSV可用 · <kbd>2</kbd> 已修正 · <kbd>3</kbd> 必須有圖 · <kbd>4</kbd> 待議 ·
+    <kbd>P</kbd> 套用PDF文字 · <kbd>Esc</kbd> 關閉放大
+  </span>
+  <span class="hint" id="saved" style="margin-left:auto"></span>
+</div>
+
+<div id="lb"><img id="lbimg" alt=""></div>
+
+<script id="DATA" type="application/json">__DATA__</script>
+<script>
+const DATA = JSON.parse(document.getElementById('DATA').textContent);
+const KEY = 'ipas_img_review_v1';
+const VERDICT = {1:'CSV可用',2:'已修正',3:'必須有圖',4:'待議'};
+let state = {}, cur = 0, filter = 'all';
+
+try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ state = {}; }
+
+function st(id){
+  if(!state[id]){
+    const d = DATA.find(x=>x.id===id);
+    state[id] = {v:0, stem:'', opts:['','','',''], ans:d.pdfAns, note:''};
+  }
+  return state[id];
+}
+function save(){
+  localStorage.setItem(KEY, JSON.stringify(state));
+  const s = document.getElementById('saved');
+  s.textContent = '已儲存 ' + new Date().toLocaleTimeString('zh-TW');
+  clearTimeout(save._t); save._t = setTimeout(()=>s.textContent='', 2500);
+}
+
+/* ---------- character diff (LCS) ---------- */
+function diff(a, b){
+  const n=a.length, m=b.length;
+  // too big to LCS: fall back to "all different" so each side still shows
+  // only its own text (marking both as equal would concatenate them)
+  if(n*m > 400000) return [[-1,a],[1,b]];
+  const dp = new Uint32Array((n+1)*(m+1));
+  for(let i=n-1;i>=0;i--)
+    for(let j=m-1;j>=0;j--)
+      dp[i*(m+1)+j] = a[i]===b[j] ? dp[(i+1)*(m+1)+j+1]+1
+                    : Math.max(dp[(i+1)*(m+1)+j], dp[i*(m+1)+j+1]);
+  const out=[]; let i=0,j=0;
+  const push=(t,c)=>{ const l=out[out.length-1]; if(l&&l[0]===t) l[1]+=c; else out.push([t,c]); };
+  while(i<n && j<m){
+    if(a[i]===b[j]){ push(0,a[i]); i++; j++; }
+    else if(dp[(i+1)*(m+1)+j] >= dp[i*(m+1)+j+1]){ push(-1,a[i]); i++; }
+    else { push(1,b[j]); j++; }
+  }
+  while(i<n) push(-1,a[i++]);
+  while(j<m) push(1,b[j++]);
+  return out;
+}
+const esc = s => (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function renderDiff(a, b, side){
+  const d = diff(a||'', b||'');
+  return d.map(([t,c]) => t===0 ? esc(c)
+              : side==='pdf' ? (t===-1 ? '<del>'+esc(c)+'</del>' : '')
+                             : (t===1  ? '<ins>'+esc(c)+'</ins>' : '')).join('');
+}
+
+/* ---------- nav ---------- */
+function visible(){
+  return DATA.filter(d => filter==='all' ? true
+        : filter==='todo' ? !st(d.id).v
+        : filter==='done' ? !!st(d.id).v
+        : d.tier===filter);
+}
+function drawNav(){
+  const vis = visible();
+  document.getElementById('nav').innerHTML = vis.map(d=>{
+    const s = st(d.id);
+    const i = DATA.indexOf(d);
+    return `<div class="navitem ${i===cur?'cur':''}" data-i="${i}">
+      <span class="dot v${s.v}"></span><span>${d.id}</span><span class="t">${d.tier}</span></div>`;
+  }).join('') || '<div class="hint" style="padding:10px">（此篩選無項目）</div>';
+  document.querySelectorAll('.navitem').forEach(el=>
+    el.onclick = ()=>{ cur = +el.dataset.i; draw(); });
+
+  const done = DATA.filter(d=>st(d.id).v).length;
+  document.getElementById('prog').style.width = (done/DATA.length*100)+'%';
+  document.getElementById('cnt').textContent = `${done} / ${DATA.length} 已審`;
+}
+function drawFilters(){
+  const opts = [['all','全部'],['todo','未審'],['done','已審'],['A','Tier A'],['B','Tier B'],['C','Tier C']];
+  document.getElementById('filters').innerHTML = opts.map(([k,l])=>{
+    const n = k==='all'?DATA.length
+            : k==='todo'?DATA.filter(d=>!st(d.id).v).length
+            : k==='done'?DATA.filter(d=>st(d.id).v).length
+            : DATA.filter(d=>d.tier===k).length;
+    return `<button class="mini ${filter===k?'on':''}" data-f="${k}">${l} ${n}</button>`;
+  }).join(' ');
+  document.querySelectorAll('#filters button').forEach(b=>
+    b.onclick = ()=>{ filter=b.dataset.f;
+      const v=visible(); if(v.length && !v.includes(DATA[cur])) cur=DATA.indexOf(v[0]);
+      draw(); });
+}
+
+/* ---------- main ---------- */
+const TIERTXT = {A:'Tier A · PDF 有圖、CSV 未補寫', B:'Tier B · CSV 已文字補寫', C:'Tier C · 無內嵌圖（可能誤報）'};
+function draw(){
+  const d = DATA[cur], s = st(d.id);
+  const optRows = d.pdfOpts.map((o,k)=>`
+    <tr><td class="lab">選項 ${k+1}</td>
+        <td>${renderDiff(o, d.csvOpts[k].replace(/^\(\s*[1-4]\s*\)\s*/,''), 'pdf')}</td>
+        <td>${renderDiff(o, d.csvOpts[k].replace(/^\(\s*[1-4]\s*\)\s*/,''), 'csv')}</td></tr>`).join('');
+
+  document.getElementById('main').innerHTML = `
+  <div class="meta">
+    <span class="qid">${d.id}</span>
+    <span class="tag ${d.tier}">${TIERTXT[d.tier]}</span>
+    <span class="tag">${d.cat}</span>
+    <span class="tag">PDF 第 ${d.pdfq} 題 · 第 ${d.page} 頁</span>
+    <span class="tag">內嵌圖 ${d.nimg}</span>
+    <span class="tag">CSV 內容判定 ${d.contentVerdict}</span>
+  </div>
+
+  ${d.tier==='A' ? `<div class="warnbox"><b>此題 CSV 缺少圖片資訊。</b>請對照下方原始版面，判斷是否能以文字完整描述；若不能，請選「必須有圖」。</div>`:''}
+
+  <h2>① 官方 PDF 原始版面（點圖放大）</h2>
+  <div class="panel">
+    ${d.shots.map(sh=>`<p class="pgl">第 ${sh.page} 頁</p><img class="shot" loading="lazy" width="${sh.w}" height="${sh.h}" src="${sh.src}" alt="第${sh.page}頁">`).join('')}
+    <p class="hint">內嵌圖片尺寸：${esc(d.imgsize)}</p>
+  </div>
+
+  <h2>② PDF 抽取文字 ↔ CSV 現況（<del>紅</del>＝CSV 缺少，<ins>綠</ins>＝CSV 多出）</h2>
+  <div class="panel">
+    <table class="cmp">
+      <tr><th></th><th>PDF（官方原文）</th><th>CSV（現況）</th></tr>
+      <tr><td class="lab">題幹</td>
+          <td>${renderDiff(d.pdfStem, d.csvStem, 'pdf')}</td>
+          <td>${renderDiff(d.pdfStem, d.csvStem, 'csv')}</td></tr>
+      ${optRows}
+      <tr><td class="lab">答案</td>
+          <td><span class="ansbadge ${d.pdfAns===d.csvAns?'eq':'ne'}">${d.pdfAns}</span></td>
+          <td><span class="ansbadge ${d.pdfAns===d.csvAns?'eq':'ne'}">${d.csvAns}</span></td></tr>
+    </table>
+    ${d.diffDetail && d.diffDetail!=='完全一致'
+      ? `<p class="hint" style="margin:10px 0 0">自動判定：${esc(d.diffDetail)}</p>` : ''}
+  </div>
+
+  <h2>③ 你的判定</h2>
+  <div class="panel">
+    <div class="verdicts">
+      ${[1,2,3,4].map(v=>`<button class="vbtn ${s.v===v?'on':''}" data-v="${v}">${v}. ${VERDICT[v]}</button>`).join('')}
+    </div>
+    <p class="hint">
+      <b>CSV可用</b>＝現況即可入庫 ·
+      <b>已修正</b>＝我在下方改好了 ·
+      <b>必須有圖</b>＝純文字無法承載，資料庫需存圖 ·
+      <b>待議</b>＝稍後再看
+    </p>
+  </div>
+
+  <h2>④ 修正內容（留白＝沿用 CSV 現況）</h2>
+  <div class="panel">
+    <p style="margin:0 0 10px">
+      <button class="mini" id="usePdf">↓ 套用 PDF 文字</button>
+      <button class="mini" id="useCsv">↓ 套用 CSV 文字</button>
+      <button class="mini" id="clr">清空</button>
+    </p>
+    <div class="fieldrow"><label>題幹</label><textarea id="f_stem" rows="3">${esc(s.stem)}</textarea></div>
+    ${[0,1,2,3].map(k=>`<div class="fieldrow"><label>選項 ${k+1}</label>
+        <textarea id="f_o${k}" rows="2">${esc(s.opts[k])}</textarea></div>`).join('')}
+    <div class="fieldrow"><label>正確答案</label>
+      <div>${[1,2,3,4].map(v=>`<button class="mini ansb ${s.ans===v?'on':''}" data-a="${v}">${v}</button>`).join(' ')}</div></div>
+    <div class="fieldrow"><label>備註</label>
+      <textarea id="f_note" rows="2" placeholder="例：圖為 VGG16 summary，已轉為表格描述">${esc(s.note)}</textarea></div>
+  </div>`;
+
+  document.querySelectorAll('.vbtn').forEach(b=> b.onclick = ()=>{ setV(+b.dataset.v); });
+  document.querySelectorAll('.ansb').forEach(b=> b.onclick = ()=>{
+    st(d.id).ans = +b.dataset.a; save(); draw(); });
+  const bind = (el, fn) => { const e=document.getElementById(el); if(e) e.oninput = ()=>{ fn(e.value); save(); }; };
+  bind('f_stem', v=> st(d.id).stem = v);
+  [0,1,2,3].forEach(k=> bind('f_o'+k, v=> st(d.id).opts[k] = v));
+  bind('f_note', v=> st(d.id).note = v);
+
+  document.getElementById('usePdf').onclick = ()=>{
+    const t=st(d.id); t.stem=d.pdfStem; t.opts=d.pdfOpts.slice(); t.ans=d.pdfAns; save(); draw(); };
+  document.getElementById('useCsv').onclick = ()=>{
+    const t=st(d.id); t.stem=d.csvStem;
+    t.opts=d.csvOpts.map(o=>o.replace(/^\(\s*[1-4]\s*\)\s*/,'')); t.ans=d.csvAns; save(); draw(); };
+  document.getElementById('clr').onclick = ()=>{
+    const t=st(d.id); t.stem=''; t.opts=['','','','']; save(); draw(); };
+
+  document.querySelectorAll('.shot').forEach(im=> im.onclick = ()=>{
+    document.getElementById('lbimg').src = im.src;
+    document.getElementById('lb').style.display='block'; });
+
+  drawNav(); drawFilters();
+  document.querySelector('.navitem.cur')?.scrollIntoView({block:'nearest'});
+}
+function setV(v){ st(DATA[cur].id).v = v; save(); draw(); }
+function go(n){
+  const vis = visible(); if(!vis.length) return;
+  let i = vis.indexOf(DATA[cur]); if(i<0) i=0;
+  i = Math.min(vis.length-1, Math.max(0, i+n));
+  cur = DATA.indexOf(vis[i]); draw();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.getElementById('prev').onclick = ()=>go(-1);
+document.getElementById('next').onclick = ()=>go(1);
+document.getElementById('lb').onclick = ()=> document.getElementById('lb').style.display='none';
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ document.getElementById('lb').style.display='none'; return; }
+  if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+  if(e.key==='ArrowRight'||e.key==='j') go(1);
+  else if(e.key==='ArrowLeft'||e.key==='k') go(-1);
+  else if('1234'.includes(e.key)) setV(+e.key);
+  else if(e.key==='p'||e.key==='P') document.getElementById('usePdf')?.click();
+});
+
+/* ---------- export ---------- */
+/* BOM only for CSV (Excel needs it); a BOM in the JSON would make the
+   re-import below throw in JSON.parse. */
+function dl(name, text, mime, bom){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([(bom?'﻿':'')+text], {type:mime}));
+  a.download = name; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 5000);
+}
+document.getElementById('expJson').onclick = ()=>
+  dl('ipas_圖片題校對進度.json', JSON.stringify(state,null,1), 'application/json', false);
+
+document.getElementById('expCsv').onclick = ()=>{
+  const q = v => '"' + String(v==null?'':v).replace(/"/g,'""') + '"';
+  const head = ['編號','分類','題號','文件名稱','題目','選項1','選項2','選項3','選項4',
+                '正確答案','審核判定','需存圖','備註'];
+  const lines = [head.join(',')];
+  DATA.forEach(d=>{
+    const s = st(d.id);
+    const stem = s.stem || d.csvStem;
+    const opts = [0,1,2,3].map(k => s.opts[k] || d.csvOpts[k].replace(/^\(\s*[1-4]\s*\)\s*/,''));
+    lines.push([d.id, d.cat, d.pdfq, d.pdf, stem, ...opts.map((o,k)=>`(${k+1}) ${o}`),
+                s.ans || d.csvAns, VERDICT[s.v]||'未審', s.v===3?'是':'否', s.note].map(q).join(','));
+  });
+  dl('ipas_圖片題修正.csv', lines.join('\r\n'), 'text/csv;charset=utf-8', true);
+};
+document.getElementById('impBtn').onclick = ()=> document.getElementById('imp').click();
+document.getElementById('imp').onchange = e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{ try{ state = JSON.parse(String(r.result).replace(/^﻿/,'')); save(); draw(); alert('進度已載入'); }
+                   catch(err){ alert('檔案格式錯誤：'+err.message); } };
+  r.readAsText(f);
+};
+
+draw();
+</script>
+</body>
+</html>
