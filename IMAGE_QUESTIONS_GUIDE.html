@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPAS AI 應用規劃師 2026 圖像與程式碼題庫典藏與解析指南 (IMAGE_QUESTIONS_GUIDE)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-dark: #090d16;
+    --card-bg: rgba(21, 32, 54, 0.75);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --emerald: #10b981;
+    --indigo: #6366f1;
+    --amber: #f59e0b;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Noto Sans TC', 'Inter', sans-serif;
+    line-height: 1.7;
+    padding: 30px 20px 80px;
+    background-image: 
+        radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.12) 0px, transparent 40%),
+        radial-gradient(at 90% 90%, rgba(16, 185, 129, 0.12) 0px, transparent 40%);
+    background-attachment: fixed;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+header {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 30px;
+}
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--emerald);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; color: #fff; }
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 13px;
+}
+th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--card-border);
+    text-align: left;
+}
+th { background: rgba(255, 255, 255, 0.05); color: #fff; }
+td { color: var(--text-muted); }
+td strong { color: var(--text-main); }
+.img-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+}
+.preview-thumb {
+    max-height: 60px;
+    border-radius: 4px;
+    cursor: zoom-in;
+    background: #0d1117;
+    padding: 2px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="badge">🖼️ Image Questions Teaching Asset v3.01</div>
+        <h1>iPAS AI 應用規劃師 2026 圖像與程式碼題庫典藏與解析指南</h1>
+        <p style="color:var(--text-muted);">收錄全量 600 題中 52 題圖片依賴型題目（含 300 DPI 超高畫質圖表、混淆矩陣、公式與程式碼截圖）。</p>
+    </header>
+
+    <div class="card">
+        <h3 style="color:#fff; margin-bottom:12px;">💡 四大處理策略與技術架構</h3>
+        <ol style="padding-left:20px; color:var(--text-muted);">
+            <li><strong>300 DPI 自動化矩形座標擷取 (PyMuPDF)</strong>：精確排除頁首頁尾浮水印，剪裁高解像度圖表。</li>
+            <li><strong>標準化 ID 典藏命名</strong>：與題目編號 100% 綁定（如 <code>B3-002.png</code>）。</li>
+            <li><strong>CSV 11 欄位向下相容擴充</strong>：新增 <code>圖片檔名</code> 欄位。</li>
+            <li><strong>前端 Lightbox 雙模式放大燈</strong>：支援複習與考試雙模式隨時放大細節。</li>
+        </ol>
+    </div>
+
+    <div class="card">
+        <h3 style="color:#fff; margin-bottom:16px;">📋 52 題全量圖片題目明細對照表</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>題目編號</th>
+                    <th>科目</th>
+                    <th>分類類型</th>
+                    <th>圖片檔名與預覽</th>
+                    <th>題幹與關鍵考點摘要</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><strong><code>B2-001</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-001.jpeg</code><br>
+                        <img src="assets/q_images/B2-001.jpeg" class="preview-thumb mt-1" alt="B2-001">
+                    </td>
+                    <td>若某數據點的 Z 分數（Z-Score）= 2，請問代表下列哪一種意涵？</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-002</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-002.jpeg</code><br>
+                        <img src="assets/q_images/B2-002.jpeg" class="preview-thumb mt-1" alt="B2-002">
+                    </td>
+                    <td>使用 Python的 pandas套件處理各商品銷售數據（變數為 df）時，若需計算「總銷售額」欄位的敘述性統計量（如平均值、標準差等），應使用下列哪一種語法？</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-003</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-003.jpeg</code><br>
+                        <img src="assets/q_images/B2-003.jpeg" class="preview-thumb mt-1" alt="B2-003">
+                    </td>
+                    <td>附圖為某資料之分佈圖，此圖資料之偏態（Skewness）值較有可能為下列哪個選項？(圖顯示長尾向左)</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-004</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-004.jpeg</code><br>
+                        <img src="assets/q_images/B2-004.jpeg" class="preview-thumb mt-1" alt="B2-004">
+                    </td>
+                    <td>累積分佈函數（Cumulative Distribution Function, CDF）可用於描述隨機變數的機率分佈特性，其數學定義為下列何者？</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-039</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-039.png</code><br>
+                        <img src="assets/q_images/B2-039.png" class="preview-thumb mt-1" alt="B2-039">
+                    </td>
+                    <td>評估腫瘤分類模型，資料集中 80%為良性。若直接使用 5-fold交叉驗證可能導致偏差，為避免此問題，下列哪一種作法最合適？</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-038</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-038.png</code><br>
+                        <img src="assets/q_images/B3-038.png" class="preview-thumb mt-1" alt="B3-038">
+                    </td>
+                    <td>附圖程式碼 sum((y_true - y_pred) ** 2) / len(y_true) 所計算的是哪一類型的評估指標？</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-039</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-039.png</code><br>
+                        <img src="assets/q_images/B3-039.png" class="preview-thumb mt-1" alt="B3-039">
+                    </td>
+                    <td>附圖程式碼 mask = np.random.binomial(1, p, size=x.shape); return x * mask / p 實現的是哪一種...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-040</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-040.png</code><br>
+                        <img src="assets/q_images/B3-040.png" class="preview-thumb mt-1" alt="B3-040">
+                    </td>
+                    <td>依據附圖 Numpy程式碼 v1=, v2=, A=[,]，下列何者正確？</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-041</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-041.png</code><br>
+                        <img src="assets/q_images/B3-041.png" class="preview-thumb mt-1" alt="B3-041">
+                    </td>
+                    <td>考慮擲出骰子並採用 Monte Carlo方法估算條件機率。A=擲出偶數，B=擲出大於3。請問下列何者為條件機率 P(A∣B) 的正確程式碼？</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-046</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-046.png</code><br>
+                        <img src="assets/q_images/B3-046.png" class="preview-thumb mt-1" alt="B3-046">
+                    </td>
+                    <td>使用 PCA 進行降噪時，若影像仍然含有明顯的雜訊，最可能是哪一段程式碼設定不正確？（原始碼：pca = PCA()）</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-047</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-047.png</code><br>
+                        <img src="assets/q_images/B3-047.png" class="preview-thumb mt-1" alt="B3-047">
+                    </td>
+                    <td>針對 digits資料集進行 KNN分類與交叉驗證，哪幾組程式碼能正確執行？(A與C使用accuracy, B與D使用f1)</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-048</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-048.png</code><br>
+                        <img src="assets/q_images/B3-048.png" class="preview-thumb mt-1" alt="B3-048">
+                    </td>
+                    <td>參考資料標準化程式碼 X -= mean; X /= std，下列敘述何者正確？ (A: 調整平均值為0; D: 防止梯度爆炸)</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-049</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-049.png</code><br>
+                        <img src="assets/q_images/B3-049.png" class="preview-thumb mt-1" alt="B3-049">
+                    </td>
+                    <td>參考 Keras Model Summary，Layer 1 (Dense, 10) 與 Layer 2 (Dense, 10) 的參數量(Param #)分別...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-050</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-050.png</code><br>
+                        <img src="assets/q_images/B3-050.png" class="preview-thumb mt-1" alt="B3-050">
+                    </td>
+                    <td>參考訓練與驗證損失圖表與程式碼，loss (Train) 為藍色實線，val_loss (Validation) 為紅色虛線。下列敘述何者正確？(A: 空格1填...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B1-068</code></strong></td>
+                    <td>B1</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B1-068.jpeg</code><br>
+                        <img src="assets/q_images/B1-068.jpeg" class="preview-thumb mt-1" alt="B1-068">
+                    </td>
+                    <td>某醫院的AI 研究團隊正在開發一套整合「CT 影像+電子病歷文本+基因序列」三 種模態資料的癌症預測模型。請問在此場景中採用「跨模態對齊（Cross-Modal...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B1-069</code></strong></td>
+                    <td>B1</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B1-069.jpeg</code><br>
+                        <img src="assets/q_images/B1-069.jpeg" class="preview-thumb mt-1" alt="B1-069">
+                    </td>
+                    <td>一家電商公司已將推薦系統AI 模型上線三個月，業務主管要求專案團隊評估導 入成效。團隊根據下圖數據得出結論：「因為AUC 高達0.91，模型表現優異，AI 導入...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B1-070</code></strong></td>
+                    <td>B1</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B1-070.jpeg</code><br>
+                        <img src="assets/q_images/B1-070.jpeg" class="preview-thumb mt-1" alt="B1-070">
+                    </td>
+                    <td>某電商公司計畫導入即時推薦系統，希望使用者進入網站後能在100 毫秒內取得 推薦結果，且推薦結果需依據最新使用者行為進行調整。系統需支援每日約50 萬 活躍使用...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-051</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-051.jpeg</code><br>
+                        <img src="assets/q_images/B2-051.jpeg" class="preview-thumb mt-1" alt="B2-051">
+                    </td>
+                    <td>工程師使用盒鬚圖(Box Plot)比較三個城市的房價分布,觀察到城市A 的盒子很短但 鬚很長，城市B 的盒子很長且對稱，城市C 的中位數位置明顯偏向盒子下方。...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-052</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📐 數學公式圖</span></td>
+                    <td>
+                        <code>assets/q_images/B2-052.jpeg</code><br>
+                        <img src="assets/q_images/B2-052.jpeg" class="preview-thumb mt-1" alt="B2-052">
+                    </td>
+                    <td>下圖為吉尼不純度(Gini Impurity)的計算公式,在決策樹(Decision Tree)中,吉尼不 純度用於評估節點分裂的品質。關於吉尼不純度，下列敘述...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-053</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-053.jpeg</code><br>
+                        <img src="assets/q_images/B2-053.jpeg" class="preview-thumb mt-1" alt="B2-053">
+                    </td>
+                    <td>某物流平台要預測「每小時客服來電數量」,資料顯示平均每小時12 通,且來電事件 彼此獨立，並在固定時間區間內發生率穩定。工程師在選擇機率模型時，應優先考慮哪 個...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-054</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-054.png</code><br>
+                        <img src="assets/q_images/B2-054.png" class="preview-thumb mt-1" alt="B2-054">
+                    </td>
+                    <td>某工程師使用MLflow 進行實驗追蹤,評估三種不同學習率(0.001、0.01、0.1)對同 一模型在驗證資料集上的損失表現。每種學習率皆以不同隨機種子重複訓...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-055</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📐 數學公式圖</span></td>
+                    <td>
+                        <code>assets/q_images/B2-055.png</code><br>
+                        <img src="assets/q_images/B2-055.png" class="preview-thumb mt-1" alt="B2-055">
+                    </td>
+                    <td>某AI 團隊在模型上線後,透過監控系統持續追蹤輸入特徵的分布變化,系統使用Z- score（Z）作為異常判斷依據，並設定當|Z| ≥ 2 時需觸發警示。假設該特...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-056</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-056.png</code><br>
+                        <img src="assets/q_images/B2-056.png" class="preview-thumb mt-1" alt="B2-056">
+                    </td>
+                    <td>在AI 模型評估的假說檢定框架中,「女士品茶」實驗是理解型一/型二錯誤的經典案 例。實驗中某女士宣稱能分辨8 杯奶茶中哪4 杯先加牛奶，若以顯著水準α=0.05...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-057</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-057.png</code><br>
+                        <img src="assets/q_images/B2-057.png" class="preview-thumb mt-1" alt="B2-057">
+                    </td>
+                    <td>某醫療AI 研究團隊開發了一套個人化用藥劑量推薦系統,並設計實驗評估其效果。研 究團隊招募40 名高血壓患者，分別在導入AI 推薦系統前後各測量一次收縮壓，且資...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-058</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📐 數學公式圖</span></td>
+                    <td>
+                        <code>assets/q_images/B2-058.png</code><br>
+                        <img src="assets/q_images/B2-058.png" class="preview-thumb mt-1" alt="B2-058">
+                    </td>
+                    <td>某咖啡店聲稱其平均外送時間為36 分鐘,母體標準差為16 分鐘。顧客保護團體抽樣 9 筆訂單，發現平均外送時間為40 分鐘。若採用右尾Z 檢定（H₁: μ > ...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-059</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-059.png</code><br>
+                        <img src="assets/q_images/B2-059.png" class="preview-thumb mt-1" alt="B2-059">
+                    </td>
+                    <td>某生技公司正在進行新型AI 輔助新藥篩選的臨床試驗,並將顯著水準由α=0.05 降低 至α=0.01。在新藥療效安全試驗的情境下，此調整對統計檢定的直接影響為何...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-070</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-070.jpeg</code><br>
+                        <img src="assets/q_images/B2-070.jpeg" class="preview-thumb mt-1" alt="B2-070">
+                    </td>
+                    <td>某電信公司的AI 反詐欺模型在正常交易佔99.5%、詐欺交易僅佔0.5%的類別嚴重不 平衡資料集上訓練。若工程師僅以整體準確率（Accuracy）作為模型選擇的...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-071</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-071.jpeg</code><br>
+                        <img src="assets/q_images/B2-071.jpeg" class="preview-thumb mt-1" alt="B2-071">
+                    </td>
+                    <td>某AI 平台的資料工程師需要在Apache Spark 叢集上,對包含10 億筆使用者行為紀錄 的RDD/DataFrame 計算整體標準差（Standard ...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-072</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-072.jpeg</code><br>
+                        <img src="assets/q_images/B2-072.jpeg" class="preview-thumb mt-1" alt="B2-072">
+                    </td>
+                    <td>某連鎖便利商店集團欲建立門市未來14 天每日銷售額預測模型(500 間門市、3 年歷 史資料）。資料具有明顯的週期性（週末較高）、年度季節性（暑假與年末高峰）及...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-073</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📈 混淆矩陣/ROC</span></td>
+                    <td>
+                        <code>assets/q_images/B2-073.jpeg</code><br>
+                        <img src="assets/q_images/B2-073.jpeg" class="preview-thumb mt-1" alt="B2-073">
+                    </td>
+                    <td>Receiver Operating Characteristic(ROC)曲線係由單一分類模型在不同決策閾值下形成, 並以真陽率（True Positive ...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-074</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-074.jpeg</code><br>
+                        <img src="assets/q_images/B2-074.jpeg" class="preview-thumb mt-1" alt="B2-074">
+                    </td>
+                    <td>某AI 工程師評估客戶滿意度評分(1–5 分,含有明顯離群值)與退款率(連續型比例 變數）之間的相關性，考慮使用皮爾森（Pearson）、斯皮爾曼（Spearm...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-089</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-089.jpeg</code><br>
+                        <img src="assets/q_images/B2-089.jpeg" class="preview-thumb mt-1" alt="B2-089">
+                    </td>
+                    <td>在建構自動化資料清洗管線時,工程師撰寫一個用於補齊缺失欄位的Python 函式,如 下圖所示。當此函式連續處理兩筆獨立的資料（row1 與row2）後，請問第二...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-090</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-090.jpeg</code><br>
+                        <img src="assets/q_images/B2-090.jpeg" class="preview-thumb mt-1" alt="B2-090">
+                    </td>
+                    <td>下圖為一段分類演算法的pseudocode,請問最可能對應下列哪一種演算法?</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-091</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B2-091.png</code><br>
+                        <img src="assets/q_images/B2-091.png" class="preview-thumb mt-1" alt="B2-091">
+                    </td>
+                    <td>資料分析師使用Python 檢視daily_earnings 欄位的基本統計量,執行以下程式碼(Pandas 2 以上版本）： 輸出結果如下： ● mean：2...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-092</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-092.png</code><br>
+                        <img src="assets/q_images/B2-092.png" class="preview-thumb mt-1" alt="B2-092">
+                    </td>
+                    <td>承上題,團隊在建立預測模型前,先將region(A、B、C 區)轉換為整數 1、2、3, 即採用標籤編碼（Label Encoding）。模型上線測試後發現，線...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-093</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-093.png</code><br>
+                        <img src="assets/q_images/B2-093.png" class="preview-thumb mt-1" alt="B2-093">
+                    </td>
+                    <td>平台安全部門發現,僅有極少數司機(約占總體0.05%)會利用外掛程式竄改 gps_ping_rate，以騙取里程補貼。某新進資料科學家訓練了一個二元分類模型，並...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-094</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B2-094.png</code><br>
+                        <img src="assets/q_images/B2-094.png" class="preview-thumb mt-1" alt="B2-094">
+                    </td>
+                    <td>針對上述外掛偵測模型,營運長下達最終的商業決策目標如下:「對於作弊行為零容忍。 即使誤凍結部分正常司機帳號，後續仍可交由人工覆核；但不能放過任何一個真正的 外掛...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-098</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B2-098.jpeg</code><br>
+                        <img src="assets/q_images/B2-098.jpeg" class="preview-thumb mt-1" alt="B2-098">
+                    </td>
+                    <td>在進行機器學習建模前,資料分析師需對特徵變數X 進行標準化處理,以消除不同量 尺所造成的影響。已知使用StandardScaler 進行資料轉換，程式碼如下：s...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-099</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B2-099.jpeg</code><br>
+                        <img src="assets/q_images/B2-099.jpeg" class="preview-thumb mt-1" alt="B2-099">
+                    </td>
+                    <td>在進行機器學習建模前,資料分析師已完成資料前處理(包含遺漏值處理與特徵標準 化），並準備建立分類模型。 已知資料流程如下： 1. 將資料區分為訓練集與測試集 2...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B2-100</code></strong></td>
+                    <td>B2</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B2-100.png</code><br>
+                        <img src="assets/q_images/B2-100.png" class="preview-thumb mt-1" alt="B2-100">
+                    </td>
+                    <td>參考下圖程式碼,下列描述何者正確?</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-060</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-060.png</code><br>
+                        <img src="assets/q_images/B3-060.png" class="preview-thumb mt-1" alt="B3-060">
+                    </td>
+                    <td>某工程師同時開發兩個模型：一個預測使用者「隔日App 使用時長（分鐘）」，另 一個預測使用者「隔日是否流失（是/否）」。關於上述兩個任務，他應分別選擇哪 種適當...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-090</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-090.png</code><br>
+                        <img src="assets/q_images/B3-090.png" class="preview-thumb mt-1" alt="B3-090">
+                    </td>
+                    <td>分析師準備建立一個能將手寫數字圖片(28x28 像素展平為784 維度)分為0~9 共 10 個類別的多層感知機（MLP），且標籤已轉為One-Hot 編碼（O...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-091</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-091.png</code><br>
+                        <img src="assets/q_images/B3-091.png" class="preview-thumb mt-1" alt="B3-091">
+                    </td>
+                    <td>工程師使用PyTorch 建立OCR 訓練pipeline,並對手寫字母資料集套用下圖程式進 行資料增強（Transform）。模型在訓練過程中顯示驗證損失（V...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-092</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-092.jpeg</code><br>
+                        <img src="assets/q_images/B3-092.jpeg" class="preview-thumb mt-1" alt="B3-092">
+                    </td>
+                    <td>觀察程式中行</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-093</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-093.jpeg</code><br>
+                        <img src="assets/q_images/B3-093.jpeg" class="preview-thumb mt-1" alt="B3-093">
+                    </td>
+                    <td>在進行遷移學習微調(Fine-Tuning)時,通常會將優化器的學習率(Learning Rate) 設得非常小（如1e-4），下列何者為主要的原因？</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-094</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-094.png</code><br>
+                        <img src="assets/q_images/B3-094.png" class="preview-thumb mt-1" alt="B3-094">
+                    </td>
+                    <td>研究人員撰寫的程式中(下圖),先用整體資料進行LDA(Linear Discriminant Analysis）降維，接著再用KNN（K-Nearest Nei...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-095</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">💻 程式碼截圖</span></td>
+                    <td>
+                        <code>assets/q_images/B3-095.png</code><br>
+                        <img src="assets/q_images/B3-095.png" class="preview-thumb mt-1" alt="B3-095">
+                    </td>
+                    <td>研究人員在程式(下圖)中使用cross_val_score 進行交叉驗證,但目前尚未設定cv 參數。 他們希望確保在每次資料分割時，訓練集與測試集的類別比例與原...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-096</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-096.png</code><br>
+                        <img src="assets/q_images/B3-096.png" class="preview-thumb mt-1" alt="B3-096">
+                    </td>
+                    <td>參考下圖資料處理,下列哪一項描述組合正確? 第三科：機器學習技術與應用 題目 答案</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-097</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-097.png</code><br>
+                        <img src="assets/q_images/B3-097.png" class="preview-thumb mt-1" alt="B3-097">
+                    </td>
+                    <td>參考下圖建立模型結果,下列哪一項描述組合正確?</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-098</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-098.png</code><br>
+                        <img src="assets/q_images/B3-098.png" class="preview-thumb mt-1" alt="B3-098">
+                    </td>
+                    <td>參考下圖繪圖結果,當Epochs=6 時,訓練曲線值(0.81)明顯大於驗證曲線值(0.72), 第三科：機器學習技術與應用 題目 答案 下列何者為最可能的原因...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-099</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-099.png</code><br>
+                        <img src="assets/q_images/B3-099.png" class="preview-thumb mt-1" alt="B3-099">
+                    </td>
+                    <td>若團隊需要建立一個超過50 層的深層神經網路,以捕捉晶圓表面細微的劃傷特徵, 但又擔心傳統深層網路常見的梯度消失（Vanishing Gradient）問題，則...</td>
+                </tr>
+
+                <tr>
+                    <td><strong><code>B3-100</code></strong></td>
+                    <td>B3</td>
+                    <td><span class="img-tag">📊 統計圖表</span></td>
+                    <td>
+                        <code>assets/q_images/B3-100.png</code><br>
+                        <img src="assets/q_images/B3-100.png" class="preview-thumb mt-1" alt="B3-100">
+                    </td>
+                    <td>為了修復訓練過程中Loss 突然變成NaN 的問題,工程師考慮在PyTorch 訓練迴圈 中加入梯度裁剪（Gradient Clipping）機制，例如 tor...</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
