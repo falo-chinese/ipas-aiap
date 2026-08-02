@@ -1891,45 +1891,69 @@ const app = {
         };
     },
 
-    getExamSeriesKey: function(subject, parsed, filename, id) {
-        const qId = id || '';
-        const numMatch = qId.match(/-\d+$/);
-        const num = numMatch ? parseInt(numMatch[1], 10) : 0;
+    getExamSeriesKey: function(subject, parsed, filename, item) {
+        const title = (item && item.title) ? item.title : '';
+        const key = (item && item.key) ? item.key : '';
+        const fn = (filename || '') + ' ' + title + ' ' + key;
+        const subj = subject || (item && item.subject) || '';
 
-        if (subject.startsWith('B')) {
-            if (num > 50) return 'b-115-1';
+        if (subj.startsWith('B')) {
+            if (fn.includes('2026 第1次') || fn.includes('115年第一次') || fn.includes('115-1') || fn.includes('20260615')) {
+                return 'b-115-1';
+            }
             return 'b-114-2';
         }
-        if (num > 100) return 'a-115-2';
-        if (num > 50) return 'a-115-1';
+        
+        if (fn.includes('2026 第2次') || fn.includes('115年第二次') || fn.includes('115-2') || fn.includes('20260604')) {
+            return 'a-115-2';
+        }
+        if (fn.includes('2026 第1次') || fn.includes('115年第一次') || fn.includes('115-1') || fn.includes('20260410')) {
+            return 'a-115-1';
+        }
         return 'a-114-4';
     },
 
-    getExamSeriesLabel: function(subject, parsed, filename, id) {
-        const qId = id || '';
-        const numMatch = qId.match(/-\d+$/);
-        const num = numMatch ? parseInt(numMatch[1], 10) : 0;
+    getExamSeriesLabel: function(subject, parsed, filename, item) {
+        const title = (item && item.title) ? item.title : '';
+        const key = (item && item.key) ? item.key : '';
+        const fn = (filename || '') + ' ' + title + ' ' + key;
+        const subj = subject || (item && item.subject) || '';
 
-        if (subject.startsWith('B')) {
-            if (num > 50) return '中階 B 系列 ｜ 115 年第一次';
+        if (subj.startsWith('B')) {
+            if (fn.includes('2026 第1次') || fn.includes('115年第一次') || fn.includes('115-1') || fn.includes('20260615')) {
+                return '中階 B 系列 ｜ 115 年第一次';
+            }
             return '中階 B 系列 ｜ 114 年第二梯次';
         }
-        if (num > 100) return '初階 A 系列 ｜ 115 年第二次';
-        if (num > 50) return '初階 A 系列 ｜ 115 年第一次';
+        
+        if (fn.includes('2026 第2次') || fn.includes('115年第二次') || fn.includes('115-2') || fn.includes('20260604')) {
+            return '初階 A 系列 ｜ 115 年第二次';
+        }
+        if (fn.includes('2026 第1次') || fn.includes('115年第一次') || fn.includes('115-1') || fn.includes('20260410')) {
+            return '初階 A 系列 ｜ 115 年第一次';
+        }
         return '初階 A 系列 ｜ 114 年第四梯次';
     },
 
-    getExamSeriesClass: function(subject, parsed, filename, id) {
-        const qId = id || '';
-        const numMatch = qId.match(/-\d+$/);
-        const num = numMatch ? parseInt(numMatch[1], 10) : 0;
+    getExamSeriesClass: function(subject, parsed, filename, item) {
+        const title = (item && item.title) ? item.title : '';
+        const key = (item && item.key) ? item.key : '';
+        const fn = (filename || '') + ' ' + title + ' ' + key;
+        const subj = subject || (item && item.subject) || '';
 
-        if (subject.startsWith('B')) {
-            if (num > 50) return 'series-b-115';
+        if (subj.startsWith('B')) {
+            if (fn.includes('2026 第1次') || fn.includes('115年第一次') || fn.includes('115-1') || fn.includes('20260615')) {
+                return 'series-b-115';
+            }
             return 'series-b-114';
         }
-        if (num > 100) return 'series-a-115-2';
-        if (num > 50) return 'series-a-115-1';
+        
+        if (fn.includes('2026 第2次') || fn.includes('115年第二次') || fn.includes('115-2') || fn.includes('20260604')) {
+            return 'series-a-115-2';
+        }
+        if (fn.includes('2026 第1次') || fn.includes('115年第一次') || fn.includes('115-1') || fn.includes('20260410')) {
+            return 'series-a-115-1';
+        }
         return 'series-a-114-4';
     },
 
