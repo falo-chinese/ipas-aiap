@@ -1,0 +1,2935 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iPAS AIAP 智慧刷題模擬器 v1.01 | Falo x Force Cheng 2026/6/25</title>
+  
+  <!-- Standard SEO Meta Tags -->
+  <meta name="description" content="iPAS AIAP 智慧刷題模擬器 v1.01 專為自動化解題與產線測試設計，結合 Gemini Vision AI 與高精度 OCR 自動化模擬刷題，支援循序與固定時限雙模式，提供精準的延遲、Token 數及費用診斷報告。">
+  <meta name="keywords" content="iPAS, AIAP, 智慧刷題, 自動化模擬, Gemini Vision API, OCR 解題, 效能基準測試, 考題模擬器, Falo x Force Cheng">
+  <meta name="author" content="Falo x Force Cheng">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="version" content="v1.01">
+  <meta name="release-date" content="2026-06-25">
+  
+  <!-- GEO / Location Meta Tags (Optimized for Taiwan) -->
+  <meta name="geo.region" content="TW">
+  <meta name="geo.placename" content="Taiwan">
+  <meta name="geo.position" content="23.973875;120.982024">
+  <meta name="ICBM" content="23.973875, 120.982024">
+  
+  <!-- Generative Engine Optimization (GEO) & AI Crawler Meta Tags -->
+  <meta name="ai-application" content="iPAS AIAP Exam Practice Swiper Simulator v1.01">
+  <meta name="ai-developer" content="Falo x Force Cheng">
+  <meta name="ai-release-date" content="2026-06-25">
+  <meta name="ai-capabilities" content="OCR Vision-based solving, real-time telemetry, auto-swiping simulation, token cost evaluation, performance latency recommendation">
+  
+  <!-- JSON-LD Structured Data for GEO / AI Crawlers -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "iPAS AIAP 智慧刷題模擬器 (iPAS AIAP Exam Practice Swiper Simulator)",
+      "version": "1.01",
+      "releaseDate": "2026-06-25",
+      "author": {
+        "@type": "Person",
+        "name": "Falo x Force Cheng"
+      },
+      "description": "Premium client-side simulator and benchmark dashboard for iPAS AIAP exams featuring automated OCR, Gemini Vision API solving, real-time performance telemetry, and auto-swiping simulation.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web Browser",
+      "browserRequirements": "Requires HTML5, CSS3, ES6+, and support for Canvas/fetch.",
+      "featureList": [
+        "Automated OCR & Vision-based solving with Gemini API",
+        "Dual simulation modes: Sequential safety mode vs Fixed-time real mode",
+        "Precision telemetry tracking latency, token usage, and NTD billing",
+        "Dynamic tuning recommendations with speed presets",
+        "Local diagnostic history database with styled logs and custom remarks",
+        "3-tier question bank loading architecture (Local CSV -> Remote CSV -> Built-in Fallback)"
+      ]
+    }
+  </script>
+
+  <!-- Google Fonts & PapaParse & html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- CSS Variables & Themes --- */
+    :root {
+      --google-blue: #4285F4;
+      --google-red: #EA4335;
+      --google-yellow: #FBBC05;
+      --google-green: #34A853;
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --bg-gradient: linear-gradient(135deg, #f4f6f9 0%, #eef2f7 100%);
+      --card-bg: #ffffff;
+      --text-main: #202124;
+      --text-muted: #5f6368;
+      --border-color: #dadce0;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', 'Noto Sans TC', -apple-system, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* --- Subtle Diagonal Background Watermark --- */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99999;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='220' viewBox='0 0 320 220'><text x='15' y='110' fill='%23000000' font-family='Noto Sans TC, Outfit, sans-serif' font-size='13' font-weight='bold' opacity='0.02' transform='rotate(-28 160 110)'>Falo x Force Cheng v1.01 2026/06/25</text></svg>");
+      background-repeat: repeat;
+    }
+
+    /* --- Workspace Layout (Main + Sidebar) --- */
+    .workspace {
+      display: flex;
+      width: 100%;
+      max-width: 1120px;
+      gap: 24px;
+      align-items: flex-start;
+      transition: all 0.3s ease;
+    }
+
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    /* --- Sidebar AI Panel --- */
+    .ai-sidebar {
+      width: 360px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* --- Header Card --- */
+    .header-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 16px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 3px 6px rgba(66, 133, 244, 0.2);
+    }
+
+    .brand-text h1 {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .progress-badge {
+      background: #e8f0fe;
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid rgba(26, 115, 232, 0.1);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* --- Question Card --- */
+    .question-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .question-card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .tag-subject {
+      background: #e8f0fe;
+      color: var(--google-blue);
+      border: 1px solid rgba(66, 133, 244, 0.15);
+    }
+
+    .tag-file {
+      background: #f1f3f4;
+      color: var(--text-muted);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .question-text {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.55;
+      color: #202124;
+      word-break: break-word;
+    }
+
+    /* --- Options Grid --- */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 16px 20px;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      line-height: 1.45;
+      outline: none;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary);
+      background: #f8fafd;
+      transform: translateY(-1px);
+    }
+
+    .option-btn:active {
+      transform: translateY(1px);
+    }
+
+    .option-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: #f1f3f4;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-muted);
+      flex: 0 0 auto;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover .option-num {
+      background: var(--primary);
+      color: white;
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary);
+      background: #e8f0fe;
+      color: var(--primary-dark);
+    }
+
+    .option-btn.selected .option-num {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* --- Footer Navigation --- */
+    .nav-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 16px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-nav {
+      padding: 10px 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: white;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .btn-nav:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #f8fafd;
+    }
+
+    .btn-nav:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(26, 115, 232, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      color: white;
+    }
+
+    /* --- Loading Spinner --- */
+    #loading-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.95);
+      z-index: 10;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      transition: opacity 0.3s ease;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* --- AI Sidebar Styles --- */
+    .ai-header {
+      padding: 16px;
+      background: rgba(26, 115, 232, 0.04);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ai-pulse {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #9aa0a6;
+      transition: background 0.3s;
+    }
+
+    .ai-pulse.active {
+      background: var(--google-green);
+      animation: pulse-anim 1.5s infinite;
+    }
+
+    .ai-pulse.waiting {
+      background: var(--google-yellow);
+      animation: pulse-anim 1.5s infinite;
+    }
+
+    @keyframes pulse-anim {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .ai-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+      max-height: calc(100vh - 100px);
+    }
+
+    .setting-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .setting-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .setting-group input,
+    .setting-group select {
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+      width: 100%;
+    }
+
+    .setting-group input:focus,
+    .setting-group select:focus {
+      border-color: var(--primary);
+    }
+
+    .ai-btn-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .ai-btn {
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: white;
+      width: 100%;
+    }
+
+    .ai-btn-start {
+      background: var(--google-green);
+    }
+
+    .ai-btn-start:hover {
+      background: #2d9247;
+    }
+
+    .ai-btn-stop {
+      background: var(--google-red);
+    }
+
+    .ai-btn-stop:hover {
+      background: #c5221f;
+    }
+
+    .ai-btn-benchmark {
+      background: var(--primary);
+    }
+
+    .ai-btn-benchmark:hover {
+      background: var(--primary-dark);
+    }
+
+    .ai-btn:disabled {
+      background: #e8eaed;
+      color: #9aa0a6;
+      cursor: not-allowed;
+    }
+
+    /* Timer track */
+    .ai-progress-track {
+      width: 100%;
+      height: 6px;
+      background: #f1f3f4;
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ai-progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--primary);
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: width 1s linear;
+    }
+
+    .ai-result-box {
+      border: 2px dashed var(--google-green);
+      background: #f4faf6;
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .ai-result-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #137333;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .ai-result-badge {
+      font-size: 24px;
+      font-weight: 900;
+      color: #137333;
+    }
+
+    .ai-explanation-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .ai-explanation-text {
+      font-size: 13px;
+      line-height: 1.55;
+      color: #4e5256;
+      background: #f8f9fa;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px;
+      overflow-wrap: break-word;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    /* --- History Panel --- */
+    .history-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .history-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .history-list {
+      max-height: 280px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 12px;
+      padding: 4px 0;
+    }
+
+    .history-item {
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: white;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .history-item:hover {
+      border-color: var(--primary);
+      background: #f8fafd;
+    }
+
+    .history-item.has-failures {
+      background: #fff5f5;
+      border-color: #fcdbd9;
+    }
+
+    .history-item.has-failures:hover {
+      background: #ffebeb;
+      border-color: #f9c2c0;
+    }
+
+    .history-meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+
+    .history-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .history-badge-seq { background: #e8f0fe; color: #174ea6; }
+    .history-badge-fixed { background: #fce8e6; color: #c5221f; }
+
+    /* --- Mode Toggle Buttons --- */
+    .mode-toggle-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    /* --- Speed/Interval Toggle Buttons --- */
+    .speed-toggle-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .speed-toggle-btn {
+      flex: 1 1 calc(20% - 6px);
+      min-width: 48px;
+      padding: 8px 2px;
+      font-size: 11px;
+      font-weight: 800;
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      background: white;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      outline: none;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .speed-toggle-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #f8fafd;
+      color: var(--primary);
+    }
+
+    .speed-toggle-btn.active {
+      background: #e8f0fe;
+      border-color: var(--google-blue);
+      color: var(--google-blue);
+      box-shadow: 0 3px 8px rgba(66, 133, 244, 0.12);
+    }
+
+    .speed-toggle-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      border-color: var(--border-color);
+      background: #f5f5f5;
+      color: #b0b0b0;
+      box-shadow: none;
+    }
+
+    .mode-toggle-btn {
+      padding: 10px 8px;
+      font-weight: 700;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      background: white;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+    }
+
+    .mode-toggle-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #f8fafd;
+      color: var(--primary);
+    }
+
+    .mode-toggle-btn.active[data-mode="sequential"] {
+      background: #e8f0fe;
+      border-color: var(--google-blue);
+      color: var(--google-blue);
+      box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
+    }
+
+    .mode-toggle-btn.active[data-mode="fixed"] {
+      background: #fce8e6;
+      border-color: var(--google-red);
+      color: var(--google-red);
+      box-shadow: 0 4px 12px rgba(234, 67, 53, 0.15);
+    }
+
+    .mode-toggle-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      border-color: var(--border-color);
+      background: #f5f5f5;
+      color: #b0b0b0;
+      box-shadow: none;
+    }
+
+    /* --- Time Limit Tuning Panel --- */
+    .tuning-panel {
+      background: linear-gradient(135deg, rgba(66, 133, 244, 0.03) 0%, rgba(66, 133, 244, 0.08) 100%);
+      border: 1px solid rgba(66, 133, 244, 0.2);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(66, 133, 244, 0.05);
+    }
+
+    .tuning-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tuning-icon {
+      font-size: 22px;
+    }
+
+    .tuning-title-group h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .tuning-title-group p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .tuning-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .tuning-metric-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .tuning-metric-item:last-child {
+      border-right: none;
+    }
+
+    .tuning-metric-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .tuning-metric-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tuning-metric-item.highlight {
+      background: rgba(66, 133, 244, 0.05);
+      border-radius: 6px;
+      padding: 4px;
+    }
+
+    .tuning-metric-item.highlight .tuning-metric-value {
+      color: var(--primary);
+      font-size: 15px;
+    }
+
+    .tuning-apply-btn {
+      align-self: flex-end;
+      padding: 6px 14px;
+      font-size: 12px;
+      border-radius: 6px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    /* --- Extra Result Badges for Late Responses --- */
+    .result-badge.timeout-correct {
+      background: #fff8e1;
+      color: #137333;
+      border: 1px dashed #34a853;
+    }
+
+    .result-badge.timeout-wrong {
+      background: #fce8e6;
+      color: #c5221f;
+      border: 1px dashed #ea4335;
+    }
+
+    /* --- Benchmark Modal --- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: white;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 900px;
+      max-height: 95vh;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modal-slide 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes modal-slide {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #edf0f2;
+      background: rgba(26, 115, 232, 0.03);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .modal-close-btn {
+      background: #f1f3f4;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: background 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      background: #e8eaed;
+      color: var(--text-main);
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Diagnostic summary grid */
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .diagnostic-card {
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px;
+      background: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .diagnostic-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .diagnostic-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .diagnostic-value.success {
+      color: var(--google-green);
+    }
+
+    /* Table styles */
+    .benchmark-table-wrapper {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .benchmark-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .benchmark-table th {
+      background: #f1f3f4;
+      padding: 12px 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .benchmark-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #edf0f2;
+      color: #3c4043;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .benchmark-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .benchmark-table tr:hover td {
+      background: #f8fbff;
+    }
+
+    /* Badges */
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .result-badge.correct {
+      background: #e6f4ea;
+      color: #137333;
+    }
+
+    .result-badge.wrong {
+      background: #fce8e6;
+      color: #c5221f;
+    }
+
+    .result-badge.timeout {
+      background: #fff8e1;
+      color: #7a4d00;
+    }
+
+    .modal-footer-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 6px;
+    }
+
+    .btn-export {
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-export-csv {
+      background: white;
+      color: var(--text-main);
+    }
+
+    .btn-export-csv:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #f8fafd;
+    }
+
+    .btn-export-html {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .btn-export-html:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="workspace">
+    
+    <!-- Left Main Swiper Area -->
+    <div class="main-area">
+      <!-- Header -->
+      <div class="header-card">
+        <div class="brand">
+          <div class="brand-logo">AI</div>
+          <div class="brand-text">
+            <h1>iPAS AIAP 智慧刷題模擬器 v1.01</h1>
+            <p>外掛截圖自動化專用測試頁 • Falo x Force Cheng 2026/6/25</p>
+          </div>
+        </div>
+        <div id="progress-badge" class="progress-badge">載入中...</div>
+      </div>
+
+      <!-- Main Question Card -->
+      <div class="question-card">
+        <!-- Loading Overlay -->
+        <div id="loading-overlay">
+          <div class="spinner"></div>
+          <p style="font-size: 14px; font-weight: 700; color: var(--text-muted);">正在同步 iPAS 題庫數據...</p>
+        </div>
+
+        <!-- Question Meta -->
+        <div class="meta-row">
+          <span id="tag-subject" class="tag tag-subject">科目</span>
+          <span id="tag-file" class="tag tag-file">文件名稱</span>
+        </div>
+
+        <!-- Question Text -->
+        <div id="question-text" class="question-text">
+          正在載入考題內容...
+        </div>
+
+        <!-- Options Grid -->
+        <div class="options-grid">
+          <button class="option-btn" onclick="selectOption(1)">
+            <span class="option-num">1</span>
+            <span id="opt1-text">選項一載入中...</span>
+          </button>
+          <button class="option-btn" onclick="selectOption(2)">
+            <span class="option-num">2</span>
+            <span id="opt2-text">選項二載入中...</span>
+          </button>
+          <button class="option-btn" onclick="selectOption(3)">
+            <span class="option-num">3</span>
+            <span id="opt3-text">選項三載入中...</span>
+          </button>
+          <button class="option-btn" onclick="selectOption(4)">
+            <span class="option-num">4</span>
+            <span id="opt4-text">選項四載入中...</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Control -->
+      <div class="nav-card">
+        <button class="btn-nav" onclick="prevQuestion()">
+          ◀ 上一題
+        </button>
+        
+        <!-- Custom Question Dropdown Selector -->
+        <select id="question-selector" style="width: auto; max-width: 240px; padding: 8px 12px; font-size: 13px; border: 1px solid var(--border-color); border-radius: 8px; font-weight: bold; cursor: pointer;" onchange="jumpToQuestion(this.value)">
+          <option value="0">跳轉至題目...</option>
+        </select>
+
+        <button class="btn-nav btn-primary" onclick="nextQuestion()">
+          下一題 ▶
+        </button>
+      </div>
+
+      <!-- Local History Panel (Moved to Main Area Bottom) -->
+      <div class="history-card">
+        <div class="history-title">
+          <span>📂 歷史測試診斷紀錄</span>
+          <button style="border: none; background: none; color: var(--google-red); font-size: 11px; font-weight: bold; cursor: pointer;" onclick="clearAllHistory()">一鍵清除</button>
+        </div>
+        <div id="history-list" class="history-list">
+          <div style="text-align: center; color: var(--text-muted); font-size: 11px; padding: 12px 0;">暫無歷史紀錄</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right AI Panel Simulator -->
+    <div class="ai-sidebar">
+      <!-- AI Header -->
+      <div class="ai-header">
+        <div id="ai-pulse" class="ai-pulse"></div>
+        <span style="font-weight: 800; font-size: 14px; color: var(--primary);">AI 協同解題模擬面板</span>
+      </div>
+
+      <!-- AI Body -->
+      <div class="ai-body">
+        <!-- AI Connection Group (Key & Model together) -->
+        <div style="background: rgba(66, 133, 244, 0.02); border: 1px solid rgba(66, 133, 244, 0.08); padding: 12px; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 4px;">
+          <div class="setting-group" style="margin: 0;">
+            <label for="api-key-input">Gemini API Key</label>
+            <input type="password" id="api-key-input" value="AIzaSyBHDXuzYzSGEcga0AwD4DaGiRGCQJCh0fw" placeholder="請輸入 Google Gemini API Key">
+          </div>
+          <div class="setting-group" style="margin: 0;">
+            <label for="model-select">使用的 AI 模型</label>
+            <select id="model-select" style="width: 100%;">
+              <option value="gemini-3.1-flash-lite" selected>Gemini 3.1 Flash Lite</option>
+              <option value="gemini-3.1-flash">Gemini 3.1 Flash</option>
+              <option value="gemini-2.0-flash-lite">Gemini 2.0 Flash Lite</option>
+              <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+              <option value="gemini-3.5-flash">Gemini 3.5 Flash</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Mode Select -->
+        <div class="setting-group">
+          <label>模擬運作模式</label>
+          <input type="hidden" id="mode-select" value="sequential">
+          <div class="mode-toggle-container">
+            <button type="button" id="btn-mode-seq" class="mode-toggle-btn active" data-mode="sequential" onclick="selectMode('sequential')">
+              <span style="font-size: 13px; font-weight: 800;">循序式等待</span>
+              <span style="font-size: 9px; font-weight: normal; opacity: 0.8; margin-top: 2px;">(原本安全模式)</span>
+            </button>
+            <button type="button" id="btn-mode-fixed" class="mode-toggle-btn" data-mode="fixed" onclick="selectMode('fixed')">
+              <span style="font-size: 13px; font-weight: 800;">固定時限式</span>
+              <span style="font-size: 9px; font-weight: normal; opacity: 0.8; margin-top: 2px;">(真正即時模式)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Speed/Interval Buttons Group -->
+        <div class="setting-group">
+          <label>切換速度 (秒)</label>
+          <input type="hidden" id="interval-input" value="3">
+          <div id="speed-btn-container" class="speed-toggle-container">
+            <button type="button" class="speed-toggle-btn" data-value="1" onclick="selectSpeed(1)">1.0s</button>
+            <button type="button" class="speed-toggle-btn" data-value="2" onclick="selectSpeed(2)">2.0s</button>
+            <button type="button" class="speed-toggle-btn active" data-value="3" onclick="selectSpeed(3)">3.0s</button>
+            <button type="button" class="speed-toggle-btn" data-value="5" onclick="selectSpeed(5)">5.0s</button>
+            <button type="button" class="speed-toggle-btn" data-value="10" onclick="selectSpeed(10)">10.0s</button>
+          </div>
+          <!-- Custom Speed Input & Recommendation (Combined in Single Row) -->
+          <div style="display: flex; align-items: center; gap: 6px; margin-top: 8px; flex-wrap: nowrap; width: 100%;">
+            <span style="font-size: 11px; font-weight: 800; color: var(--text-muted); white-space: nowrap;">自訂:</span>
+            <input type="number" id="custom-speed-input" step="0.1" min="0.5" max="30" placeholder="秒數" style="width: 55px; padding: 6px 4px; font-size: 12px; border: 2px solid var(--border-color); border-radius: 8px; outline: none; text-align: center; box-sizing: border-box;" oninput="handleCustomSpeedInput(this.value)">
+            <span style="font-size: 11px; font-weight: 800; color: var(--text-muted); white-space: nowrap; margin-right: 2px;">秒</span>
+            
+            <div id="sidebar-rec-display" style="flex: 1; padding: 6px 4px; font-size: 10px; font-weight: 800; border: 1px dashed var(--primary); border-radius: 8px; background: rgba(26, 115, 232, 0.02); color: var(--primary); text-align: center; white-space: nowrap;" data-value="0">
+              💡 推薦: -- 秒
+            </div>
+            <button type="button" id="btn-sidebar-apply-rec" class="btn-nav btn-primary" style="padding: 6px 8px; font-size: 11px; border-radius: 8px; font-weight: 800; cursor: pointer; white-space: nowrap;" onclick="applySidebarRecommendedTime()">
+              帶入
+            </button>
+          </div>
+        </div>
+
+        <!-- Control Action Row -->
+        <div class="ai-btn-row">
+          <button id="btn-start-sim" class="ai-btn ai-btn-start" onclick="startSimulation()">啟動單題自動模擬</button>
+          <button id="btn-start-benchmark" class="ai-btn ai-btn-benchmark" onclick="startBenchmarkTest()">🏆 啟動 5 題基準測試</button>
+          <button id="btn-stop-sim" class="ai-btn ai-btn-stop" onclick="stopSimulation()" disabled>停止模擬/測試</button>
+        </div>
+
+        <!-- Timer progress bar -->
+        <div id="progress-track" class="ai-progress-track hidden">
+          <div id="progress-bar" class="ai-progress-bar"></div>
+        </div>
+
+        <div style="border-bottom: 1px solid rgba(0,0,0,0.06); margin: 4px 0;"></div>
+
+        <!-- Simulation Status Info -->
+        <div id="sim-status-box" style="font-size: 13px; font-weight: 700; color: var(--text-muted); display: flex; justify-content: space-between;">
+          <span>模擬狀態：已停止</span>
+          <span id="sim-timer-text" style="color: var(--primary);">--s</span>
+        </div>
+
+        <!-- AI Result Box -->
+        <div id="ai-result-box" class="ai-result-box hidden">
+          <div class="ai-result-title">OCR + Vision AI 判定正確答案</div>
+          <div id="ai-result-badge" class="ai-result-badge">第 - 選項</div>
+        </div>
+
+        <!-- AI Explanation Area -->
+        <div id="ai-explanation-box" class="hidden">
+          <div class="ai-explanation-title">💡 模擬外掛 AI 解析：</div>
+          <div id="ai-explanation-text" class="ai-explanation-text">
+            等待解題中...
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Benchmark Diagnosis Modal -->
+  <div id="benchmark-modal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modal-title-text">🏆 Gemini AI 基準效能與計費診斷報告 v1.01 (5 題隨機測試)</h2>
+        <button class="modal-close-btn" onclick="closeBenchmarkModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Diagnostic Cards -->
+        <div class="diagnostic-grid">
+          <div class="diagnostic-card">
+            <span class="diagnostic-label">答題正確率</span>
+            <span id="diag-accuracy" class="diagnostic-value success">--%</span>
+          </div>
+          <div class="diagnostic-card">
+            <span class="diagnostic-label">平均解題秒數 (API響應)</span>
+            <span id="diag-speed" class="diagnostic-value">--s</span>
+          </div>
+          <div class="diagnostic-card">
+            <span class="diagnostic-label">總消耗 Token 數</span>
+            <span id="diag-tokens" class="diagnostic-value">--</span>
+          </div>
+          <div class="diagnostic-card">
+            <span class="diagnostic-label">總估計費用 (NT$)</span>
+            <span id="diag-cost" class="diagnostic-value success">NT$ --</span>
+          </div>
+        </div>
+
+        <!-- Time Limit Tuning Panel -->
+        <div id="tuning-recommendation-panel" class="tuning-panel hidden">
+          <div class="tuning-header">
+            <span class="tuning-icon">💡</span>
+            <div class="tuning-title-group">
+              <h3>系統時限調優建議 (Tuning Recommendations)</h3>
+              <p>根據本次測試的 AI 真實響應延遲，推薦最適合您生產線的固定時限設定</p>
+            </div>
+          </div>
+          <div class="tuning-metrics-grid">
+            <div class="tuning-metric-item">
+              <span class="tuning-metric-label">平均響應</span>
+              <span id="tuning-avg-time" class="tuning-metric-value">-- 秒</span>
+            </div>
+            <div class="tuning-metric-item">
+              <span class="tuning-metric-label">最慢響應</span>
+              <span id="tuning-max-time" class="tuning-metric-value">-- 秒</span>
+            </div>
+            <div class="tuning-metric-item">
+              <span class="tuning-metric-label">推薦緩衝 (Buffer)</span>
+              <span id="tuning-buffer-val" class="tuning-metric-value">-- 秒</span>
+            </div>
+            <div class="tuning-metric-item highlight">
+              <span class="tuning-metric-label">建議時限設定</span>
+              <span id="tuning-rec-limit" class="tuning-metric-value">-- 秒</span>
+            </div>
+          </div>
+          <button id="btn-apply-rec-limit" class="btn-nav btn-primary tuning-apply-btn" onclick="applyRecommendedTime()">
+            ⚡ 套用建議時限
+          </button>
+        </div>
+
+        <!-- Session Remarks Note Panel -->
+        <div style="background: rgba(251, 188, 5, 0.03); border: 1px dashed rgba(251, 188, 5, 0.3); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
+          <label for="modal-session-note" style="font-size: 12px; font-weight: 800; color: #b06000; display: block; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;">
+            📝 測試診斷備註 (Persistent Session Note)
+          </label>
+          <textarea id="modal-session-note" placeholder="在此輸入此測試的特別備註或優化紀錄（自動儲存）..." oninput="updateActiveSessionNote(this.value)" style="width: 100%; height: 60px; padding: 8px; font-size: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; resize: none; box-sizing: border-box; outline: none; transition: border 0.2s;" onfocus="this.style.borderColor='var(--google-yellow)'" onblur="this.style.borderColor='var(--border-color)'"></textarea>
+        </div>
+
+        <!-- Detailed Table -->
+        <div class="benchmark-table-wrapper">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>測驗次數</th>
+                <th>題目編號</th>
+                <th>AI 判斷答案</th>
+                <th>標準答案</th>
+                <th>是否正確</th>
+                <th>API 秒數</th>
+                <th>Token 數 (入/出)</th>
+                <th>估計費用 (NT$)</th>
+              </tr>
+            </thead>
+            <tbody id="benchmark-table-body">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div style="font-size: 11px; color: var(--text-muted); line-height: 1.5; background: #f8f9fa; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px;">
+          <strong>計費公式說明：</strong><br>
+          - 匯率基底：1 USD = 30 NTD (台幣計費)。<br>
+          - **Gemini 3.1/2.0 Flash Lite** 計費率：輸入 $0.075 USD / 百萬 Token，輸出 $0.30 USD / 百萬 Token。<br>
+          - **Gemini 2.5/3.5/2.0 Flash** 計費率：輸入 $0.075 USD / 百萬 Token，輸出 $0.30 USD / 百萬 Token。<br>
+          - 單次費用 = (輸入 Token * 輸入單價 + 輸出 Token * 輸出單價) * 30。
+        </div>
+
+        <!-- Modal Footer Export Buttons -->
+        <div class="modal-footer-actions">
+          <button class="btn-export btn-export-csv" onclick="exportCurrentSessionCSV()">📥 匯出為 CSV 報表</button>
+          <button class="btn-export btn-export-html" onclick="exportCurrentSessionHTML()">📄 匯出為獨立 HTML 報告</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Configuration ---
+    const GOOGLE_SHEET_ID = "1F3XY1WblxeXU62BEJelSkEsyVRdeW-ogrpa5T1iS1jk";
+    const QUESTIONS_GID = "109381915";
+    const CSV_URL = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/export?format=csv&gid=${QUESTIONS_GID}`;
+
+    // Pricing rates per 1,000,000 tokens (USD)
+    const MODEL_RATES = {
+      'gemini-3.1-flash-lite': { input: 0.075, output: 0.30 },
+      'gemini-3.1-flash': { input: 0.075, output: 0.30 },
+      'gemini-2.0-flash-lite': { input: 0.075, output: 0.30 },
+      'gemini-2.5-flash': { input: 0.075, output: 0.30 },
+      'gemini-3.5-flash': { input: 0.075, output: 0.30 }
+    };
+
+    // Global State
+    let questions = [];
+    let currentIndex = 0;
+
+    // Simulation/Benchmark Loop Variables
+    let isSimulating = false;
+    let isBenchmarkMode = false;
+    let simTimeoutId = null;
+    let simIntervalId = null;
+    let countdownVal = 3;
+
+    // Asynchronous Request Control (Prevents race conditions in Fixed mode)
+    let currentRequestId = 0;
+    let requestSettled = false; // Tracks whether the current question has been resolved (success or timeout)
+
+    // Benchmark Session State
+    let benchmarkQuestions = [];
+    let benchmarkResults = [];
+    let benchmarkCurrentIdx = 0;
+    let activeSessionData = null; // Stored current session object
+
+    // Built-in Offline Fallback Questions
+    const fallbackQuestions = [
+      {
+        id: "A1_114_01",
+        subject: "人工智慧基礎概論",
+        filename: "114年第四次初階人工智慧基礎概論",
+        qno: 1,
+        question: "關於生成式人工智慧（Generative AI）的描述，下列何者「錯誤」？",
+        options: [
+          "主要是透過學習大量既有數據的分布規則，來生成全新的原創內容",
+          "大型語言模型（LLM）如 GPT 屬於生成式 AI 的典型應用",
+          "生成式 AI 只能處理和生成純文字內容，無法生成圖像或音訊",
+          "在使用生成式 AI 時，可能會產生「幻覺（Hallucination）」即生成虛假不實的內容"
+        ],
+        answer: "3"
+      },
+      {
+        id: "A1_114_02",
+        subject: "人工智慧基礎概論",
+        filename: "114年第四次初階人工智慧基礎概論",
+        qno: 2,
+        question: "在機器學習中，當模型在訓練數據上表現極佳，但在未曾見過的測試數據上表現卻很差，這種現象通常稱為什麼？",
+        options: [
+          "欠擬合 (Underfitting)",
+          "過擬合 (Overfitting)",
+          "梯度消失 (Gradient Vanishing)",
+          "維度災難 (Curse of Dimensionality)"
+        ],
+        answer: "2"
+      },
+      {
+        id: "A2_114_01",
+        subject: "生成式AI應用與規劃",
+        filename: "114年第四次初階生成式AI應用與規劃",
+        qno: 1,
+        question: "在使用 Prompt Engineering（提示詞工程）進行模型引導時，提供少數幾個（例如一到三個）問題與答案的示範範例給模型參考，這種提示方法稱之為何？",
+        options: [
+          "Zero-shot Prompting (零樣本提示)",
+          "Few-shot Prompting (少樣本提示)",
+          "Chain of Thought (思維鏈提示)",
+          "Role Play (角色扮演提示)"
+        ],
+        answer: "2"
+      },
+      {
+        id: "A2_114_02",
+        subject: "生成式AI應用與規劃",
+        filename: "114年第四次初階生成式AI應用與規劃",
+        qno: 2,
+        question: "政府或企業在導入生成式 AI 應用時，為了解決模型可能洩漏機密商業資訊或個人隱私資料的安全風險，以下何種做法「最不恰當」？",
+        options: [
+          "在將資料送往雲端 API 前，先進行去識別化（Anonymization）與敏感詞屏蔽處理",
+          "直接將公司未公開的研發機密代碼上傳至公共免費版 AI 聊天室進行除錯",
+          "布署地端的開源大型語言模型（Local LLM），確保所有商業資料不離開企業內網",
+          "與 AI 服務廠商簽署嚴格的企業級隱私保護合約（Enterprise SLA），聲明上傳數據不用於二次訓練"
+        ],
+        answer: "2"
+      },
+      {
+        id: "A1_115_01",
+        subject: "人工智慧基礎概論",
+        filename: "115年第一次初階人工智慧基礎概論",
+        qno: 1,
+        question: "深度學習模型中，常使用卷積神經網路（CNN）來處理圖像資料，其中「卷積層（Convolutional Layer）」的主要作用為何？",
+        options: [
+          "將圖像進行隨機打亂以增加訓練樣本的多樣性",
+          "自動提取圖像局部區域的空間特徵（如邊緣、紋理、形狀等）",
+          "將所有神經元進行全連接，以輸出最後的分類機率",
+          "用來減少圖像特徵圖的空間尺寸，以達到降維目的"
+        ],
+        answer: "2"
+      }
+    ];
+
+    // Load Data on Startup
+    window.addEventListener('DOMContentLoaded', () => {
+      loadQuestionBank();
+      renderHistoryList();
+    });
+
+    // Fetch and parse the CSV with 3-tier fallback architecture: Local CSV -> Remote Sheet CSV -> Built-in array
+    function loadQuestionBank() {
+      // Tier 1: Attempt to load from relative './questions.csv' (ideal for local/GitHub deployment)
+      console.log("Tier 1: Attempting to load local questions.csv...");
+      Papa.parse("./questions.csv", {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          const rawData = results.data;
+          if (rawData && rawData.length > 0) {
+            console.log("Tier 1 Success: Successfully loaded from local questions.csv.");
+            processCsvData(rawData);
+          } else {
+            console.warn("Tier 1: Local CSV was empty. Falling back to Tier 2 (Google Sheets)...");
+            loadRemoteCsv();
+          }
+        },
+        error: function(err) {
+          console.warn("Tier 1: Failed to load local questions.csv. Falling back to Tier 2 (Google Sheets)...", err);
+          loadRemoteCsv();
+        }
+      });
+    }
+
+    // Tier 2: Attempt to load from remote Google Sheets CSV URL
+    function loadRemoteCsv() {
+      console.log("Tier 2: Attempting to load remote Google Sheets CSV...");
+      Papa.parse(CSV_URL, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          const rawData = results.data;
+          if (rawData && rawData.length > 0) {
+            console.log("Tier 2 Success: Successfully loaded from remote Google Sheet.");
+            processCsvData(rawData);
+          } else {
+            console.warn("Tier 2: Remote CSV was empty. Falling back to Tier 3 (Offline built-in)...");
+            useFallbackQuestions();
+          }
+        },
+        error: function(err) {
+          console.error("Tier 2: Failed to download CSV from Google Sheets. Falling back to Tier 3 (Offline built-in)...", err);
+          useFallbackQuestions();
+        }
+      });
+    }
+
+    // Process structured CSV Rows
+    function processCsvData(rows) {
+      questions = [];
+      rows.forEach((row) => {
+        if (!row['編號'] && !row['id']) return;
+        
+        const qText = String(row['題目'] || row['question'] || "").trim();
+        if (!qText) return; 
+
+        questions.push({
+          id: String(row['編號'] || row['id'] || "").trim(),
+          subject: String(row['分類'] || row['subject'] || "A1").trim(),
+          filename: String(row['文件名稱'] || row['filename'] || "題庫").trim(),
+          qno: parseInt(row['題號'] || row['qno']) || 0,
+          question: qText,
+          options: [
+            String(row['選項1'] || row['opt1'] || "").trim(),
+            String(row['選項2'] || row['opt2'] || "").trim(),
+            String(row['選項3'] || row['opt3'] || "").trim(),
+            String(row['選項4'] || row['opt4'] || "").trim()
+          ],
+          answer: String(row['正確答案'] || row['answer'] || "1").trim()
+        });
+      });
+
+      if (questions.length === 0) {
+        useFallbackQuestions();
+      } else {
+        initUI();
+      }
+    }
+
+    // Use built-in questions
+    function useFallbackQuestions() {
+      questions = fallbackQuestions;
+      initUI();
+    }
+
+    // Initialize UI and elements
+    function initUI() {
+      document.getElementById('loading-overlay').classList.add('hidden');
+      
+      // Populate jumping dropdown selector
+      const selector = document.getElementById('question-selector');
+      selector.innerHTML = '<option value="0">跳轉至題目...</option>';
+      
+      questions.forEach((q, idx) => {
+        const option = document.createElement('option');
+        option.value = idx;
+        option.innerText = `[${q.subject}] 第 ${idx + 1} 題 (題號 ${q.qno})`;
+        selector.appendChild(option);
+      });
+
+      renderQuestion();
+    }
+
+    // Render current question to DOM
+    function renderQuestion() {
+      if (questions.length === 0) return;
+      
+      const q = questions[currentIndex];
+      
+      document.getElementById('tag-subject').innerText = q.subject;
+      document.getElementById('tag-file').innerText = q.filename;
+      document.getElementById('question-text').innerText = `${q.qno}. ${q.question}`;
+      
+      document.getElementById('opt1-text').innerText = q.options[0];
+      document.getElementById('opt2-text').innerText = q.options[1];
+      document.getElementById('opt3-text').innerText = q.options[2];
+      document.getElementById('opt4-text').innerText = q.options[3];
+      
+      document.getElementById('progress-badge').innerText = `第 ${currentIndex + 1} / ${questions.length} 題`;
+      
+      clearOptionSelection();
+      document.getElementById('question-selector').value = currentIndex;
+    }
+
+    // User selects an option manually
+    function selectOption(index) {
+      clearOptionSelection();
+      const btns = document.querySelectorAll('.option-btn');
+      if (btns[index - 1]) {
+        btns[index - 1].classList.add('selected');
+      }
+    }
+
+    function clearOptionSelection() {
+      const btns = document.querySelectorAll('.option-btn');
+      btns.forEach(btn => {
+        btn.classList.remove('selected');
+        btn.style.boxShadow = '';
+        btn.style.borderColor = '';
+        btn.style.backgroundColor = '';
+        btn.style.transform = '';
+      });
+    }
+
+    // Navigation functions
+    function nextQuestion() {
+      if (currentIndex < questions.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      } else {
+        alert("已達最後一題！將回到第一題。");
+        currentIndex = 0;
+        renderQuestion();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      } else {
+        alert("這已經是第一題了！");
+      }
+    }
+
+    function jumpToQuestion(index) {
+      const idx = parseInt(index, 10);
+      if (idx >= 0 && idx < questions.length) {
+        currentIndex = idx;
+        renderQuestion();
+      }
+    }
+
+    // Attach global window object references
+    window.app = {
+      nextQuestion: nextQuestion,
+      prevQuestion: prevQuestion,
+      getCurrentQuestion: () => questions[currentIndex]
+    };
+
+
+    // ==========================================
+    // =  AI CO-PILOT SIMULATION LOGIC (ON PAGE) =
+    // ==========================================
+
+    const aiPulse = document.getElementById('ai-pulse');
+    const simStatusText = document.querySelector('#sim-status-box span');
+    const simTimerText = document.getElementById('sim-timer-text');
+    const aiResultBox = document.getElementById('ai-result-box');
+    const aiResultBadge = document.getElementById('ai-result-badge');
+    const aiExplanationBox = document.getElementById('ai-explanation-box');
+    const aiExplanationText = document.getElementById('ai-explanation-text');
+    const progressTrack = document.getElementById('progress-track');
+    const progressBar = document.getElementById('progress-bar');
+
+    // Start Single-Question Auto Simulation
+    function startSimulation() {
+      const key = document.getElementById('api-key-input').value.trim();
+      if (!key) {
+        alert('請先輸入 Gemini API Key！');
+        document.getElementById('api-key-input').focus();
+        return;
+      }
+
+      isSimulating = true;
+      isBenchmarkMode = false;
+      lockInputs(true);
+      progressTrack.classList.remove('hidden');
+
+      runSimulationIteration();
+    }
+
+    // Start 5-Question Benchmark Mode (Random)
+    function startBenchmarkTest() {
+      const key = document.getElementById('api-key-input').value.trim();
+      if (!key) {
+        alert('請先輸入 Gemini API Key！');
+        document.getElementById('api-key-input').focus();
+        return;
+      }
+
+      // Select 5 random questions
+      if (questions.length < 5) {
+        alert('題庫數量小於 5 題，將直接進行完整測驗。');
+        benchmarkQuestions = [...questions];
+      } else {
+        const shuffled = [...questions].sort(() => 0.5 - Math.random());
+        benchmarkQuestions = shuffled.slice(0, 5);
+      }
+
+      isSimulating = true;
+      isBenchmarkMode = true;
+      benchmarkResults = [];
+      benchmarkCurrentIdx = 0;
+
+      lockInputs(true);
+      progressTrack.classList.remove('hidden');
+
+      // Jump to the first benchmark question immediately
+      const firstQ = benchmarkQuestions[0];
+      const actualIdx = questions.findIndex(q => q.id === firstQ.id);
+      if (actualIdx !== -1) {
+        currentIndex = actualIdx;
+        renderQuestion();
+      }
+
+      runSimulationIteration();
+    }
+
+    // Stop Simulation
+    function stopSimulation() {
+      isSimulating = false;
+      isBenchmarkMode = false;
+      
+      lockInputs(false);
+
+      if (simTimeoutId) clearTimeout(simTimeoutId);
+      if (simIntervalId) clearInterval(simIntervalId);
+      simTimeoutId = null;
+      simIntervalId = null;
+
+      aiPulse.className = 'ai-pulse';
+      simStatusText.innerText = '模擬狀態：已停止';
+      simTimerText.innerText = '--s';
+      progressTrack.classList.add('hidden');
+      progressBar.style.width = '0%';
+      
+      clearOptionSelection();
+    }
+
+    // Select simulation operation mode via buttons
+    function selectMode(mode) {
+      if (!isSimulating) {
+        document.getElementById('mode-select').value = mode;
+        
+        const btnSeq = document.getElementById('btn-mode-seq');
+        const btnFixed = document.getElementById('btn-mode-fixed');
+        
+        if (mode === 'sequential') {
+          btnSeq.classList.add('active');
+          btnFixed.classList.remove('active');
+        } else {
+          btnSeq.classList.remove('active');
+          btnFixed.classList.add('active');
+        }
+      }
+    }
+
+    // Select swiper speed via buttons
+    function selectSpeed(value) {
+      if (!isSimulating) {
+        document.getElementById('interval-input').value = value;
+        
+        const btns = document.querySelectorAll('.speed-toggle-btn');
+        btns.forEach(btn => {
+          if (parseFloat(btn.dataset.value) === parseFloat(value)) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+        
+        // Clear custom input visually since a preset has been selected
+        document.getElementById('custom-speed-input').value = '';
+      }
+    }
+
+    // Handle custom speed text box changes
+    function handleCustomSpeedInput(val) {
+      if (!isSimulating) {
+        const num = parseFloat(val);
+        if (!isNaN(num) && num >= 0.5) {
+          document.getElementById('interval-input').value = num;
+          
+          // Deactivate all preset speed buttons
+          const btns = document.querySelectorAll('.speed-toggle-btn');
+          btns.forEach(btn => btn.classList.remove('active'));
+        }
+      }
+    }
+
+    // Apply the recommended time limit from the sidebar badge to the custom input field
+    function applySidebarRecommendedTime() {
+      if (!isSimulating) {
+        const badge = document.getElementById('sidebar-rec-display');
+        if (!badge) return;
+        
+        const recVal = parseFloat(badge.dataset.value);
+        if (!recVal || recVal <= 0) {
+          alert('尚未進行基準測試，無推薦秒數可帶入。');
+          return;
+        }
+        
+        document.getElementById('custom-speed-input').value = recVal.toFixed(1);
+        handleCustomSpeedInput(recVal);
+      }
+    }
+
+    // Lock/Unlock control inputs
+    function lockInputs(lock) {
+      document.getElementById('btn-start-sim').disabled = lock;
+      document.getElementById('btn-start-benchmark').disabled = lock;
+      document.getElementById('btn-stop-sim').disabled = !lock;
+      
+      document.getElementById('api-key-input').disabled = lock;
+      document.getElementById('btn-mode-seq').disabled = lock;
+      document.getElementById('btn-mode-fixed').disabled = lock;
+      document.getElementById('model-select').disabled = lock;
+      
+      // Disable hidden input, custom input text box, and apply button
+      document.getElementById('interval-input').disabled = lock;
+      document.getElementById('custom-speed-input').disabled = lock;
+      document.getElementById('btn-sidebar-apply-rec').disabled = lock;
+      
+      // Disable speed buttons
+      const speedBtns = document.querySelectorAll('.speed-toggle-btn');
+      speedBtns.forEach(btn => {
+        btn.disabled = lock;
+      });
+    }
+
+    // Core Loop Iteration
+    async function runSimulationIteration() {
+      if (!isSimulating) return;
+
+      // Unique Request ID for async isolation in Fixed mode
+      currentRequestId++;
+      const requestId = currentRequestId;
+      requestSettled = false; 
+
+      const mode = document.getElementById('mode-select').value;
+      const intervalSec = parseFloat(document.getElementById('interval-input').value) || 3;
+
+      // Update UI to Capturing state
+      aiPulse.className = 'ai-pulse waiting'; 
+      simStatusText.innerText = isBenchmarkMode 
+        ? `測試中 (${benchmarkCurrentIdx + 1}/5)：截圖中...` 
+        : '模擬狀態：正在截圖中...';
+      simTimerText.innerText = 'OCR';
+
+      const startTime = performance.now();
+
+      // IF FIXED MODE: Start the countdown timer IMMEDIATELY!
+      if (mode === 'fixed') {
+        startFixedModeCountdown(requestId, intervalSec);
+      }
+
+      try {
+        const cardElement = document.querySelector('.question-card');
+        const canvas = await html2canvas(cardElement, {
+          useCORS: true,
+          logging: false,
+          scale: 1.5 
+        });
+        
+        const webpDataUrl = canvas.toDataURL('image/webp', 0.8);
+        const base64Image = webpDataUrl.split(',')[1];
+
+        // Call Gemini API
+        if (isSimulating && (mode === 'sequential' || requestId === currentRequestId)) {
+          simStatusText.innerText = isBenchmarkMode 
+            ? `測試中 (${benchmarkCurrentIdx + 1}/5)：分析解題中...` 
+            : '模擬狀態：分析與解題中...';
+        }
+        
+        const apiKey = document.getElementById('api-key-input').value.trim();
+        const apiModel = document.getElementById('model-select').value;
+
+        // Fetch raw response
+        const aiResponseRaw = await queryGeminiVisionRaw(base64Image, apiKey, apiModel);
+        
+        // Asynchronous guard: discard response if request has been superseded or simulation stopped
+        if (!isSimulating) return;
+
+        if (mode === 'fixed' && (requestId !== currentRequestId || requestSettled)) {
+          // Check if this is a late response for an ongoing benchmark run
+          if (isBenchmarkMode) {
+            const lateRecord = benchmarkResults.find(r => r.requestId === requestId);
+            if (lateRecord && lateRecord.status === 'timeout') {
+              const endTime = performance.now();
+              const responseSeconds = parseFloat(((endTime - startTime) / 1000).toFixed(2));
+              
+              const responseText = aiResponseRaw.candidates?.[0]?.content?.parts?.[0]?.text;
+              if (responseText) {
+                try {
+                  const parsedData = JSON.parse(responseText.trim());
+                  const usage = aiResponseRaw.usageMetadata || { promptTokenCount: 0, candidatesTokenCount: 0, totalTokenCount: 0 };
+                  const rates = MODEL_RATES[apiModel] || { input: 0.075, output: 0.30 }; 
+                  const usdCost = (usage.promptTokenCount / 1000000) * rates.input + (usage.candidatesTokenCount / 1000000) * rates.output;
+                  const ntdCost = parseFloat((usdCost * 30).toFixed(5));
+                  
+                  const isCorrect = String(parsedData.answer).trim() === String(lateRecord.stdAnswer).trim();
+                  
+                  console.log(`Processing late response for Request ID ${requestId} (took ${responseSeconds}s)`);
+                  
+                  lateRecord.isLate = true;
+                  lateRecord.lateCorrect = isCorrect;
+                  lateRecord.seconds = responseSeconds;
+                  lateRecord.aiAnswer = parsedData.answer;
+                  lateRecord.isCorrect = isCorrect;
+                  lateRecord.inputTokens = usage.promptTokenCount;
+                  lateRecord.outputTokens = usage.candidatesTokenCount;
+                  lateRecord.totalTokens = usage.totalTokenCount;
+                  lateRecord.ntdCost = ntdCost;
+                  
+                  // If the late response belongs to the question currently on screen, update the UI dynamically!
+                  if (requestId === currentRequestId) {
+                    aiPulse.className = 'ai-pulse active';
+                    simStatusText.innerText = isBenchmarkMode 
+                      ? `測試中 (${benchmarkCurrentIdx}/5)：解題完成！`
+                      : '模擬狀態：解題完成！';
+                    
+                    aiResultBox.classList.remove('hidden');
+                    if (isCorrect) {
+                      aiResultBox.style.border = '2px dashed var(--google-green)';
+                      aiResultBox.style.background = '#f4faf6';
+                      aiResultBadge.innerText = `第 ( ${parsedData.answer} ) 選項`;
+                      aiResultBadge.style.color = '#137333';
+                    } else {
+                      aiResultBox.style.border = '2px dashed var(--google-red)';
+                      aiResultBox.style.background = '#fce8e6';
+                      aiResultBadge.innerText = `第 ( ${parsedData.answer} ) 選項`;
+                      aiResultBadge.style.color = '#c5221f';
+                    }
+                    
+                    aiExplanationBox.classList.remove('hidden');
+                    aiExplanationText.innerHTML = `
+                      <strong>辨識題目：</strong>${parsedData.question}<br>
+                      <strong>API 耗時：</strong>${responseSeconds} 秒 (已逾時)<br>
+                      <strong>Token 數：</strong>輸入 ${usage.promptTokenCount} / 輸出 ${usage.candidatesTokenCount} (共 ${usage.totalTokenCount})<br>
+                      <strong>估計費用：</strong>NT$ ${ntdCost}<br><br>
+                      <strong>💡 AI 解析：</strong>${parsedData.explanation}
+                    `;
+                    
+                    highlightOptionButton(parsedData.answer);
+                  }
+                  
+                  recalculateSessionTotals();
+                } catch (e) {
+                  console.error('Failed to parse late response:', e);
+                }
+              }
+            }
+          }
+          return; 
+        }
+
+        const endTime = performance.now();
+        const responseSeconds = parseFloat(((endTime - startTime) / 1000).toFixed(2));
+
+        // Parse API response
+        const responseText = aiResponseRaw.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!responseText) throw new Error('API 回傳空資料');
+        
+        const parsedData = JSON.parse(responseText.trim());
+        const usage = aiResponseRaw.usageMetadata || { promptTokenCount: 0, candidatesTokenCount: 0, totalTokenCount: 0 };
+        
+        // Cost calculation
+        const rates = MODEL_RATES[apiModel] || { input: 0.075, output: 0.30 }; 
+        const usdCost = (usage.promptTokenCount / 1000000) * rates.input + (usage.candidatesTokenCount / 1000000) * rates.output;
+        const ntdCost = parseFloat((usdCost * 30).toFixed(5));
+
+        const currentQ = isBenchmarkMode ? benchmarkQuestions[benchmarkCurrentIdx] : questions[currentIndex];
+        const isCorrect = String(parsedData.answer).trim() === String(currentQ.answer).trim();
+
+        // Clear any previous interval if in sequential mode
+        if (mode === 'sequential') {
+          if (simIntervalId) clearInterval(simIntervalId);
+        }
+
+        requestSettled = true;
+
+        const runRecord = {
+          requestId: requestId,
+          round: benchmarkCurrentIdx + 1,
+          qId: currentQ.id,
+          aiAnswer: parsedData.answer,
+          stdAnswer: currentQ.answer,
+          isCorrect: isCorrect,
+          seconds: responseSeconds,
+          inputTokens: usage.promptTokenCount,
+          outputTokens: usage.candidatesTokenCount,
+          totalTokens: usage.totalTokenCount,
+          ntdCost: ntdCost,
+          status: 'success',
+          isLate: false
+        };
+
+        if (isBenchmarkMode) {
+          benchmarkResults.push(runRecord);
+        }
+
+        // Update single-question UI
+        aiPulse.className = 'ai-pulse active'; 
+        simStatusText.innerText = isBenchmarkMode 
+          ? `測試中 (${benchmarkCurrentIdx + 1}/5)：解題完成！` 
+          : '模擬狀態：解題完成！';
+        
+        aiResultBox.classList.remove('hidden');
+        if (isCorrect) {
+          aiResultBox.style.border = '2px dashed var(--google-green)';
+          aiResultBox.style.background = '#f4faf6';
+          aiResultBadge.innerText = `第 ( ${parsedData.answer} ) 選項`;
+          aiResultBadge.style.color = '#137333';
+        } else {
+          aiResultBox.style.border = '2px dashed var(--google-red)';
+          aiResultBox.style.background = '#fce8e6';
+          aiResultBadge.innerText = `第 ( ${parsedData.answer} ) 選項`;
+          aiResultBadge.style.color = '#c5221f';
+        }
+        
+        aiExplanationBox.classList.remove('hidden');
+        aiExplanationText.innerHTML = `
+          <strong>辨識題目：</strong>${parsedData.question}<br>
+          <strong>API 耗時：</strong>${responseSeconds} 秒<br>
+          <strong>Token 數：</strong>輸入 ${usage.promptTokenCount} / 輸出 ${usage.candidatesTokenCount} (共 ${usage.totalTokenCount})<br>
+          <strong>估計費用：</strong>NT$ ${ntdCost}<br><br>
+          <strong>💡 AI 解析：</strong>${parsedData.explanation}
+        `;
+
+        // Highlight option button
+        highlightOptionButton(parsedData.answer);
+
+        // Advancing states
+        if (isBenchmarkMode) {
+          if (mode === 'sequential') {
+            // Sequential mode advances after a normal countdown
+            benchmarkCurrentIdx++;
+            if (benchmarkCurrentIdx >= 5 || benchmarkCurrentIdx >= benchmarkQuestions.length) {
+              setTimeout(() => {
+                stopSimulation();
+                showBenchmarkReport();
+              }, 1500);
+            } else {
+              startSimCountdown();
+            }
+          }
+          // Note: In Fixed mode, the countdown timer we started at the beginning will handle advancing!
+        } else {
+          if (mode === 'sequential') {
+            startSimCountdown();
+          }
+        }
+
+      } catch (err) {
+        console.error('Simulation failed:', err);
+        if (!isSimulating || (mode === 'fixed' && requestId !== currentRequestId)) return;
+        
+        // Handle error
+        aiPulse.className = 'ai-pulse';
+        simStatusText.innerText = '模擬狀態：解題出錯';
+        aiResultBox.classList.remove('hidden');
+        aiResultBadge.innerText = '⚠️ 模擬失敗';
+        aiExplanationBox.classList.remove('hidden');
+        aiExplanationText.innerText = `錯誤原因: ${err.message}`;
+        
+        if (mode === 'sequential') {
+          if (isBenchmarkMode) {
+            recordFailedOrTimeout(false);
+          } else {
+            startSimCountdown();
+          }
+        }
+      }
+    }
+
+    // Call Google Gemini API
+    async function queryGeminiVisionRaw(base64Image, apiKey, model) {
+      const prompt = `這是一張考試題目的截圖。請幫我精準辨識題目、選項，判斷正確答案是哪一個選項（請提供 1, 2, 3 或 4 之一的整數，不要寫 A, B, C, D），並給出簡短的解析（大約 50-100 字，繁體中文）。
+請務必以 JSON 格式回傳，格式如下：
+{
+  "question": "辨識出的題目文字",
+  "options": [
+    "選項 1 文字",
+    "選項 2 文字",
+    "選項 3 文字",
+    "選項 4 文字"
+  ],
+  "answer": 1,
+  "explanation": "詳細的AI解析內容..."
+}`;
+
+      const requestBody = {
+        contents: [
+          {
+            parts: [
+              { text: prompt },
+              {
+                inlineData: {
+                  mimeType: 'image/webp',
+                  data: base64Image
+                }
+              }
+            ]
+          }
+        ],
+        generationConfig: {
+          responseMimeType: 'application/json'
+        }
+      };
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`API ${response.status}: ${errorText}`);
+      }
+
+      return await response.json();
+    }
+
+    // Highlight option button on the webpage
+    function highlightOptionButton(optionIndex) {
+      clearOptionSelection();
+      const idx = optionIndex - 1;
+      const btns = document.querySelectorAll('.option-btn');
+      if (btns[idx]) {
+        const btn = btns[idx];
+        btn.style.transition = 'all 0.3s ease';
+        btn.style.boxShadow = '0 0 0 4px rgba(52, 168, 83, 0.4), 0 4px 10px rgba(52, 168, 83, 0.15)';
+        btn.style.borderColor = '#34a853';
+        btn.style.backgroundColor = '#e6f4ea';
+        btn.style.transform = 'translateY(-2px)';
+      }
+    }
+
+    // High-precision countdown and automatic click next (Sequential Mode Only)
+    function startSimCountdown() {
+      const intervalSec = parseFloat(document.getElementById('interval-input').value) || 3;
+      const startTime = performance.now();
+      const durationMs = intervalSec * 1000;
+      
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '100%';
+      
+      simTimerText.innerText = `${intervalSec.toFixed(1)}s`;
+      simStatusText.innerText = isBenchmarkMode 
+        ? `測試中 (${benchmarkCurrentIdx}/5)：等待換題中...` 
+        : '模擬狀態：等待換題中...';
+
+      if (simIntervalId) clearInterval(simIntervalId);
+      
+      simIntervalId = setInterval(() => {
+        if (!isSimulating) {
+          clearInterval(simIntervalId);
+          return;
+        }
+
+        const elapsedMs = performance.now() - startTime;
+        const remainingMs = Math.max(0, durationMs - elapsedMs);
+        const remainingSec = remainingMs / 1000;
+        
+        const pct = (remainingMs / durationMs) * 100;
+        progressBar.style.transition = 'width 0.1s linear';
+        progressBar.style.width = `${pct}%`;
+        
+        simTimerText.innerText = `${remainingSec.toFixed(1)}s`;
+
+        if (remainingMs <= 0) {
+          clearInterval(simIntervalId);
+          simIntervalId = null;
+          advanceToNextQuestion();
+        }
+      }, 100);
+    }
+
+    // High-precision Fixed Mode Countdown (Starts immediately on question load)
+    function startFixedModeCountdown(requestId, intervalSec) {
+      const startTime = performance.now();
+      const durationMs = intervalSec * 1000;
+      
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '100%';
+      
+      simTimerText.innerText = `${intervalSec.toFixed(1)}s`;
+
+      if (simIntervalId) clearInterval(simIntervalId);
+      
+      simIntervalId = setInterval(() => {
+        if (!isSimulating || requestId !== currentRequestId) {
+          clearInterval(simIntervalId);
+          return;
+        }
+
+        const elapsedMs = performance.now() - startTime;
+        const remainingMs = Math.max(0, durationMs - elapsedMs);
+        const remainingSec = remainingMs / 1000;
+        
+        const pct = (remainingMs / durationMs) * 100;
+        progressBar.style.transition = 'width 0.1s linear';
+        progressBar.style.width = `${pct}%`;
+        
+        simTimerText.innerText = `${remainingSec.toFixed(1)}s`;
+
+        if (remainingMs <= 0) {
+          clearInterval(simIntervalId);
+          simIntervalId = null;
+          
+          if (isSimulating && requestId === currentRequestId) {
+            if (requestSettled) {
+              // API responded successfully within the time limit. Advance!
+              if (isBenchmarkMode) {
+                benchmarkCurrentIdx++;
+                if (benchmarkCurrentIdx >= 5 || benchmarkCurrentIdx >= benchmarkQuestions.length) {
+                  stopSimulation();
+                  showBenchmarkReport();
+                } else {
+                  advanceToNextQuestion();
+                }
+              } else {
+                advanceToNextQuestion();
+              }
+            } else {
+              // API did NOT respond in time. Genuine timeout!
+              console.log(`Request ID ${requestId} Timed Out!`);
+              handleFixedModeTimeout(intervalSec, requestId);
+            }
+          }
+        }
+      }, 100);
+    }
+
+    // Handle Timeout in Fixed Mode
+    function handleFixedModeTimeout(intervalSec, requestId) {
+      requestSettled = true; // Settle the request as timeout
+
+      // 1. Show timeout warnings in UI
+      aiPulse.className = 'ai-pulse';
+      simStatusText.innerText = '模擬狀態：偵測逾時！';
+      
+      aiResultBox.classList.remove('hidden');
+      aiResultBox.style.border = '2px dashed var(--google-red)';
+      aiResultBox.style.background = '#fce8e6';
+      aiResultBadge.innerText = '⚠️ 偵測逾時 (Timeout)';
+      aiResultBadge.style.color = '#c5221f';
+      
+      aiExplanationBox.classList.remove('hidden');
+      aiExplanationText.innerHTML = `
+        <span style="color: #c5221f; font-weight: bold;">[系統警告] AI 視覺判讀逾時！</span><br>
+        設定的時限為 <strong>${intervalSec} 秒</strong>，但 API 響應時間大於時限，產品已在產線上流走（自動切換下一題）。
+      `;
+
+      // 2. Record as Timeout in Benchmark
+      if (isBenchmarkMode) {
+        recordFailedOrTimeout(true, intervalSec, requestId);
+      } else {
+        // In single question mode, wait 1.5s to let user see the red alert, then switch
+        setTimeout(() => {
+          if (isSimulating) {
+            advanceToNextQuestion();
+          }
+        }, 1500);
+      }
+    }
+
+    // Record Failed or Timeout run in Benchmark
+    function recordFailedOrTimeout(isTimeout, intervalSec = 0, requestId = 0) {
+      const currentQ = benchmarkQuestions[benchmarkCurrentIdx];
+      
+      const record = {
+        requestId: requestId,
+        round: benchmarkCurrentIdx + 1,
+        qId: currentQ.id,
+        aiAnswer: isTimeout ? '⚠️ 逾時' : '❌ 失敗',
+        stdAnswer: currentQ.answer,
+        isCorrect: false,
+        seconds: isTimeout ? intervalSec : 0,
+        inputTokens: 0,
+        outputTokens: 0,
+        totalTokens: 0,
+        ntdCost: 0,
+        status: isTimeout ? 'timeout' : 'fail',
+        isLate: false
+      };
+      
+      benchmarkResults.push(record);
+      benchmarkCurrentIdx++;
+
+      // Wait 1s to let user see status, then switch immediately
+      setTimeout(() => {
+        if (isSimulating) {
+          if (benchmarkCurrentIdx >= 5 || benchmarkCurrentIdx >= benchmarkQuestions.length) {
+            stopSimulation();
+            showBenchmarkReport();
+          } else {
+            advanceToNextQuestion();
+          }
+        }
+      }, 1200);
+    }
+
+    // Swiper navigation
+    function advanceToNextQuestion() {
+      if (isBenchmarkMode) {
+        const nextQ = benchmarkQuestions[benchmarkCurrentIdx];
+        const actualIdx = questions.findIndex(q => q.id === nextQ.id);
+        if (actualIdx !== -1) {
+          currentIndex = actualIdx;
+          renderQuestion();
+        }
+      } else {
+        if (currentIndex >= questions.length - 1) {
+          stopSimulation();
+          alert("已自動完成整套題目的模擬，系統已自動停止以防持續消耗 API Token。");
+          return;
+        }
+        nextQuestion();
+      }
+      
+      simStatusText.innerText = isBenchmarkMode 
+        ? `測試中 (${benchmarkCurrentIdx + 1}/5)：載入下一題...` 
+        : '模擬狀態：正在載入下一題...';
+      
+      simTimeoutId = setTimeout(() => {
+        runSimulationIteration();
+      }, 1000);
+    }
+
+    // ==========================================
+    // =       HISTORY & EXPORT MANAGEMENT      =
+    // ==========================================
+
+    // Show Report Modal & Save to LocalStorage
+    function showBenchmarkReport() {
+      const totalRuns = benchmarkResults.length;
+      // Only successful (in-time) correct answers count for the final score
+      const correctCount = benchmarkResults.filter(r => r.status === 'success' && r.isCorrect).length;
+      const accuracyPct = Math.round((correctCount / totalRuns) * 100);
+      
+      const speedRuns = benchmarkResults.filter(r => r.status === 'success');
+      const avgSpeed = speedRuns.length > 0
+        ? (speedRuns.reduce((sum, r) => sum + r.seconds, 0) / speedRuns.length).toFixed(2)
+        : '0.00';
+      
+      // Total tokens and cost include late responses as they were actually charged
+      const totalTokens = benchmarkResults.reduce((sum, r) => sum + r.totalTokens, 0);
+      const totalCost = benchmarkResults.reduce((sum, r) => sum + r.ntdCost, 0).toFixed(5);
+
+      const apiModel = document.getElementById('model-select').value;
+      const mode = document.getElementById('mode-select').value;
+      const intervalVal = document.getElementById('interval-input').value;
+
+      // Construct session object
+      activeSessionData = {
+        id: Date.now(),
+        timestamp: new Date().toLocaleString('zh-TW', { hour12: false }),
+        model: apiModel,
+        mode: mode,
+        interval: intervalVal,
+        accuracy: `${accuracyPct}% (${correctCount}/${totalRuns})`,
+        accuracyPct: accuracyPct,
+        avgSpeed: avgSpeed,
+        totalTokens: totalTokens,
+        totalCost: totalCost,
+        results: benchmarkResults,
+        note: "" // Default empty note for session remarks
+      };
+
+      // Save to History
+      saveSessionToHistory(activeSessionData);
+
+      // Render Report Modal
+      renderModalData(activeSessionData);
+    }
+
+    // Dynamic session total recalculator for late responses
+    function recalculateSessionTotals() {
+      if (!activeSessionData) return;
+      
+      const results = activeSessionData.results;
+      const totalRuns = results.length;
+      
+      const correctCount = results.filter(r => r.status === 'success' && r.isCorrect).length;
+      const accuracyPct = Math.round((correctCount / totalRuns) * 100);
+      
+      const speedRuns = results.filter(r => r.status === 'success');
+      const avgSpeed = speedRuns.length > 0
+        ? (speedRuns.reduce((sum, r) => sum + r.seconds, 0) / speedRuns.length).toFixed(2)
+        : '0.00';
+      
+      const totalTokens = results.reduce((sum, r) => sum + r.totalTokens, 0);
+      const totalCost = results.reduce((sum, r) => sum + r.ntdCost, 0).toFixed(5);
+
+      activeSessionData.accuracy = `${accuracyPct}% (${correctCount}/${totalRuns})`;
+      activeSessionData.accuracyPct = accuracyPct;
+      activeSessionData.avgSpeed = avgSpeed;
+      activeSessionData.totalTokens = totalTokens;
+      activeSessionData.totalCost = totalCost;
+
+      // Update in LocalStorage
+      updateSessionInHistory(activeSessionData);
+
+      // Re-render modal data
+      renderModalData(activeSessionData);
+    }
+
+    // Update session in LocalStorage
+    function updateSessionInHistory(session) {
+      let history = [];
+      try {
+        const stored = localStorage.getItem('ipas_benchmark_history');
+        if (stored) history = JSON.parse(stored);
+      } catch (e) {
+        console.error(e);
+      }
+
+      const idx = history.findIndex(s => s.id === session.id);
+      if (idx !== -1) {
+        history[idx] = session;
+        localStorage.setItem('ipas_benchmark_history', JSON.stringify(history));
+        renderHistoryList();
+      }
+    }
+
+    // Update active session note in-place and persist in LocalStorage
+    function updateActiveSessionNote(newNote) {
+      if (!activeSessionData) return;
+      activeSessionData.note = newNote;
+      
+      try {
+        const stored = localStorage.getItem('ipas_benchmark_history');
+        if (stored) {
+          let history = JSON.parse(stored);
+          const idx = history.findIndex(s => s.id === activeSessionData.id);
+          if (idx !== -1) {
+            history[idx].note = newNote;
+            localStorage.setItem('ipas_benchmark_history', JSON.stringify(history));
+            renderHistoryList();
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // Render data inside the modal
+    function renderModalData(session) {
+      document.getElementById('modal-title-text').innerText = `🏆 Gemini AI 基準效能與計費診斷報告 (${session.timestamp})`;
+      document.getElementById('diag-accuracy').innerText = session.accuracy;
+      document.getElementById('diag-speed').innerText = `${session.avgSpeed}s`;
+      document.getElementById('diag-tokens').innerText = session.totalTokens.toLocaleString();
+      document.getElementById('diag-cost').innerText = `NT$ ${session.totalCost}`;
+
+      // Populate note field
+      const noteInput = document.getElementById('modal-session-note');
+      if (noteInput) {
+        noteInput.value = session.note || '';
+      }
+
+      // Populate table rows
+      const tbody = document.getElementById('benchmark-table-body');
+      tbody.innerHTML = '';
+
+      session.results.forEach(r => {
+        const tr = document.createElement('tr');
+        
+        let badgeClass = 'wrong';
+        let badgeText = '❌ 答錯';
+        
+        if (r.status === 'success') {
+          if (r.isCorrect) {
+            badgeClass = 'correct';
+            badgeText = '✅ 答對';
+          } else {
+            badgeClass = 'wrong';
+            badgeText = '❌ 答錯';
+          }
+        } else if (r.status === 'timeout') {
+          if (r.isLate) {
+            if (r.lateCorrect) {
+              badgeClass = 'timeout-correct';
+              badgeText = '⚠️ 逾時答對';
+            } else {
+              badgeClass = 'timeout-wrong';
+              badgeText = '⚠️ 逾時答錯';
+            }
+          } else {
+            badgeClass = 'timeout';
+            badgeText = '⚠️ 逾時';
+          }
+        } else if (r.status === 'fail') {
+          badgeClass = 'wrong';
+          badgeText = '❌ 失敗';
+        }
+
+        const aiAnswerVal = (r.status === 'timeout' && !r.isLate) ? '⚠️ 逾時' : r.aiAnswer;
+        
+        let secondsText = '無';
+        if (r.status === 'success') {
+          secondsText = `${r.seconds} 秒`;
+        } else if (r.status === 'timeout') {
+          if (r.isLate) {
+            secondsText = `> ${session.interval} 秒 (實際 ${r.seconds} 秒)`;
+          } else {
+            secondsText = `> ${session.interval} 秒`;
+          }
+        }
+        
+        let tokenText = '無';
+        if (r.status === 'success' || (r.status === 'timeout' && r.isLate)) {
+          tokenText = `入: ${r.inputTokens} / 出: ${r.outputTokens}`;
+        }
+
+        tr.innerHTML = `
+          <td>第 ${r.round} 次</td>
+          <td style="font-family: monospace; font-weight: bold;">${r.qId}</td>
+          <td style="font-weight: bold; text-align: center;">${aiAnswerVal}</td>
+          <td style="font-weight: bold; text-align: center;">${r.stdAnswer}</td>
+          <td>
+            <span class="result-badge ${badgeClass}">${badgeText}</span>
+          </td>
+          <td>${secondsText}</td>
+          <td>${tokenText}</td>
+          <td style="font-weight: bold; color: #137333;">NT$ ${r.ntdCost > 0 ? r.ntdCost.toFixed(5) : '0'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Calculate time limit tuning recommendations with rich statistics
+      const allTimes = session.results
+        .filter(r => r.status === 'success' || r.isLate)
+        .map(r => r.seconds);
+
+      const panel = document.getElementById('tuning-recommendation-panel');
+      
+      if (allTimes.length > 0) {
+        const sum = allTimes.reduce((a, b) => a + b, 0);
+        const avgTime = sum / allTimes.length;
+        const maxTime = Math.max(...allTimes);
+        
+        // 15% safety buffer
+        const bufferVal = maxTime * 0.15;
+        const recLimit = maxTime + bufferVal;
+        
+        // Round to 1 decimal place (precise to 0.x seconds)
+        const finalRec = Math.max(1.0, Math.ceil(recLimit * 10) / 10);
+        
+        document.getElementById('tuning-avg-time').innerText = `${avgTime.toFixed(2)} 秒`;
+        document.getElementById('tuning-max-time').innerText = `${maxTime.toFixed(2)} 秒`;
+        document.getElementById('tuning-buffer-val').innerText = `+15% (+${bufferVal.toFixed(2)} 秒)`;
+        
+        const recLimitEl = document.getElementById('tuning-rec-limit');
+        recLimitEl.innerText = `${finalRec.toFixed(1)} 秒`;
+        recLimitEl.dataset.value = finalRec;
+        
+        // Update sidebar recommendation display dynamically
+        const sidebarRec = document.getElementById('sidebar-rec-display');
+        if (sidebarRec) {
+          sidebarRec.innerText = `💡 最佳推薦: ${finalRec.toFixed(1)} 秒`;
+          sidebarRec.dataset.value = finalRec;
+        }
+        
+        panel.classList.remove('hidden');
+      } else {
+        // If all timed out completely, recommend current interval + 2 seconds
+        const currentInterval = parseFloat(session.interval) || 3;
+        const finalRec = currentInterval + 2;
+        
+        document.getElementById('tuning-avg-time').innerText = '無 (全逾時)';
+        document.getElementById('tuning-max-time').innerText = '無 (全逾時)';
+        document.getElementById('tuning-buffer-val').innerText = '無法估計';
+        
+        const recLimitEl = document.getElementById('tuning-rec-limit');
+        recLimitEl.innerText = `${finalRec.toFixed(1)} 秒`;
+        recLimitEl.dataset.value = finalRec;
+        
+        // Update sidebar recommendation display dynamically
+        const sidebarRec = document.getElementById('sidebar-rec-display');
+        if (sidebarRec) {
+          sidebarRec.innerText = `💡 最佳推薦: ${finalRec.toFixed(1)} 秒`;
+          sidebarRec.dataset.value = finalRec;
+        }
+        
+        panel.classList.remove('hidden');
+      }
+
+      // Update global active reference
+      activeSessionData = session;
+
+      // Show modal
+      document.getElementById('benchmark-modal').classList.remove('hidden');
+    }
+
+    // Apply the recommended time limit from the modal (calls sidebar apply and closes modal)
+    function applyRecommendedTime() {
+      applySidebarRecommendedTime();
+      closeBenchmarkModal();
+    }
+
+    // Close the benchmark modal
+    function closeBenchmarkModal() {
+      document.getElementById('benchmark-modal').classList.add('hidden');
+    }
+
+    // Save session to LocalStorage
+    function saveSessionToHistory(session) {
+      let history = [];
+      try {
+        const stored = localStorage.getItem('ipas_benchmark_history');
+        if (stored) history = JSON.parse(stored);
+      } catch (e) {
+        console.error(e);
+      }
+
+      // Add to beginning and limit to 10 records
+      history.unshift(session);
+      if (history.length > 10) history.pop();
+
+      localStorage.setItem('ipas_benchmark_history', JSON.stringify(history));
+      renderHistoryList();
+    }
+
+    // Render local history sidebar items
+    function renderHistoryList() {
+      const listEl = document.getElementById('history-list');
+      listEl.innerHTML = '';
+
+      let history = [];
+      try {
+        const stored = localStorage.getItem('ipas_benchmark_history');
+        if (stored) history = JSON.parse(stored);
+      } catch (e) {
+        console.error(e);
+      }
+
+      if (history.length === 0) {
+        listEl.innerHTML = '<div style="text-align: center; color: var(--text-muted); font-size: 11px; padding: 12px 0;">暫無歷史紀錄</div>';
+        return;
+      }
+
+      history.forEach(session => {
+        const item = document.createElement('div');
+        item.className = 'history-item';
+        
+        // Mark as has-failures if accuracy is less than 100%
+        const hasFailures = (session.accuracyPct !== undefined) 
+          ? (session.accuracyPct < 100)
+          : (!session.accuracy.includes('100%'));
+        
+        if (hasFailures) {
+          item.classList.add('has-failures');
+        }
+        
+        const modeText = session.mode === 'sequential' ? '循序' : '固定';
+        const modeClass = session.mode === 'sequential' ? 'history-badge-seq' : 'history-badge-fixed';
+
+        const noteHtml = session.note
+          ? `<div style="margin-top: 6px; font-size: 10px; color: #b06000; background: rgba(251, 188, 5, 0.04); border-left: 2px solid var(--google-yellow); padding: 2px 6px; border-radius: 4px; word-break: break-all;"><strong>備註:</strong> ${session.note}</div>`
+          : '';
+
+        item.innerHTML = `
+          <div class="history-meta-row">
+            <span style="color: var(--primary);">${session.model.replace('gemini-', '')}</span>
+            <span class="history-badge ${modeClass}">${modeText} ${session.interval}s</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; color: var(--text-muted); font-size: 10px; margin-top: 2px;">
+            <span>${session.timestamp.split(' ')[1]}</span>
+            <span style="font-weight: 700; color: var(--google-green);">對: ${session.accuracy.split(' ')[0]}</span>
+            <span style="font-weight: 700; color: #137333;">NT$ ${parseFloat(session.totalCost).toFixed(4)}</span>
+          </div>
+          ${noteHtml}
+        `;
+
+        // Click to view
+        item.addEventListener('click', () => {
+          renderModalData(session);
+        });
+
+        listEl.appendChild(item);
+      });
+    }
+
+    // Clear all history
+    function clearAllHistory() {
+      if (confirm('確定要清除所有本地歷史測試紀錄嗎？')) {
+        localStorage.removeItem('ipas_benchmark_history');
+        renderHistoryList();
+      }
+    }
+
+    // Export current active session to CSV
+    function exportCurrentSessionCSV() {
+      if (!activeSessionData) return;
+      
+      const session = activeSessionData;
+      let csvContent = '\uFEFF'; // Add BOM for Excel Chinese compatibility
+      
+      // Headers
+      csvContent += '測試次數,題目編號,AI判斷答案,標準答案,是否正確,API秒數(秒),輸入Token,輸出Token,總Token,估計費用(NT$),備註\n';
+      
+      // Rows
+      session.results.forEach(r => {
+        const matchText = r.isCorrect ? '對' : (r.status === 'timeout' ? '逾時' : '錯');
+        const noteEscaped = (session.note || '').replace(/"/g, '""');
+        csvContent += `第 ${r.round} 次,${r.qId},${r.aiAnswer},${r.stdAnswer},${matchText},${r.seconds || ''},${r.inputTokens || 0},${r.outputTokens || 0},${r.totalTokens || 0},${r.ntdCost},"${noteEscaped}"\n`;
+      });
+
+      // Trigger Download
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute('download', `Gemini_Benchmark_${session.timestamp.replace(/[:\/ ]/g, '_')}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Export current active session to premium standalone HTML report
+    function exportCurrentSessionHTML() {
+      if (!activeSessionData) return;
+      
+      const session = activeSessionData;
+      
+      let tableRowsHtml = '';
+      session.results.forEach(r => {
+        let badgeStyle = 'background: #fce8e6; color: #c5221f;';
+        let badgeText = '❌ 答錯';
+        
+        if (r.status === 'success') {
+          if (r.isCorrect) {
+            badgeStyle = 'background: #e6f4ea; color: #137333;';
+            badgeText = '✅ 答對';
+          } else {
+            badgeStyle = 'background: #fce8e6; color: #c5221f;';
+            badgeText = '❌ 答錯';
+          }
+        } else if (r.status === 'timeout') {
+          if (r.isLate) {
+            if (r.lateCorrect) {
+              badgeStyle = 'background: #fff8e1; color: #137333; border: 1px dashed #34a853;';
+              badgeText = '⚠️ 逾時答對';
+            } else {
+              badgeStyle = 'background: #fce8e6; color: #c5221f; border: 1px dashed #ea4335;';
+              badgeText = '⚠️ 逾時答錯';
+            }
+          } else {
+            badgeStyle = 'background: #fff8e1; color: #7a4d00;';
+            badgeText = '⚠️ 逾時';
+          }
+        } else if (r.status === 'fail') {
+          badgeStyle = 'background: #fce8e6; color: #c5221f;';
+          badgeText = '❌ 失敗';
+        }
+
+        const aiAnswerVal = (r.status === 'timeout' && !r.isLate) ? '⚠️ 逾時' : r.aiAnswer;
+        
+        let secondsText = '無';
+        if (r.status === 'success') {
+          secondsText = `${r.seconds} 秒`;
+        } else if (r.status === 'timeout') {
+          if (r.isLate) {
+            secondsText = `> ${session.interval} 秒 (實際 ${r.seconds} 秒)`;
+          } else {
+            secondsText = `> ${session.interval} 秒`;
+          }
+        }
+        
+        let tokenText = '無';
+        if (r.status === 'success' || (r.status === 'timeout' && r.isLate)) {
+          tokenText = `入: ${r.inputTokens} / 出: ${r.outputTokens}`;
+        }
+
+        tableRowsHtml += `
+          <tr>
+            <td>第 ${r.round} 次</td>
+            <td style="font-family: monospace; font-weight: bold;">${r.qId}</td>
+            <td style="font-weight: bold; text-align: center;">${aiAnswerVal}</td>
+            <td style="font-weight: bold; text-align: center;">${r.stdAnswer}</td>
+            <td><span class="badge" style="${badgeStyle}">${badgeText}</span></td>
+            <td>${secondsText}</td>
+            <td>${tokenText}</td>
+            <td style="font-weight: bold; color: #137333;">NT$ ${r.ntdCost > 0 ? r.ntdCost.toFixed(5) : '0'}</td>
+          </tr>
+        `;
+      });
+
+      const htmlContent = `<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>Gemini AI 基準效能診斷報告 v1.01 | Falo x Force Cheng</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif; background: #f4f6f9; color: #202124; padding: 40px 20px; display: flex; justify-content: center; }
+    .report-card { background: white; border-radius: 24px; width: 100%; max-width: 840px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.04); overflow: hidden; }
+    .header { padding: 30px 24px; background: rgba(26, 115, 232, 0.04); border-bottom: 1px solid #edf0f2; }
+    .header h1 { font-size: 22px; color: #1a73e8; margin: 0; font-weight: 900; }
+    .header p { font-size: 13px; color: #5f6368; margin: 6px 0 0; font-weight: bold; }
+    .body { padding: 30px 24px; display: flex; flex-direction: column; gap: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .metric-card { border: 1px solid #dadce0; border-radius: 16px; padding: 16px; background: #f8f9fa; display: flex; flex-direction: column; gap: 4px; }
+    .metric-label { font-size: 11px; font-weight: 700; color: #5f6368; text-transform: uppercase; }
+    .metric-value { font-size: 20px; font-weight: 800; color: #1a73e8; }
+    .metric-value.success { color: #137333; }
+    .table-wrapper { border: 1px solid #dadce0; border-radius: 12px; overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+    th { background: #f1f3f4; padding: 12px 16px; font-weight: 700; border-bottom: 2px solid #dadce0; }
+    td { padding: 12px 16px; border-bottom: 1px solid #edf0f2; }
+    tr:last-child td { border-bottom: none; }
+    .badge { display: inline-flex; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: bold; }
+    .footer { padding: 20px 24px; background: #f8f9fa; border-top: 1px solid #edf0f2; font-size: 11px; color: #70757a; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="report-card">
+    <div class="header">
+      <h1>🏆 Gemini AI 基準效能與計費診斷報告 v1.01</h1>
+      <p>測試時間：${session.timestamp} ｜ 模式：${session.mode === 'sequential' ? '循序式安全等待' : '固定時限式即時'} (${session.interval} 秒)</p>
+    </div>
+    ${session.note ? `
+    <div style="margin: 20px 24px 0 24px; padding: 12px 16px; background: rgba(251, 188, 5, 0.04); border-left: 4px solid #fbbc05; border-radius: 8px; font-size: 13px; color: #664d03; line-height: 1.5;">
+      <strong>📝 測試診斷備註：</strong> ${session.note.replace(/\n/g, '<br>')}
+    </div>
+    ` : ''}
+    <div class="body">
+      <div class="grid">
+        <div class="metric-card">
+          <span class="metric-label">答題正確率</span>
+          <span class="metric-value success">${session.accuracy}</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">平均解題秒數</span>
+          <span class="metric-value">${session.avgSpeed}s</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">總消耗 Token 數</span>
+          <span class="metric-value">${session.totalTokens.toLocaleString()}</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">總估計費用 (NT$)</span>
+          <span class="metric-value success">NT$ ${session.totalCost}</span>
+        </div>
+      </div>
+      
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>測驗次數</th>
+              <th>題目編號</th>
+              <th>AI 判斷答案</th>
+              <th>標準答案</th>
+              <th>是否正確</th>
+              <th>API 秒數</th>
+              <th>Token 數 (入/出)</th>
+              <th>估計費用 (NT$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableRowsHtml}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="footer">
+      <strong>計費診斷說明：</strong><br>
+      - 模型版本：${session.model} ｜ 匯率基底：1 USD = 30 NTD (台幣計費)。<br>
+      - 單次估計費用 = (輸入 Token * $0.075/M + 輸出 Token * $0.30/M) * 30。<br>
+      - 本報告為 Falo x Force Cheng 共同研發輔助版 (v1.01) 自動生成，發佈於 2026/6/25，供教學與產線自動化導入評估。
+    </div>
+  </div>
+</body>
+</html>`;
+
+      // Trigger Download
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute('download', `Gemini_Benchmark_Report_${session.timestamp.replace(/[:\/ ]/g, '_')}.html`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>

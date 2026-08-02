@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>iPAS AIAP AI 教材工作流入口｜FALO Taiwan</title>
+  <meta name="description" content="iPAS AI 應用規劃師教材入口：官方 PDF、歷屆考題、自修題庫、Gemini / Canva Prompt 與 GitHub Pages 發布工作流。">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="iPAS AIAP AI 教材工作流入口">
+  <meta property="og:description" content="從官方 PDF 到 CSV 題庫、自修網站與 GitHub Pages 發布的 AI 教材工作流。">
+  <meta property="og:type" content="website">
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #607086;
+      --line: #d7e2ec;
+      --paper: #ffffff;
+      --bg: #f4f8fb;
+      --blue: #086b96;
+      --green: #1a7c58;
+      --red: #b4233b;
+      --gold: #9a6300;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(8, 107, 150, .12), transparent 34rem),
+        linear-gradient(180deg, #f9fcff 0%, var(--bg) 50%, #eef5f8 100%);
+      color: var(--ink);
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.75;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 44px 20px 76px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 30px;
+    }
+
+    .hero-text {
+      padding: 28px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-weight: 800;
+      letter-spacing: 0;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.15rem, 5vw, 4.2rem);
+      line-height: 1.12;
+      color: #102f45;
+    }
+
+    .lead {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      margin: 0;
+    }
+
+    .status {
+      background: #0f2f44;
+      color: #eff8ff;
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 18px 44px rgba(16, 47, 69, .16);
+    }
+
+    .status h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+    }
+
+    .status p {
+      margin: 0 0 12px;
+      color: #c8ddec;
+    }
+
+    .flow {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin: 22px 0 32px;
+      font-weight: 800;
+      color: #17324a;
+      box-shadow: 0 10px 28px rgba(31, 41, 55, .06);
+    }
+
+    .section-title {
+      margin: 36px 0 16px;
+      color: #102f45;
+      font-size: 1.45rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 190px;
+      box-shadow: 0 10px 28px rgba(31, 41, 55, .06);
+    }
+
+    .card h3 {
+      margin: 8px 0 8px;
+      font-size: 1.14rem;
+      color: #152536;
+    }
+
+    .card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: #e8f4fb;
+      color: var(--blue);
+      font-size: .85rem;
+      font-weight: 800;
+    }
+
+    .tag.green { background: #eefaf3; color: var(--green); }
+    .tag.gold { background: #fff6e6; color: var(--gold); }
+    .tag.red { background: #fff0f3; color: var(--red); }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .links a {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 7px 10px;
+      background: #fbfdff;
+    }
+
+    .note {
+      background: #eefaf3;
+      border-left: 6px solid var(--green);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-top: 28px;
+      font-weight: 800;
+    }
+
+    footer {
+      margin-top: 42px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      main { padding: 28px 16px 56px; }
+      .grid { grid-template-columns: 1fr; }
+      .hero-text { padding: 12px 0; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <div class="eyebrow">FALO Taiwan × iPAS AIAP</div>
+        <h1>AI 應用規劃師模型菜示範中心</h1>
+        <p class="lead">這裡把 iPAS AI 應用規劃師的官方資料、歷屆考題、自修題庫、學員 Prompt 與 GitHub Pages 發布流程整理成一個可教學、可追溯、可複製的模型菜示範中心。</p>
+      </div>
+      <aside class="status">
+        <h2>課程定位</h2>
+        <p>這不是單一練習網站，而是 FALO 針對台灣 AI 應用規劃師建立的模型菜示範中心，示範如何把官方 PDF 轉成 CSV 題庫、互動自修工具、可追溯資料庫與公開教材頁。</p>
+        <p>原本的題庫網站已保留在 `practice/`，作為其中一個可操作範例。</p>
+      </aside>
+    </section>
+
+    <div class="flow">官方資料來源 -> PDF 封存 -> AI 抽題 -> CSV 清洗 -> 題庫 DB -> 自修網站 -> GitHub Pages 發布</div>
+
+    <h2 class="section-title">主要入口</h2>
+    <section class="grid">
+      <article class="card" style="border-top: 4px solid var(--blue); background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);">
+        <span class="tag red">🔥 核心模擬</span>
+        <h3>iPAS AIAP 智慧刷題模擬器 v1.01</h3>
+        <p>外掛截圖自動化與 Gemini Vision AI 協同解題模擬器，支援高精度基準效能測試、計費診斷與時限調優報告。</p>
+        <div class="links">
+          <a href="practice-swiper.html" style="background: #eff8ff; color: #1a73e8; border-color: rgba(26, 115, 232, 0.25); font-weight: 800;">啟動模擬器</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag green">自修工具</span>
+        <h3>原自修題庫網站</h3>
+        <p>原本首頁的互動題庫網站，現在保留為次連結，方便學生直接練題。</p>
+        <div class="links">
+          <a href="practice/">開啟練習</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag gold">學員輔助</span>
+        <h3>成績落點與分佈分析儀</h3>
+        <p>輸入雙科分數後，即時估算 PR 值、總分落點與常態分佈曲線；支援白色底 / 深色底切換並記住狀態。</p>
+        <div class="links">
+          <a href="apps/score-simulator/">開啟工具</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">官方資料</span>
+        <h3>歷屆考題 PDF 封存</h3>
+        <p>保存官方歷屆考題 PDF，依初級 / 中級分類，作為 AI 抽題與教材整理的上游證據。</p>
+        <div class="links">
+          <a href="official_sources/aiap/past-exams/">查看考題</a>
+          <a href="official_sources/aiap/past-exams/manifest.json">Manifest</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag green">模型菜示範</span>
+        <h3>題庫解析 ETL 與 DB 設計</h3>
+        <p>用官方 PDF 示範 Extract、Transform、Load：抽題、欄位整理、答案校正、概念標籤與題庫 DB 設計。</p>
+        <div class="links">
+          <a href="official_sources/aiap/past-exams/">來源資料</a>
+          <a href="docs/helper-pages-index.html">輔助頁</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag gold">學員輔助</span>
+        <h3>輔助頁索引</h3>
+        <p>集中整理 Prompt 頁、官方來源頁、資料契約與後續課程輔助頁。</p>
+        <div class="links">
+          <a href="docs/helper-pages-index.html">HTML</a>
+          <a href="docs/helper-pages-index.md">MD</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag gold">Prompt</span>
+        <h3>Gemini / Canva 練習網站 Prompt</h3>
+        <p>讓學員把 `ok.csv` 題庫轉成可以自我練習、判斷對錯、統計進度的單頁網站。</p>
+        <div class="links">
+          <a href="docs/student-gemini-canvas-practice-prompt.html">HTML</a>
+          <a href="docs/student-gemini-canvas-practice-prompt.md">MD</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag red">官方入口</span>
+        <h3>iPAS AIAP 官方學習資源</h3>
+        <p>官方最新消息、考試資訊、學習資源與檔案下載仍以官方網站為準。</p>
+        <div class="links">
+          <a href="https://ipd.nat.gov.tw/ipas/certification/AIAP/learning-resources">官方學習資源</a>
+          <a href="https://ipd.nat.gov.tw/ipas/certification/AIAP/news">官方最新消息</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">架構文件</span>
+        <h3>專案文件</h3>
+        <p>保留給 AI 與後續教材接續使用的架構、資料契約與整合地圖。</p>
+        <div class="links">
+          <a href="docs/architecture.md">架構</a>
+          <a href="docs/data-contracts.md">資料契約</a>
+          <a href="docs/integration-map.md">整合地圖</a>
+        </div>
+      </article>
+    </section>
+
+    <div class="note">一句話理解：PDF 是來源，CSV 是中繼資料，題庫 DB 是可操作知識，HTML 是練習工具，GitHub Pages 是展示入口。</div>
+
+    <footer>
+      FALO Taiwan / Force Cheng. 本頁作為 iPAS AIAP 課程教材工作流入口；官方考試資訊請以 iPAS 官方網站公告為準。
+    </footer>
+  </main>
+</body>
+</html>

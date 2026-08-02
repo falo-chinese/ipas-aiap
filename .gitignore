@@ -1,0 +1,5 @@
+# Git Ignore Rules for ipas-aiap
+*.zip
+backup/
+scratch/
+extracted_questions.json
