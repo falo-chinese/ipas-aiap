@@ -187,7 +187,7 @@
     <div class="container">
         <span class="demo-badge mb-2">v3.01 本機測試展台</span>
         <h1 class="h3 font-weight-bold mb-2">iPAS AI應用規劃師 題目圖片渲染展示頁面</h1>
-        <p class="text-light opacity-75 mb-0">專屬本機展示檔｜支援 52 題考題圖片、高解析燈箱放大與全選項檢視</p>
+        <p class="text-light opacity-75 mb-0">專屬本機展示檔｜支援 37 題考題圖片（58 張圖）、高解析燈箱放大與全選項檢視</p>
     </div>
 </div>
 
@@ -197,7 +197,7 @@
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
             <div class="d-flex align-items-center gap-2">
                 <button id="btn-filter-all" class="btn btn-primary" onclick="app.setFilter('all')">全數題目 (600題)</button>
-                <button id="btn-filter-img" class="btn btn-outline-primary" onclick="app.setFilter('img_only')">📷 僅顯示圖片題 (共 52 題)</button>
+                <button id="btn-filter-img" class="btn btn-outline-primary" onclick="app.setFilter('img_only')">📷 僅顯示圖片題 (共 37 題)</button>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="chk-show-all-ans" onchange="app.toggleShowAllAns(this.checked)">
@@ -261,21 +261,25 @@ const app = {
             const rawAns = row['正確答案'] || vals[9] || '1';
             const ansIdx = parseInt(rawAns, 10) - 1;
 
-            let imgName = row['圖片檔名'] || vals[10] || '';
-            imgName = imgName.trim();
-            if (imgName.toLowerCase() === 'none' || imgName.toLowerCase() === 'null') {
-                imgName = '';
+            let imgStr = row['圖片檔名'] || vals[10] || '';
+            imgStr = imgStr.trim();
+            if (imgStr.toLowerCase() === 'none' || imgStr.toLowerCase() === 'null') {
+                imgStr = '';
             }
 
-            // Standardize image path
-            let imgUrl = '';
-            if (imgName) {
-                if (imgName.includes('/')) {
-                    const fname = imgName.split('/').pop();
-                    imgUrl = `images/${fname}`;
-                } else {
-                    imgUrl = `images/${imgName}`;
-                }
+            let images = [];
+            if (imgStr) {
+                const parts = imgStr.split(';').map(p => p.trim()).filter(Boolean);
+                images = parts.map(p => {
+                    let url = p;
+                    if (!p.startsWith('figures/') && !p.startsWith('images/') && !p.startsWith('assets/')) {
+                        url = `figures/${p}`;
+                    }
+                    return {
+                        name: p,
+                        url: url
+                    };
+                });
             }
 
             return {
@@ -286,8 +290,9 @@ const app = {
                 options: opts,
                 answer: ansIdx,
                 answerIndex: ansIdx,
-                image_url: imgUrl,
-                img_name: imgName
+                images: images,
+                image_url: images.length > 0 ? images[0].url : '',
+                img_name: imgStr
             };
         });
     },
@@ -329,12 +334,16 @@ const app = {
 
                     <div class="q-stem">Q${qIndex + 1}. ${this.escapeHtml(q.question)}</div>
 
-                    ${q.image_url ? `
+                    ${q.images && q.images.length > 0 ? `
                         <div class="q-image-container">
                             <div class="q-image-label">
-                                📷 題目附圖 / 程式碼圖表 <span>(${q.img_name})</span> (點擊可全螢幕放大)
+                                📷 題目附圖 / 程式碼圖表 (共 ${q.images.length} 張圖，點擊可全螢幕放大)
                             </div>
-                            <img src="${q.image_url}" class="q-image-preview" alt="試題圖片" onclick="app.openLightbox('${q.image_url}')" onerror="this.onerror=null; this.src='assets/q_images/${q.img_name.split('/').pop()}';">
+                            <div class="d-flex flex-wrap justify-content-center gap-3">
+                                ${q.images.map(img => `
+                                    <img src="${img.url}" class="q-image-preview" alt="試題圖片" onclick="app.openLightbox('${img.url}')" onerror="this.onerror=null; this.src='images/${img.name.split('/').pop()}';">
+                                `).join('')}
+                            </div>
                         </div>
                     ` : ''}
 
