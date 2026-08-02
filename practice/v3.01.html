@@ -49,12 +49,16 @@
     }
     
 function getQuestionImageHtml(q) {
-    var imgUrl = q.image_url || q.image || q['圖片檔名'];
+    if (!q) return '';
+    var imgUrl = q.image_url || q.image || '';
     if (!imgUrl) return '';
-    return '<div class="q-image-card">' +
-           '  <div class="q-image-badge"><i class="bi bi-image-fill"></i> 考題附圖 / 程式碼 / 圖表 (點擊可放大)</div>' +
+    
+    var src = (imgUrl.startsWith('http') || imgUrl.startsWith('/') || imgUrl.startsWith('assets/')) ? imgUrl : ('assets/q_images/' + imgUrl);
+    
+    return '<div class="q-image-card my-3">' +
+           '  <div class="q-image-badge mb-2"><i class="bi bi-image-fill me-1"></i> 考題附圖 / 程式碼 / 圖表 (點擊可放大)</div>' +
            '  <div class="text-center">' +
-           '    <img src="' + imgUrl + '" class="img-fluid rounded q-img-preview" alt="考題附圖" onclick="openImageModal('' + imgUrl + '', '' + (q.id || '') + '')">' +
+           '    <img src="' + src + '" class="img-fluid rounded border shadow-sm q-img-preview" alt="考題附圖" onclick="openImageModal(\'' + src + '\', \'' + (q.id || '') + '\')">' +
            '  </div>' +
            '</div>';
 }
@@ -1944,47 +1948,44 @@ const app = {
     },
 
     getExamSeriesKey: function(subject, parsed, filename, id) {
-        const fn = (filename || '') + ' ' + (parsed.rawName || '');
         const qId = id || '';
-        const numMatch = qId.match(/-(\d+)$/);
+        const numMatch = qId.match(/-\d+$/);
         const num = numMatch ? parseInt(numMatch[1], 10) : 0;
 
         if (subject.startsWith('B')) {
-            if (num > 50 || fn.includes('115年第一次') || fn.includes('20260615')) return 'b-115-1';
+            if (num > 50) return 'b-115-1';
             return 'b-114-2';
         }
-        if (num > 100 || fn.includes('115年第二次') || fn.includes('20260604')) return 'a-115-2';
-        if (num > 50 || fn.includes('115年第一次') || fn.includes('20260410')) return 'a-115-1';
+        if (num > 100) return 'a-115-2';
+        if (num > 50) return 'a-115-1';
         return 'a-114-4';
     },
 
     getExamSeriesLabel: function(subject, parsed, filename, id) {
-        const fn = (filename || '') + ' ' + (parsed.rawName || '');
         const qId = id || '';
-        const numMatch = qId.match(/-(\d+)$/);
+        const numMatch = qId.match(/-\d+$/);
         const num = numMatch ? parseInt(numMatch[1], 10) : 0;
 
         if (subject.startsWith('B')) {
-            if (num > 50 || fn.includes('115年第一次') || fn.includes('20260615')) return '中階 B 系列 ｜ 115 年第一次';
+            if (num > 50) return '中階 B 系列 ｜ 115 年第一次';
             return '中階 B 系列 ｜ 114 年第二梯次';
         }
-        if (num > 100 || fn.includes('115年第二次') || fn.includes('20260604')) return '初階 A 系列 ｜ 115 年第二次';
-        if (num > 50 || fn.includes('115年第一次') || fn.includes('20260410')) return '初階 A 系列 ｜ 115 年第一次';
+        if (num > 100) return '初階 A 系列 ｜ 115 年第二次';
+        if (num > 50) return '初階 A 系列 ｜ 115 年第一次';
         return '初階 A 系列 ｜ 114 年第四梯次';
     },
 
     getExamSeriesClass: function(subject, parsed, filename, id) {
-        const fn = (filename || '') + ' ' + (parsed.rawName || '');
         const qId = id || '';
-        const numMatch = qId.match(/-(\d+)$/);
+        const numMatch = qId.match(/-\d+$/);
         const num = numMatch ? parseInt(numMatch[1], 10) : 0;
 
         if (subject.startsWith('B')) {
-            if (num > 50 || fn.includes('115年第一次') || fn.includes('20260615')) return 'series-b-115';
+            if (num > 50) return 'series-b-115';
             return 'series-b-114';
         }
-        if (num > 100 || fn.includes('115年第二次') || fn.includes('20260604')) return 'series-a-115-2';
-        if (num > 50 || fn.includes('115年第一次') || fn.includes('20260410')) return 'series-a-115-1';
+        if (num > 100) return 'series-a-115-2';
+        if (num > 50) return 'series-a-115-1';
         return 'series-a-114-4';
     },
 
