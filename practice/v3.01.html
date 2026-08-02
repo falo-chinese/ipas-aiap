@@ -1825,7 +1825,7 @@ const app = {
             this.processMappings(mappingRows);
             this.processSummary(summaryDataRows);
             this.processData(questionRows);
-            if (!questions.length) {
+            if (!this.questions || !this.questions.length) {
                 throw new Error('v3.01 question sheet returned no usable rows');
             }
             this.renderExamSetFilters();
@@ -1836,8 +1836,8 @@ const app = {
             document.getElementById('app').classList.remove('hidden');
             this.filterBrowseData(true);
         } catch (err) {
-            console.error(err);
-            document.querySelector('#loading-overlay p').innerHTML = `<span style="color:red">連線失敗</span><br>無法讀取 v3.01 Google Sheet。<br>請確認網路狀態，或確認試算表已開放「知道連結者可檢視」。`;
+            console.error('Initialization error:', err);
+            document.querySelector('#loading-overlay p').innerHTML = `<span style="color:red">載入遭遇狀況</span><br>資料庫載入失敗: ${err.message || '請確認網路與資料檔案'}<br>請重新整理頁面或聯繫管理員。`;
         }
         
         // Add Global Keydown Listener
