@@ -1815,32 +1815,45 @@ const app = {
 
     init: async function() {
         try {
-            const [questionRows, syllabusRows, mappingRows, summaryDataRows] = await Promise.all([
-                this.loadCsv('FALO-IPAS-AIAP-20260802.csv').catch(() => this.loadCsv('../questions.csv')).catch(() => this.loadCsv(sheetCsvUrl(SHEET_GIDS.questions))),
-                this.loadCsv('../syllabus.csv').catch(() => this.loadCsv(sheetCsvUrl(SHEET_GIDS.syllabus))),
-                this.loadCsv('../mapping.csv').catch(() => this.loadCsv(sheetCsvUrl(SHEET_GIDS.mapping))),
-                this.loadCsv('../summary.csv').catch(() => this.loadCsv(sheetCsvUrl(SHEET_GIDS.summary)))
+            const questionRows = await this.loadCsv('FALO-IPAS-AIAP-20260802.csv')
+                .catch(() => this.loadCsv('questions.csv'))
+                .catch(() => this.loadCsv('../FALO-IPAS-AIAP-20260802.csv'))
+                .catch(() => this.loadCsv('../questions.csv'));
+
+            const [syllabusRows, mappingRows, summaryDataRows] = await Promise.all([
+                this.loadCsv('syllabus.csv').catch(() => this.loadCsv('../syllabus.csv')).catch(() => []),
+                this.loadCsv('mapping.csv').catch(() => this.loadCsv('../mapping.csv')).catch(() => []),
+                this.loadCsv('summary.csv').catch(() => this.loadCsv('../summary.csv')).catch(() => [])
             ]);
+
             this.processSyllabus(syllabusRows);
             this.processMappings(mappingRows);
             this.processSummary(summaryDataRows);
             this.processData(questionRows);
+
             if (!this.questions || !this.questions.length) {
-                throw new Error('v3.01 question sheet returned no usable rows');
+                throw new Error('試算表無法載入有效題目，請重新整理頁面');
             }
+
             this.renderExamSetFilters();
             this.syncExamLimitBounds();
             this.renderAnalysis();
             this.initAnalysisImages();
-            document.getElementById('loading-overlay').classList.add('hidden');
-            document.getElementById('app').classList.remove('hidden');
+
+            const loadingOverlay = document.getElementById('loading-overlay');
+            if (loadingOverlay) loadingOverlay.classList.add('hidden');
+            const mainApp = document.getElementById('app');
+            if (mainApp) mainApp.classList.remove('hidden');
+
             this.filterBrowseData(true);
         } catch (err) {
             console.error('Initialization error:', err);
-            document.querySelector('#loading-overlay p').innerHTML = `<span style="color:red">載入遭遇狀況</span><br>資料庫載入失敗: ${err.message || '請確認網路與資料檔案'}<br>請重新整理頁面或聯繫管理員。`;
+            const overlayP = document.querySelector('#loading-overlay p');
+            if (overlayP) {
+                overlayP.innerHTML = `<span style="color:red; font-weight:bold;">載入遭遇狀況</span><br>資料庫載入失敗: ${err.message || '請確認網路狀態'}<br>請重新整理頁面。`;
+            }
         }
         
-        // Add Global Keydown Listener
         document.addEventListener('keydown', (e) => this.handleKeydown(e));
         window.addEventListener('beforeprint', () => this.updatePrintMeta());
     },
