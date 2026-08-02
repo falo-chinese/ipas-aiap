@@ -1845,50 +1845,65 @@ const app = {
     },
 
     processData: function(rawData) {
-        questions = [];
-        const mappingMap = new Map(topicMappings.map(item => [item.questionId, item]));
-        rawData.forEach((row, index) => {
-            if (!row['編號'] && !row['id']) return;
-            try {
-                const id = row['編號'] || row['id'];
-                let ansRaw = row['正確答案'] || row['answer'];
-                let ansIdx = -1;
-                if (ansRaw) {
-                    ansRaw = String(ansRaw).trim();
-                    ansIdx = parseInt(ansRaw) - 1;
-                }
-                const subject = String(row['分類'] || row['subject'] || "").trim();
-                const filename = String(row['文件名稱'] || row['filename'] || "").trim();
-                const examSet = this.buildExamSet(subject, filename);
-                const questionId = String(id).trim();
-                questions.push({
-                    id: questionId,
-                    subject: subject,
-                    qno: parseInt(row['題號'] || row['qno']) || 0,
-                    filename: filename,
-                    setKey: examSet.key,
-                    setLabel: examSet.label,
-                    setMeta: examSet.meta,
-                    setOrder: examSet.order,
-                    setSeriesKey: examSet.seriesKey,
-                    setSeriesLabel: examSet.seriesLabel,
-                    setSeriesClass: examSet.seriesClass,
-                    question: String(row['題目'] || row['question'] || "").trim(),
-                    options: [
-                        String(row['選項1'] || row['opt1'] || "").trim(),
-                        String(row['選項2'] || row['opt2'] || "").trim(),
-                        String(row['選項3'] || row['opt3'] || "").trim(),
-                        String(row['選項4'] || row['opt4'] || "").trim()
-                    ],
-                    answerIndex: ansIdx,
-                    topic: mappingMap.get(questionId) || null
-                });
-            } catch (err) { console.warn(`Row ${index} format error`, err); }
-        });
-    },
+        this.questions = [];
+        const mappingMap = new Map((topicMappings || []).map(item => [item.questionId, item]));
+        
+        (rawData || []).forEach((row, index) => {
+            if (!row) return;
+            
+            // Positional or key-based extraction
+            const keys = Object.keys(row);
+            const vals = Object.values(row);
+            
+            const id = row['編號'] || row['id'] || row['ID'] || vals[0] || '';
+            if (!id || !String(id).trim() || String(id).trim() === '編號') return;
+            
+            const questionId = String(id).trim();
+            const subject = String(row['分類'] || row['subject'] || vals[1] || '').trim();
+            const qno = parseInt(row['題號'] || row['qno'] || vals[2]) || (index + 1);
+            const filename = String(row['文件名稱'] || row['filename'] || vals[3] || '').trim();
+            const questionText = String(row['題目'] || row['question'] || vals[4] || '').trim();
+            
+            const opt1 = String(row['選項1'] || row['option1'] || vals[5] || '').trim();
+            const opt2 = String(row['選項2'] || row['option2'] || vals[6] || '').trim();
+            const opt3 = String(row['選項3'] || row['option3'] || vals[7] || '').trim();
+            const opt4 = String(row['選項4'] || row['option4'] || vals[8] || '').trim();
+            const options = [opt1, opt2, opt3, opt4].filter(o => o !== '');
+            
+            let ansRaw = row['正確答案'] || row['answer'] || vals[9] || '';
+            let ansIdx = -1;
+            if (ansRaw) {
+                ansRaw = String(ansRaw).trim();
+                ansIdx = parseInt(ansRaw, 10) - 1;
+            }
+            
+            const imgUrl = String(row['圖片檔名'] || row['image_url'] || row['image'] || vals[10] || '').trim();
+            
+            const examSet = this.buildExamSet(subject, filename, questionId);
+            const mappedInfo = mappingMap.get(questionId);
 
-    syncExamLimitBounds: function() {
-        this.updateExamLimitBounds();
+            this.questions.push({
+                id: questionId,
+                subject: subject,
+                qno: qno,
+                filename: filename,
+                setKey: examSet.key,
+                setLabel: examSet.label,
+                setMeta: examSet.meta,
+                setOrder: examSet.order,
+                setSeriesKey: examSet.seriesKey,
+                setSeriesLabel: examSet.seriesLabel,
+                setSeriesClass: examSet.seriesClass,
+                question: questionText,
+                options: options,
+                answer: ansIdx,
+                image_url: imgUrl,
+                mapping: mappedInfo || null
+            });
+        });
+        
+        // Expose global questions variable for backwards compatibility
+        questions = this.questions;
     },
 
     buildExamSet: function(subject, filename) {
