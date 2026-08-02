@@ -1363,7 +1363,12 @@ function getQuestionImageHtml(q) {
             /* Adjust content spacing so it doesn't overlap footer */
             body { padding-bottom: 50px; }
         }
-    </style>
+    
+#imageLightboxModal:not(.show) {
+    display: none !important;
+}
+
+</style>
 
 <style>
 /* v3.01 Image Card Styling */
@@ -3509,9 +3514,9 @@ window.onload = app.init.bind(app);
 </script>
 
 <!-- Image Lightbox Modal -->
-<div class="modal fade" id="imageLightboxModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="imageLightboxModal" tabindex="-1" aria-hidden="true" style="display: none !important;">
   <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content bg-dark text-white border-secondary">
+    <div class="modal-content bg-dark text-white border-secondary shadow-lg">
       <div class="modal-header border-secondary">
         <h5 class="modal-title" id="imageLightboxTitle"><i class="bi bi-zoom-in me-2 text-info"></i>考題高畫質圖表細節檢視</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
