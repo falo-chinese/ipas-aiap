@@ -1921,6 +1921,8 @@ const app = {
                 question: questionText,
                 options: options,
                 answer: ansIdx,
+                answerIndex: ansIdx,
+                answerIndex: ansIdx,
                 image_url: imgUrl,
                 mapping: mappedInfo || null
             });
@@ -2548,7 +2550,7 @@ const app = {
             let optionsHtml = '';
             q.options.forEach((opt, idx) => {
                 let classes = 'browse-opt';
-                if (showAllAns && idx === q.answerIndex) classes += ' is-ans';
+                if (showAllAns && idx === (q.answerIndex !== undefined ? q.answerIndex : q.answer)) classes += ' is-ans';
                 optionsHtml += `<div class="${classes}" data-opt-idx="${idx}">${opt}</div>`;
             });
 
@@ -2560,7 +2562,7 @@ const app = {
                         <span class="badge badge-subject">${q.subject}</span>
                         <span class="badge badge-id">${q.id}</span>
                     </div>
-                    ${!showAllAns ? `<button id="${showBtnId}" class="btn btn-outline btn-sm" onclick="app.revealAnswer(this, ${q.answerIndex})">👁️ 查看答案</button>` : ''}
+                    ${!showAllAns ? `<button id="${showBtnId}" class="btn btn-outline btn-sm" onclick="app.revealAnswer(this, ${(q.answerIndex !== undefined ? q.answerIndex : q.answer)})">👁️ 查看答案</button>` : ''}
                 </div>
                 <div class="question-text"><span style="color:var(--google-blue);">Q${q.qno}.</span> ${q.question}</div>
                 <div class="browse-opts-container">${optionsHtml}</div>
@@ -2572,13 +2574,15 @@ const app = {
     },
 
     revealAnswer: function(btn, correctIdx) {
-        const cardBody = btn.closest('.card').querySelector('.browse-opts-container');
-        const opts = cardBody.querySelectorAll('.browse-opt');
-        if(opts[correctIdx]) opts[correctIdx].classList.add('is-ans');
+        const card = btn.closest('.card');
+        if (!card) return;
+        const opts = card.querySelectorAll('.browse-opt');
+        if (opts && opts[correctIdx]) {
+            opts[correctIdx].classList.add('is-ans');
+        }
         btn.style.display = 'none';
     },
 
-    // --- EXAM LOGIC ---
     getAnswerRevealMode: function() {
         return document.querySelector('input[name="answer-reveal-mode"]:checked')?.value || 'immediate';
     },
@@ -2739,7 +2743,7 @@ const app = {
         this.pauseQuestionTimer(ex.answerRevealMode === 'after_exam' ? '換題暫停' : '看解答暫停');
         
         const q = ex.list[ex.currentIdx];
-        const isCorrect = (ex.userChoice === q.answerIndex);
+        const isCorrect = (ex.userChoice === (q.answerIndex !== undefined ? q.answerIndex : q.answer));
         const previousAnsweredTime = ex.answers.reduce((sum, answer) => sum + (answer.timeSpentMs || 0), 0);
         const timeSpentMs = Math.max(0, questionElapsedBeforePause - previousAnsweredTime);
         
@@ -2765,7 +2769,7 @@ const app = {
         document.getElementById('exam-feedback').classList.remove('hidden');
         
         const optBtns = document.querySelectorAll('.option-btn');
-        optBtns[q.answerIndex].classList.add('correct');
+        optBtns[(q.answerIndex !== undefined ? q.answerIndex : q.answer)].classList.add('correct');
         
         const fbPanel = document.getElementById('feedback-panel');
         const fbMsg = document.getElementById('feedback-msg');
@@ -2775,7 +2779,7 @@ const app = {
             fbMsg.innerText = "答錯了！";
             fbMsg.style.color = "var(--google-red)";
             fbPanel.className = 'feedback-panel wrong';
-            document.getElementById('feedback-detail').innerText = `正確答案：${q.options[q.answerIndex]}`;
+            document.getElementById('feedback-detail').innerText = `正確答案：${q.options[(q.answerIndex !== undefined ? q.answerIndex : q.answer)]}`;
         } else {
             fbMsg.innerText = "答對了！";
             fbMsg.style.color = "var(--google-green)";
@@ -2846,7 +2850,7 @@ const app = {
                 q.options.forEach((opt, optIdx) => {
                     let style = 'padding:8px; border-radius:4px; margin-bottom:4px; border:1px solid #eee;';
                     let prefix = '';
-                    if (optIdx === q.answerIndex) {
+                    if (optIdx === (q.answerIndex !== undefined ? q.answerIndex : q.answer)) {
                         style = 'background:#e6f4ea; border-color:var(--google-green); color:#0d652d; font-weight:bold;';
                         prefix = '✅ 正確：';
                     } else if (optIdx === item.userChoice) {
@@ -3489,7 +3493,7 @@ const app = {
             rows.push([
                 `錯題 ${index + 1}`,
                 '你的答案 / 正確答案',
-                `你的答案：${answer.userChoice + 1}. ${q.options[answer.userChoice] || '未作答'}\n正確答案：${q.answerIndex + 1}. ${q.options[q.answerIndex] || ''}`,
+                `你的答案：${answer.userChoice + 1}. ${q.options[answer.userChoice] || '未作答'}\n正確答案：${(q.answerIndex !== undefined ? q.answerIndex : q.answer) + 1}. ${q.options[(q.answerIndex !== undefined ? q.answerIndex : q.answer)] || ''}`,
                 '建議回到官方考綱分類與相近題型一起複習'
             ]);
             rows.push([
