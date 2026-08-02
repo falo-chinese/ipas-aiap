@@ -33,22 +33,6 @@
             border-radius: 9999px;
             font-size: 0.875rem;
         }
-        .exam-series-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            border: 1px solid #e2e8f0;
-            box-shadow: var(--card-shadow);
-        }
-        .series-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
         .question-card {
             background: #ffffff;
             border-radius: 12px;
@@ -65,6 +49,7 @@
             display: flex;
             gap: 0.5rem;
             margin-bottom: 0.75rem;
+            align-items: center;
         }
         .q-badge {
             background: #eff6ff;
@@ -74,6 +59,15 @@
             padding: 0.2rem 0.6rem;
             border-radius: 6px;
             border: 1px solid #bfdbfe;
+        }
+        .q-group-tag {
+            background: #fef3c7;
+            color: #b45309;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #fde68a;
         }
         .q-stem {
             font-size: 1.05rem;
@@ -94,9 +88,9 @@
         }
         .q-image-label {
             font-size: 0.85rem;
-            color: #64748b;
+            color: #475569;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -104,11 +98,11 @@
         }
         .q-image-preview {
             max-width: 100%;
-            max-height: 380px;
+            max-height: 420px;
             object-fit: contain;
             border-radius: 6px;
             background: #ffffff;
-            padding: 4px;
+            padding: 6px;
             border: 1px solid #e2e8f0;
             cursor: zoom-in;
             transition: transform 0.2s;
@@ -187,7 +181,7 @@
     <div class="container">
         <span class="demo-badge mb-2">v3.01 本機測試展台</span>
         <h1 class="h3 font-weight-bold mb-2">iPAS AI應用規劃師 題目圖片渲染展示頁面</h1>
-        <p class="text-light opacity-75 mb-0">專屬本機展示檔｜支援 47 題考題圖片（含題組共用圖 30 題）、高解析燈箱放大與全選項檢視</p>
+        <p class="text-light opacity-75 mb-0">專屬本機展示檔｜支援 47 題考題圖片（含 12 個題組共用情境圖）、高解析燈箱放大與全選項檢視</p>
     </div>
 </div>
 
@@ -196,8 +190,8 @@
     <div class="card p-3 mb-4 shadow-sm">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
             <div class="d-flex align-items-center gap-2">
-                <button id="btn-filter-all" class="btn btn-primary" onclick="app.setFilter('all')">全數題目 (600題)</button>
-                <button id="btn-filter-img" class="btn btn-outline-primary" onclick="app.setFilter('img_only')">📷 僅顯示圖片題 (共 47 題)</button>
+                <button id="btn-filter-all" class="btn btn-outline-primary" onclick="app.setFilter('all')">全數題目 (600題)</button>
+                <button id="btn-filter-img" class="btn btn-primary" onclick="app.setFilter('img_only')">📷 載入中...</button>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="chk-show-all-ans" onchange="app.toggleShowAllAns(this.checked)">
@@ -207,9 +201,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Exam Series Container -->
-    <div id="series-container" class="mb-4"></div>
 
     <!-- Questions Container -->
     <div id="questions-container"></div>
@@ -240,6 +231,7 @@ const app = {
             skipEmptyLines: true,
             complete: (results) => {
                 this.processData(results.data);
+                this.updateFilterButtonText();
                 this.render();
             },
             error: (err) => {
@@ -261,26 +253,10 @@ const app = {
             const rawAns = row['正確答案'] || vals[9] || '1';
             const ansIdx = parseInt(rawAns, 10) - 1;
 
-            let imgStr = row['圖片檔名'] || vals[10] || '';
-            imgStr = imgStr.trim();
-            if (imgStr.toLowerCase() === 'none' || imgStr.toLowerCase() === 'null') {
-                imgStr = '';
-            }
-
-            let images = [];
-            if (imgStr) {
-                const parts = imgStr.split(';').map(p => p.trim()).filter(Boolean);
-                images = parts.map(p => {
-                    let url = p;
-                    if (!p.startsWith('figures/') && !p.startsWith('images/') && !p.startsWith('assets/')) {
-                        url = `figures/${p}`;
-                    }
-                    return {
-                        name: p,
-                        url: url
-                    };
-                });
-            }
+            let rawImg = (row['圖片檔名'] || vals[10] || '').trim();
+            if (rawImg.toLowerCase() === 'none' || rawImg.toLowerCase() === 'null') rawImg = '';
+            
+            const images = rawImg ? rawImg.split(';').map(s => s.trim()).filter(Boolean) : [];
 
             return {
                 id: id,
@@ -291,10 +267,15 @@ const app = {
                 answer: ansIdx,
                 answerIndex: ansIdx,
                 images: images,
-                image_url: images.length > 0 ? images[0].url : '',
-                img_name: imgStr
+                group: (row['題組'] || '').trim(),
+                needsManualCheck: (row['圖片待人工確認'] || '').trim() === '是'
             };
         });
+    },
+
+    updateFilterButtonText: function() {
+        const imgCount = this.questions.filter(q => q.images.length > 0).length;
+        document.getElementById('btn-filter-img').textContent = `📷 僅顯示圖片題 (共 ${imgCount} 題)`;
     },
 
     setFilter: function(mode) {
@@ -314,7 +295,7 @@ const app = {
         let filtered = this.questions;
 
         if (this.filterMode === 'img_only') {
-            filtered = this.questions.filter(q => q.image_url !== '');
+            filtered = this.questions.filter(q => q.images.length > 0);
         }
 
         if (filtered.length === 0) {
@@ -329,19 +310,20 @@ const app = {
                 <div class="question-card" id="q-card-${q.id}">
                     <div class="q-meta">
                         <span class="q-badge">${q.id}</span>
-                        <span class="text-muted small">${q.filename}</span>
+                        ${q.group ? `<span class="q-group-tag">📌 ${q.group}</span>` : ''}
+                        <span class="text-muted small ms-2">${this.escapeHtml(q.filename)}</span>
                     </div>
 
                     <div class="q-stem">Q${qIndex + 1}. ${this.escapeHtml(q.question)}</div>
 
-                    ${q.images && q.images.length > 0 ? `
+                    ${q.images.length > 0 ? `
                         <div class="q-image-container">
                             <div class="q-image-label">
-                                📷 題目附圖 / 程式碼圖表 (共 ${q.images.length} 張圖，點擊可全螢幕放大)
+                                📷 題目附圖${q.group ? `（${this.escapeHtml(q.group)} 共用情境）` : ''}（點擊可全螢幕放大）
                             </div>
                             <div class="d-flex flex-wrap justify-content-center gap-3">
-                                ${q.images.map(img => `
-                                    <img src="${img.url}" class="q-image-preview" alt="試題圖片" onclick="app.openLightbox('${img.url}')" onerror="this.onerror=null; this.src='images/${img.name.split('/').pop()}';">
+                                ${q.images.map(src => `
+                                    <img src="${src}" class="q-image-preview" alt="試題圖片" loading="lazy" onclick="app.openLightbox('${src}')">
                                 `).join('')}
                             </div>
                         </div>

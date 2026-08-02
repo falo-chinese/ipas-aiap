@@ -52,7 +52,7 @@ for pdfname, v in pdfdata.items():
         first = rev.get((pdfname, g['first']))
         if not first:
             continue
-        files = crop(pdfname, g['shared_images'], f'G_{first}') if g['shared_images'] else []
+        files = crop(pdfname, g['shared_images'], f'fig_G_{first}') if g['shared_images'] else []
         for n in range(g['first'], g['last'] + 1):
             qid = rev.get((pdfname, n))
             if qid:
@@ -63,7 +63,7 @@ out = []
 for qid in sorted(det):
     pdfname, qnum = loc[qid]
     q = next(x for x in pdfdata[pdfname]['questions'] if x['qnum'] == qnum)
-    own = crop(pdfname, q['images'], qid) if q['images'] else []
+    own = crop(pdfname, q['images'], f'fig_{qid}') if q['images'] else []
     sh = group_files.get(qid, [])
     if not own and not sh:
         continue
