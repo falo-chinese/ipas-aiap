@@ -67,6 +67,15 @@ function getQuestionImageHtml(q) {
     <!-- 引入 PapaParse 用於解析 CSV -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
+
+/* Bulletproof Lightbox Modal Hiding */
+#imageLightboxModal {
+    display: none !important;
+}
+#imageLightboxModal.show {
+    display: block !important;
+}
+
         /* --- Google Fonts & Variables --- */
         :root {
             --google-blue: #4285F4;
@@ -3514,7 +3523,7 @@ window.onload = app.init.bind(app);
 </script>
 
 <!-- Image Lightbox Modal -->
-<div class="modal fade" id="imageLightboxModal" tabindex="-1" aria-hidden="true" style="display: none !important;">
+<div class="modal fade" id="imageLightboxModal" style="display: none !important;" tabindex="-1" aria-hidden="true" style="display: none !important;">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content bg-dark text-white border-secondary shadow-lg">
       <div class="modal-header border-secondary">
