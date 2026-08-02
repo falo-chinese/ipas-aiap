@@ -1972,79 +1972,106 @@ const app = {
     },
 
     parseFilename: function(filename) {
-        const yearMatch = String(filename).match(/(\d{3})年/);
-        const rocYear = yearMatch ? parseInt(yearMatch[1], 10) : 0;
-        const westernYear = rocYear ? rocYear + 1911 : 0;
-        const sessionMatch = String(filename).match(/第([一二三四五六七八九十]+)(梯次|次)/);
-        const sessionNumber = sessionMatch ? this.chineseNumberToInt(sessionMatch[1]) : 0;
-        const sessionType = sessionMatch ? sessionMatch[2] : '次';
-        const levelLabel = filename.includes('中級') ? '中階' : '初階';
+        const raw = String(filename || '');
+        const yearMatch = raw.match(/(\d{3})年/);
+        const rocYear = yearMatch ? yearMatch[1] : '';
+        const yearLabel = rocYear === '115' ? '2026' : (rocYear === '114' ? '2025' : '');
+
+        let sessionLabel = '';
+        let sessionOrder = 9;
+
+        if (raw.includes('第二次') || raw.includes('第2次')) {
+            sessionLabel = '第2次';
+            sessionOrder = 2;
+        } else if (raw.includes('第一次') || raw.includes('第1次')) {
+            sessionLabel = '第1次';
+            sessionOrder = 1;
+        } else if (raw.includes('第四梯次') || raw.includes('第4梯次')) {
+            sessionLabel = '第4梯次';
+            sessionOrder = 4;
+        } else if (raw.includes('第二梯次') || raw.includes('第2梯次')) {
+            sessionLabel = '第2梯次';
+            sessionOrder = 2;
+        }
 
         return {
-            yearNumber: westernYear || 0,
-            yearLabel: westernYear ? `${westernYear}` : '未標年份',
-            sessionLabel: sessionNumber ? `第${sessionNumber}${sessionType}` : '未標梯次',
-            sessionOrder: String(99 - sessionNumber).padStart(2, '0'),
-            levelLabel: levelLabel,
-            levelOrder: levelLabel === '初階' ? '1' : '2'
+            rocYear,
+            yearLabel,
+            sessionLabel,
+            sessionOrder,
+            rawName: raw
         };
     },
 
-    chineseNumberToInt: function(value) {
-        const map = { 一: 1, 二: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10 };
-        if (value === '十') return 10;
-        if (value.includes('十')) {
-            const [tens, ones] = value.split('十');
-            return (tens ? map[tens] : 1) * 10 + (ones ? map[ones] : 0);
-        }
-        return map[value] || 0;
-    },
+    getExamSeriesKey: function(subject, parsed, filename, item) {
+        const fn = (filename || '') + ' ' + (parsed ? parsed.rawName : '') + ' ' + (item ? item.title : '');
+        const subj = subject || (item ? item.subject : '');
 
-    getSubjectName: function(subject) {
-        const names = {
-            A1: '第一科 人工智慧基礎概論',
-            A2: '第二科 生成式 AI 應用與規劃',
-            B1: '第一科 人工智慧技術應用與規劃',
-            B2: '第二科 大數據處理分析與應用',
-            B3: '第三科 機器學習技術與應用'
-        };
-        return names[subject] || '未標科目';
-    },
-
-    getSubjectOrder: function(subject) {
-        const order = { A1: '1', A2: '2', B1: '3', B2: '4', B3: '5' };
-        return order[subject] || '9';
-    },
-
-    getAvailableExamSets: function() {
-        const map = new Map();
-        questions.forEach(q => {
-            if (!map.has(q.setKey)) {
-                map.set(q.setKey, {
-                    key: q.setKey,
-                    label: q.setLabel,
-                    meta: q.setMeta,
-                    order: q.setOrder,
-                    seriesKey: q.setSeriesKey,
-                    seriesLabel: q.setSeriesLabel,
-                    seriesClass: q.setSeriesClass,
-                    count: 0
-                });
+        if (subj.startsWith('B')) {
+            if (fn.includes('115年第一次') || fn.includes('115年第1次') || fn.includes('2026 第1次') || fn.includes('20260615')) {
+                return 'b-115-1';
             }
-            map.get(q.setKey).count += 1;
-        });
-        return Array.from(map.values()).sort((a, b) => a.order.localeCompare(b.order));
+            return 'b-114-2';
+        }
+
+        if (fn.includes('115年第二次') || fn.includes('115年第2次') || fn.includes('2026 第2次') || fn.includes('20260604')) {
+            return 'a-115-2';
+        }
+        if (fn.includes('115年第一次') || fn.includes('115年第1次') || fn.includes('2026 第1次') || fn.includes('20260410')) {
+            return 'a-115-1';
+        }
+        return 'a-114-4';
+    },
+
+    getExamSeriesLabel: function(subject, parsed, filename, item) {
+        const fn = (filename || '') + ' ' + (parsed ? parsed.rawName : '') + ' ' + (item ? item.title : '');
+        const subj = subject || (item ? item.subject : '');
+
+        if (subj.startsWith('B')) {
+            if (fn.includes('115年第一次') || fn.includes('115年第1次') || fn.includes('2026 第1次') || fn.includes('20260615')) {
+                return '中階 B 系列 ｜ 115 年第一次';
+            }
+            return '中階 B 系列 ｜ 114 年第二梯次';
+        }
+
+        if (fn.includes('115年第二次') || fn.includes('115年第2次') || fn.includes('2026 第2次') || fn.includes('20260604')) {
+            return '初階 A 系列 ｜ 115 年第二次';
+        }
+        if (fn.includes('115年第一次') || fn.includes('115年第1次') || fn.includes('2026 第1次') || fn.includes('20260410')) {
+            return '初階 A 系列 ｜ 115 年第一次';
+        }
+        return '初階 A 系列 ｜ 114 年第四梯次';
+    },
+
+    getExamSeriesClass: function(subject, parsed, filename, item) {
+        const fn = (filename || '') + ' ' + (parsed ? parsed.rawName : '') + ' ' + (item ? item.title : '');
+        const subj = subject || (item ? item.subject : '');
+
+        if (subj.startsWith('B')) {
+            if (fn.includes('115年第一次') || fn.includes('115年第1次') || fn.includes('2026 第1次') || fn.includes('20260615')) {
+                return 'series-b-115';
+            }
+            return 'series-b-114';
+        }
+
+        if (fn.includes('115年第二次') || fn.includes('115年第2次') || fn.includes('2026 第2次') || fn.includes('20260604')) {
+            return 'series-a-115-2';
+        }
+        if (fn.includes('115年第一次') || fn.includes('115年第1次') || fn.includes('2026 第1次') || fn.includes('20260410')) {
+            return 'series-a-115-1';
+        }
+        return 'series-a-114-4';
     },
 
     groupExamSetsBySeries: function(sets) {
-        const order = ['a-115', 'a-114', 'b-middle'];
+        const order = ['a-115-2', 'a-115-1', 'a-114-4', 'b-115-1', 'b-114-2'];
         const groups = new Map();
         sets.forEach(set => {
             const key = set.seriesKey || 'other';
             if (!groups.has(key)) {
                 groups.set(key, {
                     key: key,
-                    label: set.seriesLabel || '其他題型',
+                    label: set.seriesLabel || '其他梯次',
                     className: set.seriesClass || '',
                     sets: [],
                     count: 0
