@@ -1780,7 +1780,7 @@ const app = {
             }
 
             this.renderExamSetFilters();
-            this.syncExamLimitBounds();
+            this.updateExamLimitBounds();
             this.renderAnalysis();
             this.initAnalysisImages();
 
@@ -1804,13 +1804,24 @@ const app = {
 
     loadCsv: function(url) {
         return new Promise((resolve, reject) => {
-            Papa.parse(url, {
-                download: true,
-                header: true,
-                skipEmptyLines: true,
-                complete: (results) => resolve(results.data || []),
-                error: (err) => reject(err)
-            });
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return res.text();
+                })
+                .then(text => {
+                    const trimmed = text.trim();
+                    if (trimmed.startsWith('<!DOCTYPE') || trimmed.startsWith('<html') || trimmed.startsWith('<?xml')) {
+                        throw new Error('Invalid CSV: Response is HTML/XML');
+                    }
+                    Papa.parse(text, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: (results) => resolve(results.data || []),
+                        error: (err) => reject(err)
+                    });
+                })
+                .catch(err => reject(err));
         });
     },
 
@@ -1919,6 +1930,22 @@ const app = {
         questions = this.questions;
     },
 
+    getSubjectName: function(subject) {
+        const map = {
+            'A1': '第一科 人工智慧基礎概論',
+            'A2': '第二科 生成式 AI 應用與規劃',
+            'B1': '第一科 人工智慧技術應用與規劃',
+            'B2': '第二科 大數據處理分析與應用',
+            'B3': '第三科 機器學習技術與應用'
+        };
+        return map[subject] || subject || '';
+    },
+
+    getSubjectOrder: function(subject) {
+        const map = { 'A1': 1, 'A2': 2, 'B1': 1, 'B2': 2, 'B3': 3 };
+        return map[subject] || 9;
+    },
+
     buildExamSet: function(subject, filename) {
         const parsed = this.parseFilename(filename);
         const subjectName = this.getSubjectName(subject);
@@ -2022,11 +2049,14 @@ const app = {
             sessionOrder = 2;
         }
 
+        const levelLabel = raw.includes('中級') || raw.includes('中階') ? '中階' : (raw.includes('初級') || raw.includes('初階') ? '初階' : '');
+
         return {
             rocYear,
             yearLabel,
             sessionLabel,
             sessionOrder,
+            levelLabel,
             rawName: raw
         };
     },
@@ -2089,6 +2119,26 @@ const app = {
             return 'series-a-115-1';
         }
         return 'series-a-114-4';
+    },
+
+    getAvailableExamSets: function() {
+        const map = new Map();
+        (this.questions || questions || []).forEach(q => {
+            if (!map.has(q.setKey)) {
+                map.set(q.setKey, {
+                    key: q.setKey,
+                    label: q.setLabel,
+                    meta: q.setMeta,
+                    order: q.setOrder,
+                    seriesKey: q.setSeriesKey,
+                    seriesLabel: q.setSeriesLabel,
+                    seriesClass: q.setSeriesClass,
+                    count: 0
+                });
+            }
+            map.get(q.setKey).count += 1;
+        });
+        return Array.from(map.values()).sort((a, b) => a.order.localeCompare(b.order));
     },
 
     groupExamSetsBySeries: function(sets) {
