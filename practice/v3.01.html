@@ -1943,22 +1943,37 @@ const app = {
         };
     },
 
-    getExamSeriesKey: function(subject, parsed) {
-        if (subject.startsWith('B')) return 'b-middle';
-        if (parsed.yearLabel === '2026') return 'a-115';
-        return 'a-114';
+    getExamSeriesKey: function(subject, parsed, filename) {
+        const fn = filename || '';
+        if (subject.startsWith('B')) {
+            if (fn.includes('115年第一次') || fn.includes('20260615') || fn.includes('115年1次')) return 'b-115-1';
+            return 'b-114-2';
+        }
+        if (fn.includes('115年第二次') || fn.includes('20260604') || fn.includes('115年2次')) return 'a-115-2';
+        if (fn.includes('115年第一次') || fn.includes('20260410') || fn.includes('115年1次') || parsed.yearLabel === '2026') return 'a-115-1';
+        return 'a-114-4';
     },
 
-    getExamSeriesLabel: function(subject, parsed) {
-        if (subject.startsWith('B')) return '中階 B 系列｜114 第二梯次';
-        if (parsed.yearLabel === '2026') return '初階 A 系列｜115 第一次';
+    getExamSeriesLabel: function(subject, parsed, filename) {
+        const fn = filename || '';
+        if (subject.startsWith('B')) {
+            if (fn.includes('115年第一次') || fn.includes('20260615') || fn.includes('115年1次')) return '中階 B 系列｜115 第一梯次';
+            return '中階 B 系列｜114 第二梯次';
+        }
+        if (fn.includes('115年第二次') || fn.includes('20260604') || fn.includes('115年2次')) return '初階 A 系列｜115 第二次';
+        if (fn.includes('115年第一次') || fn.includes('20260410') || fn.includes('115年1次') || parsed.yearLabel === '2026') return '初階 A 系列｜115 第一次';
         return '初階 A 系列｜114 第四梯次';
     },
 
-    getExamSeriesClass: function(subject, parsed) {
-        if (subject.startsWith('B')) return 'series-b';
-        if (parsed.yearLabel === '2026') return 'series-a-115';
-        return 'series-a-114';
+    getExamSeriesClass: function(subject, parsed, filename) {
+        const fn = filename || '';
+        if (subject.startsWith('B')) {
+            if (fn.includes('115年第一次') || fn.includes('20260615') || fn.includes('115年1次')) return 'series-b-115';
+            return 'series-b-114';
+        }
+        if (fn.includes('115年第二次') || fn.includes('20260604') || fn.includes('115年2次')) return 'series-a-115-2';
+        if (fn.includes('115年第一次') || fn.includes('20260410') || fn.includes('115年1次') || parsed.yearLabel === '2026') return 'series-a-115-1';
+        return 'series-a-114-4';
     },
 
     parseFilename: function(filename) {
