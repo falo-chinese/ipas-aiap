@@ -74,7 +74,8 @@ catcount = collections.Counter()
 for r in rows:
     qid, real = r['編號'], resolve(r['文件名稱'])
     q = {x['qnum']: x for x in pdfdata[real]['questions']}[ordinal[qid]]
-    has_img = bool(q['images']) or bool(FIG_KW.search(q['stem'] + ''.join(q['options'])))
+    allimg = q['images'] + q.get('shared_images', [])
+    has_img = bool(allimg) or bool(FIG_KW.search(q['stem'] + ''.join(q['options'])))
     l3, other, cats, notes = [], [], set(), []
 
     # --- L3 content ---
@@ -133,7 +134,7 @@ for r in rows:
         溯源判定='PASS' if trace_ok else 'FAIL',
         題號判定='PASS' if num_ok else 'FAIL',
         顯示判定='PASS' if not disp else 'FAIL',
-        圖片依賴='是' if has_img else '否', 內嵌圖片數=len(q['images']),
+        圖片依賴='是' if has_img else '否', 內嵌圖片數=len(allimg),
         差異類型='; '.join(sorted(cats)) or '-',
         內容差異明細=' | '.join(l3) or '完全一致',
         其他問題=' | '.join(other) or '-',
@@ -142,9 +143,11 @@ for r in rows:
     if has_img:
         imgrows.append(dict(
             編號=qid, 分類=r['分類'], 對應PDF=real, PDF題號=q['qnum'], PDF頁碼=q['page_start'],
-            內嵌圖片數=len(q['images']),
-            圖片尺寸='; '.join(f"{i['w']}x{i['h']}" for i in q['images']) or '(無內嵌點陣圖：向量圖或文字表格)',
+            內嵌圖片數=len(allimg),
+            圖片尺寸='; '.join(f"{i['w']}x{i['h']}" for i in allimg) or '(無內嵌點陣圖：向量圖或文字表格)',
             題幹提及圖表='是' if FIG_KW.search(q['stem'] + ''.join(q['options'])) else '否',
+            題組=('第%d~%d題共用' % tuple(q['group'])) if q.get('group') else '',
+            共用圖數=len(q.get('shared_images', [])), 自有圖數=len(q['images']),
             CSV是否文字補寫='是' if 'C1 圖片內容以文字補寫' in detail[-1]['差異類型'] else '否',
             內容判定=detail[-1]['內容判定'],
             風險='高：CSV 無圖，作答資訊不足' if not detail[-1]['差異類型'].startswith('C1') else '中：CSV 已文字補寫，需人工核對正確性',

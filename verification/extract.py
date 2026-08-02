@@ -79,7 +79,7 @@ def parse_pdf(path):
             key = (x[2], x[3], round(bb.x0), round(bb.y0), round(bb.x1), round(bb.y1))
             if key in wm:
                 continue
-            content_imgs.append((pno, bb.y0, bb.y1, x[2], x[3]))
+            content_imgs.append((pno, bb.y0, bb.y1, x[2], x[3], bb.x0, bb.x1))
 
     # ---- build one text stream with char-offset -> (page,y) map ----
     stream, spans = [], []
@@ -138,16 +138,55 @@ def parse_pdf(path):
 
         p0, y0, _ = loc(hend)
         p1, _, y1 = loc(max(off, end - 1))
-        imgs = [dict(page=ip + 1, w=w, h=h) for ip, iy0, iy1, w, h in content_imgs
-                if (ip > p0 or (ip == p0 and iy1 > y0)) and (ip < p1 or (ip == p1 and iy0 < y1))]
+        # Claim every image from this question's header down to the *next*
+        # question's header, not just to the last text block: figures often sit
+        # after the final option, and anything left in that gap ends up orphaned.
+        # Group preambles land here too, and are moved to the group below.
+        if i + 1 < len(starts):
+            nb = loc(starts[i + 1][1])[:2]
+        else:
+            nb = (len(doc), 1e9)
+        imgs = [dict(page=ip + 1, w=w, h=h, x0=ix0, y0=iy0, x1=ix1, y1=iy1)
+                for ip, iy0, iy1, w, h, ix0, ix1 in content_imgs
+                if (ip, iy0) >= (p0, y0) and (ip, iy0) < nb]
 
         qs.append(dict(qnum=num, answer_letter=letter, stem=stem, options=opts,
                        n_options=len(opts), images=imgs, fullwidth_answer=(letter != full[off:hend].strip()[:1]),
-                       page_start=p0 + 1, page_end=p1 + 1, raw=body))
+                       page_start=p0 + 1, page_end=p1 + 1, y_start=y0, y_end=y1, raw=body))
+
+    # ---- question groups ("請根據此資料情境回答 43~47 題") ----
+    # The shared preamble and its figures sit physically AFTER the previous
+    # question's options and BEFORE the group's first question, so the loop
+    # above attributes them to the wrong question. Reassign them to the whole
+    # group here.
+    by_num = {q['qnum']: q for q in qs}
+    # NB: use the match END. QSTART begins with (?:^|\n), so match.start()
+    # lands in the *previous* block and would put the boundary too early.
+    start_off = {n: starts[i][1] for i, (_, _, _, n) in enumerate(starts)}
+    groups = []
+    for m in re.finditer(r'(\d{1,2})\s*[-–—~～至到]\s*(\d{1,2})\s*題', full):
+        a, b = int(m.group(1)), int(m.group(2))
+        if not (1 <= a < b <= 50 and b - a <= 9) or a not in start_off:
+            continue
+        mp, my, _ = loc(m.end())
+        qp, qy, _ = loc(start_off[a])
+        shared = [dict(page=ip + 1, w=w, h=h, x0=ix0, y0=iy0, x1=ix1, y1=iy1)
+                  for ip, iy0, iy1, w, h, ix0, ix1 in content_imgs
+                  if (ip, iy0) >= (mp, my) and (ip, iy0) < (qp, qy)]
+        groups.append(dict(first=a, last=b, shared_images=shared))
+        owner = by_num.get(a - 1)
+        keys = {(i['page'], round(i['y0'], 1)) for i in shared}
+        if owner:
+            owner['images'] = [i for i in owner['images']
+                               if (i['page'], round(i['y0'], 1)) not in keys]
+        for n in range(a, b + 1):
+            if n in by_num:
+                by_num[n]['group'] = [a, b]
+                by_num[n]['shared_images'] = shared
 
     npg = len(doc)
     doc.close()
-    return dict(pdf=os.path.basename(path), n_pages=npg,
+    return dict(pdf=os.path.basename(path), n_pages=npg, groups=groups,
                 questions=qs, n_content_images=len(content_imgs))
 
 result = {}
