@@ -1,0 +1,1459 @@
+[
+  {
+    "pdf_file": "114年第二梯次中級AI應用規劃師第一科人工智慧技術應用與規劃(當次試題公告114_20251226000616.pdf",
+    "total_image_questions": 1,
+    "questions": [
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第一科人工智慧技術應用與規劃(當次試題公告114_20251226000616.pdf",
+        "page": 8,
+        "qnum": 29,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": "某AI 開發團隊為提升模型開發效率及品質控制，計畫實施持續整合 （Continuous Integration, CI）流程。下列哪一項做法最符合CI 的核心實踐，且能有效減少整合風險？ (A)在主分支（Main Branch）每日固定時間手動合併並執行完整測試 流程； (B)每..."
+      }
+    ]
+  },
+  {
+    "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+    "total_image_questions": 9,
+    "questions": [
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+        "page": 10,
+        "qnum": 38,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 3,
+        "image_details": [
+          {
+            "xref": 41,
+            "width": 444,
+            "height": 56,
+            "ext": "png"
+          },
+          {
+            "xref": 42,
+            "width": 861,
+            "height": 230,
+            "ext": "png"
+          },
+          {
+            "xref": 43,
+            "width": 567,
+            "height": 248,
+            "ext": "png"
+          }
+        ],
+        "stem": "附圖程式碼所計算的是哪一類型的評估指標？  (A)MAE；(B)MSE；(C)RMSE；(D)R² C"
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+        "page": 10,
+        "qnum": 39,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 3,
+        "image_details": [
+          {
+            "xref": 41,
+            "width": 444,
+            "height": 56,
+            "ext": "png"
+          },
+          {
+            "xref": 42,
+            "width": 861,
+            "height": 230,
+            "ext": "png"
+          },
+          {
+            "xref": 43,
+            "width": 567,
+            "height": 248,
+            "ext": "png"
+          }
+        ],
+        "stem": "附圖程式碼實現的是哪一種正則化技術？  (A)L1 正則化；(B)L2 正則化；(C)Dropout；(D)Batch Normalization C"
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+        "page": 10,
+        "qnum": 40,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 3,
+        "image_details": [
+          {
+            "xref": 41,
+            "width": 444,
+            "height": 56,
+            "ext": "png"
+          },
+          {
+            "xref": 42,
+            "width": 861,
+            "height": 230,
+            "ext": "png"
+          },
+          {
+            "xref": 43,
+            "width": 567,
+            "height": 248,
+            "ext": "png"
+          }
+        ],
+        "stem": "依據附圖程式碼進行資料處理，下列何者正確？  (A)np.linalg.inv(A) 計算矩陣 A 的行列式； (B)v1 * v2 結果為 array([5, 7, 9])； (C)np.dot(v1, v2) 結果為 np.int64(32)； (D)np.linalg.ei..."
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+        "page": 10,
+        "qnum": 41,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 3,
+        "image_details": [
+          {
+            "xref": 41,
+            "width": 444,
+            "height": 56,
+            "ext": "png"
+          },
+          {
+            "xref": 42,
+            "width": 861,
+            "height": 230,
+            "ext": "png"
+          },
+          {
+            "xref": 43,
+            "width": 567,
+            "height": 248,
+            "ext": "png"
+          }
+        ],
+        "stem": "考慮擲出骰子並採用Monte Carlo 方法估算條件機率，參考附圖程式碼。 "
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+        "page": 15,
+        "qnum": 46,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 5,
+        "image_details": [
+          {
+            "xref": 68,
+            "width": 845,
+            "height": 173,
+            "ext": "png"
+          },
+          {
+            "xref": 69,
+            "width": 971,
+            "height": 74,
+            "ext": "png"
+          },
+          {
+            "xref": 70,
+            "width": 902,
+            "height": 182,
+            "ext": "jpeg"
+          },
+          {
+            "xref": 71,
+            "width": 867,
+            "height": 135,
+            "ext": "jpeg"
+          },
+          {
+            "xref": 72,
+            "width": 1058,
+            "height": 278,
+            "ext": "png"
+          }
+        ],
+        "stem": "  假設研究人員已將含有雜訊的手寫數字影像存放在變數noisy 中。部分資 料經視覺化後的外觀如下：   他們嘗試使用PCA 進行降噪，並希望能保留影像的主要特徵，同時去除影 像中的雜訊。然而，當程式執行後，觀察到影像仍然含有明顯的雜訊。研 究人員懷疑是程式中某個步驟的設定不正確..."
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+        "page": 15,
+        "qnum": 47,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 5,
+        "image_details": [
+          {
+            "xref": 68,
+            "width": 845,
+            "height": 173,
+            "ext": "png"
+          },
+          {
+            "xref": 69,
+            "width": 971,
+            "height": 74,
+            "ext": "png"
+          },
+          {
+            "xref": 70,
+            "width": 902,
+            "height": 182,
+            "ext": "jpeg"
+          },
+          {
+            "xref": 71,
+            "width": 867,
+            "height": 135,
+            "ext": "jpeg"
+          },
+          {
+            "xref": 72,
+            "width": 1058,
+            "height": 278,
+            "ext": "png"
+          }
+        ],
+        "stem": "研究人員在對digits 資料集進行分類時，決定使用KNN 並搭配交叉驗證來 評估模型準確率。他們撰寫了四組不同的程式碼來進行KNN 訓練與交叉驗 證，但不確定哪幾組程式碼能正確執行並輸出準確率。每組程式碼在資料 切割、模型訓練、交叉驗證函數的使用上略有差異，研究人員希望找出可 ..."
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+        "page": 17,
+        "qnum": 48,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖",
+          "程式碼"
+        ],
+        "content_images_count": 4,
+        "image_details": [
+          {
+            "xref": 81,
+            "width": 998,
+            "height": 302,
+            "ext": "png"
+          },
+          {
+            "xref": 82,
+            "width": 980,
+            "height": 290,
+            "ext": "png"
+          },
+          {
+            "xref": 83,
+            "width": 1073,
+            "height": 400,
+            "ext": "png"
+          },
+          {
+            "xref": 84,
+            "width": 688,
+            "height": 238,
+            "ext": "png"
+          }
+        ],
+        "stem": "參考下圖程式碼，下列何者正確？  A：X_train -= X_train.mean(axis=0) 將每個訓練集特徵的平均值調整為 0 B：X_train /= X_train.std(axis=0) 將每個訓練集特徵的標準差調整為 0 C：X_train 處理結果會將資料壓縮..."
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+        "page": 18,
+        "qnum": 49,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 4,
+        "image_details": [
+          {
+            "xref": 87,
+            "width": 1004,
+            "height": 518,
+            "ext": "png"
+          },
+          {
+            "xref": 88,
+            "width": 211,
+            "height": 85,
+            "ext": "png"
+          },
+          {
+            "xref": 89,
+            "width": 1021,
+            "height": 63,
+            "ext": "jpeg"
+          },
+          {
+            "xref": 90,
+            "width": 1094,
+            "height": 510,
+            "ext": "png"
+          }
+        ],
+        "stem": "參考下圖執行結果，下列何者正確？  (A)activation=\"relu\"其數學式為 ； (B)空格1 值為110，空格2 值為100； (C)空格1 值為100，空格2 值為110； (D)activation=\"sigmoid\"一般用於多類別分類預測模型 Ｃ"
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第三科機器學習技術與應用(當次試題公告114_20251226000650.pdf",
+        "page": 18,
+        "qnum": 50,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 4,
+        "image_details": [
+          {
+            "xref": 87,
+            "width": 1004,
+            "height": 518,
+            "ext": "png"
+          },
+          {
+            "xref": 88,
+            "width": 211,
+            "height": 85,
+            "ext": "png"
+          },
+          {
+            "xref": 89,
+            "width": 1021,
+            "height": 63,
+            "ext": "jpeg"
+          },
+          {
+            "xref": 90,
+            "width": 1094,
+            "height": 510,
+            "ext": "png"
+          }
+        ],
+        "stem": "參考下圖執行結果，下列何者正確？   "
+      }
+    ]
+  },
+  {
+    "pdf_file": "114年第二梯次中級AI應用規劃師第二科大數據處理分析與應用(當次試題公告114_20251226000634.pdf",
+    "total_image_questions": 5,
+    "questions": [
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第二科大數據處理分析與應用(當次試題公告114_20251226000634.pdf",
+        "page": 1,
+        "qnum": 1,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 23,
+            "width": 960,
+            "height": 631,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "若某數據點的Z 分數（Z-Score）= 2，請問代表下列哪一種意涵？ (A)代表該數據點之原始數值為2； (B)該數據點比平均值低2 個標準差； (C)代表數據為異常值； (D)該數據點比平均值高2 個標準差 B"
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第二科大數據處理分析與應用(當次試題公告114_20251226000634.pdf",
+        "page": 1,
+        "qnum": 2,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 23,
+            "width": 960,
+            "height": 631,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "使用Python 的pandas 套件處理各商品銷售數據（變數為 df）時，若需 計算「總銷售額」欄位的敘述性統計量（如平均值、標準差等），應使用 下列哪一種語法？ (A)df['總銷售額'].sum()； (B)df['總銷售額'].describe()； (C)df['總銷售..."
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第二科大數據處理分析與應用(當次試題公告114_20251226000634.pdf",
+        "page": 1,
+        "qnum": 3,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 23,
+            "width": 960,
+            "height": 631,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "附圖為某資料之分佈圖，此圖資料之偏態（Skewness）值較有可能為下列 哪個選項？  (A)Skewness < 0； (B)Skewness > 0； (C)Skewness = 0； (D)無法計算 Skewness B"
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第二科大數據處理分析與應用(當次試題公告114_20251226000634.pdf",
+        "page": 1,
+        "qnum": 4,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 23,
+            "width": 960,
+            "height": 631,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "累積分佈函數（Cumulative Distribution Function, CDF）可用於描述 隨機變數的機率分佈特性，其數學定義為下列何者？ (A)機率密度函數（Probability Density Function, PDF）的平均值； (B)機率密度函數（Proba..."
+      },
+      {
+        "pdf_file": "114年第二梯次中級AI應用規劃師第二科大數據處理分析與應用(當次試題公告114_20251226000634.pdf",
+        "page": 11,
+        "qnum": 39,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼",
+          "pseudocode"
+        ],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 50,
+            "width": 913,
+            "height": 698,
+            "ext": "png"
+          }
+        ],
+        "stem": "若評估一個新開發的腫瘤分類模型，其資料集中有80%的樣本來自良性病 例。若直接使用5-fold 交叉驗證（Cross-Validation） 進行模型評估， 可能導致模型效能評估出現偏差，為避免此問題，下列哪一種作法最合 適？ (A)降低K 值以減少交叉驗證次數； (B)改為使用..."
+      }
+    ]
+  },
+  {
+    "pdf_file": "114年第四梯次初級AI應用規劃師第一科人工智慧基礎概論(當次試題公告114_20251226000442.pdf",
+    "total_image_questions": 0,
+    "questions": []
+  },
+  {
+    "pdf_file": "114年第四梯次初級AI應用規劃師第二科生成式AI應用與規劃(當次試題公告114_20251226000507.pdf",
+    "total_image_questions": 3,
+    "questions": [
+      {
+        "pdf_file": "114年第四梯次初級AI應用規劃師第二科生成式AI應用與規劃(當次試題公告114_20251226000507.pdf",
+        "page": 1,
+        "qnum": 1,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 在Low Code 平台的開發應用設計中，關於「模型（Model）」，下列敘述 何者最符合實際情況？ (A)模型僅扮演設計視覺化的輔助工具，對應用邏輯的影響有限； (B)模型是用來抽象描述資料結構、業務流程與介面邏輯的核心元素， 影響應用的設計與維護； (C)模型僅依循UML（..."
+      },
+      {
+        "pdf_file": "114年第四梯次初級AI應用規劃師第二科生成式AI應用與規劃(當次試題公告114_20251226000507.pdf",
+        "page": 2,
+        "qnum": 7,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 某團隊希望讓AI 自動查詢GitHub 上的程式碼庫，並生成摘要給使用 者參考。開發者決定透過Model Context Protocol（MCP）來實現，AI 需先發出請求，再經由MCP 架構逐步完成查詢與回傳。在此情境下， MCP 運作流程的正確順序為何？ (A)MCP S..."
+      },
+      {
+        "pdf_file": "114年第四梯次初級AI應用規劃師第二科生成式AI應用與規劃(當次試題公告114_20251226000507.pdf",
+        "page": 3,
+        "qnum": 13,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": "關於GitHub Copilot，下列敘述何者正確？ (A)GitHub Copilot 基於程式碼片段查詢工具，透過後端搜尋大型程式 碼資料庫提供建議； "
+      }
+    ]
+  },
+  {
+    "pdf_file": "115年第一次中級AI應用規劃師_第一科_人工智慧技術應用與規劃_公告試題_20260615003359.pdf",
+    "total_image_questions": 3,
+    "questions": [
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第一科_人工智慧技術應用與規劃_公告試題_20260615003359.pdf",
+        "page": 6,
+        "qnum": 18,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 49,
+            "width": 838,
+            "height": 401,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": " 某醫院的AI 研究團隊正在開發一套整合「CT 影像+電子病歷文本+基因序列」三 種模態資料的癌症預測模型。請問在此場景中採用「跨模態對齊（Cross-Modal Alignment）」技術主要解決什麼問題？ (A)使模型僅聚焦於CT 影像資料，避免文本與基因資料引入雜訊； (B..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第一科_人工智慧技術應用與規劃_公告試題_20260615003359.pdf",
+        "page": 6,
+        "qnum": 19,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 49,
+            "width": 838,
+            "height": 401,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": " 一家電商公司已將推薦系統AI 模型上線三個月，業務主管要求專案團隊評估導 入成效。團隊根據下圖數據得出結論：「因為AUC 高達0.91，模型表現優異，AI 導入成效良好。」請問此評估結論存在什麼根本問題？  (A)僅依賴離線指標AUC 判斷模型成效，忽略線上業務指標（如 CTR..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第一科_人工智慧技術應用與規劃_公告試題_20260615003359.pdf",
+        "page": 6,
+        "qnum": 20,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 49,
+            "width": 838,
+            "height": 401,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": " 某電商公司計畫導入即時推薦系統，希望使用者進入網站後能在100 毫秒內取得 推薦結果，且推薦結果需依據最新使用者行為進行調整。系統需支援每日約50 萬 活躍使用者，尖峰時段每秒約3,000 筆請求（QPS）。目前公司已累積歷史購買紀 錄與瀏覽行為資料，並持續接收即時點擊流（St..."
+      }
+    ]
+  },
+  {
+    "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+    "total_image_questions": 11,
+    "questions": [
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 11,
+        "qnum": 40,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖",
+          "程式碼"
+        ],
+        "content_images_count": 2,
+        "image_details": [
+          {
+            "xref": 66,
+            "width": 744,
+            "height": 364,
+            "ext": "png"
+          },
+          {
+            "xref": 67,
+            "width": 862,
+            "height": 532,
+            "ext": "png"
+          }
+        ],
+        "stem": "分析師準備建立一個能將手寫數字圖片（28x28 像素展平為784 維度）分為0~9 共 10 個類別的多層感知機（MLP），且標籤已轉為One-Hot 編碼（One-Hot Encoding）。 為符合10 個類別的單標籤分類需求，下圖中的程式碼中(A)與(B)的函數應填入何 者..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 11,
+        "qnum": 41,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 2,
+        "image_details": [
+          {
+            "xref": 66,
+            "width": 744,
+            "height": 364,
+            "ext": "png"
+          },
+          {
+            "xref": 67,
+            "width": 862,
+            "height": 532,
+            "ext": "png"
+          }
+        ],
+        "stem": "工程師使用PyTorch 建立OCR 訓練pipeline，並對手寫字母資料集套用下圖程式進 行資料增強（Transform）。模型在訓練過程中顯示驗證損失（Validation Loss）持續 下降，但實際部署後，系統在辨識「b/d/p/q」類字母錯誤率異常偏高。下列何者為 最..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 12,
+        "qnum": 42,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 71,
+            "width": 586,
+            "height": 267,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "觀察程式中行(A)將所有既有權重的梯度計算關閉，這在遷移學習中屬於哪一種標 準策略？ (A)全面微調（Full Fine-Tuning）； (B)零樣本學習（Zero-shot Learning）； (C)特徵萃取（Feature Extraction）； (D)知識蒸餾（Kno..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 12,
+        "qnum": 43,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 71,
+            "width": 586,
+            "height": 267,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "在進行遷移學習微調（Fine-Tuning）時，通常會將優化器的學習率（Learning Rate） 設得非常小（如1e-4），下列何者為主要的原因？ (A)為了避免記憶體耗盡（OOM）； (B)為了加速模型整體的收斂時間； (C)為了讓損失函數強制歸零； (D)為了避免更新步伐..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 13,
+        "qnum": 44,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 4,
+        "image_details": [
+          {
+            "xref": 74,
+            "width": 1153,
+            "height": 269,
+            "ext": "png"
+          },
+          {
+            "xref": 75,
+            "width": 1153,
+            "height": 85,
+            "ext": "png"
+          },
+          {
+            "xref": 76,
+            "width": 1153,
+            "height": 299,
+            "ext": "png"
+          },
+          {
+            "xref": 77,
+            "width": 1153,
+            "height": 287,
+            "ext": "png"
+          }
+        ],
+        "stem": "研究人員撰寫的程式中（下圖），先用整體資料進行LDA（Linear Discriminant Analysis）降維，接著再用KNN（K-Nearest Neighbors）進行分類，並用交叉驗證 來評估準確率。請問下列敘述何者正確？ "
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 14,
+        "qnum": 45,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖",
+          "程式碼"
+        ],
+        "content_images_count": 3,
+        "image_details": [
+          {
+            "xref": 80,
+            "width": 1037,
+            "height": 396,
+            "ext": "png"
+          },
+          {
+            "xref": 81,
+            "width": 1037,
+            "height": 350,
+            "ext": "png"
+          },
+          {
+            "xref": 82,
+            "width": 723,
+            "height": 152,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "研究人員在程式（下圖）中使用cross_val_score 進行交叉驗證，但目前尚未設定cv 參數。  他們希望確保在每次資料分割時，訓練集與測試集的類別比例與原始資料一致，以 免影響模型的準確率估計。目前有以下幾段候選程式碼可供選擇。請問為了確保在 交叉驗證時每個分割中的類別比..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 15,
+        "qnum": 46,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 5,
+        "image_details": [
+          {
+            "xref": 85,
+            "width": 1207,
+            "height": 245,
+            "ext": "png"
+          },
+          {
+            "xref": 86,
+            "width": 412,
+            "height": 447,
+            "ext": "png"
+          },
+          {
+            "xref": 87,
+            "width": 361,
+            "height": 76,
+            "ext": "png"
+          },
+          {
+            "xref": 88,
+            "width": 951,
+            "height": 166,
+            "ext": "png"
+          },
+          {
+            "xref": 89,
+            "width": 700,
+            "height": 215,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "參考下圖資料處理，下列哪一項描述組合正確？   "
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 16,
+        "qnum": 47,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 2,
+        "image_details": [
+          {
+            "xref": 92,
+            "width": 1552,
+            "height": 1289,
+            "ext": "png"
+          },
+          {
+            "xref": 93,
+            "width": 1041,
+            "height": 258,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "參考下圖建立模型結果，下列哪一項描述組合正確？   (A)描述A、描述C； (B)描述C、描述E、描述F； (C)描述A、描述D、描述E； (D)描述D、描述E、描述F D"
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 16,
+        "qnum": 48,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 2,
+        "image_details": [
+          {
+            "xref": 92,
+            "width": 1552,
+            "height": 1289,
+            "ext": "png"
+          },
+          {
+            "xref": 93,
+            "width": 1041,
+            "height": 258,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "參考下圖繪圖結果，當Epochs=6 時，訓練曲線值(0.81)明顯大於驗證曲線值(0.72)， "
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 17,
+        "qnum": 49,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 96,
+            "width": 1166,
+            "height": 914,
+            "ext": "png"
+          }
+        ],
+        "stem": "若團隊需要建立一個超過50 層的深層神經網路，以捕捉晶圓表面細微的劃傷特徵， 但又擔心傳統深層網路常見的梯度消失（Vanishing Gradient）問題，則下列哪一種 經典架構最適合優先考慮？ (A)VGG（Visual Geometry Group）：透過重複堆疊3×3 卷..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第三科_機器學習技術與應用_公告試題_20260615003428.pdf",
+        "page": 18,
+        "qnum": 50,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 99,
+            "width": 404,
+            "height": 148,
+            "ext": "png"
+          }
+        ],
+        "stem": "為了修復訓練過程中Loss 突然變成NaN 的問題，工程師考慮在PyTorch 訓練迴圈 中加入梯度裁剪（Gradient Clipping）機制，例如 torch.nn.utils.clip_grad_norm_。若 要正確加入梯度裁剪，最適合插入於哪個位置？其主要作用為何？ ..."
+      }
+    ]
+  },
+  {
+    "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+    "total_image_questions": 25,
+    "questions": [
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 1,
+        "qnum": 1,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 32,
+            "width": 135,
+            "height": 68,
+            "ext": "png"
+          }
+        ],
+        "stem": "工程師使用盒鬚圖（Box Plot）比較三個城市的房價分布，觀察到城市A 的盒子很短但 鬚很長，城市B 的盒子很長且對稱，城市C 的中位數位置明顯偏向盒子下方。依統計 圖形判讀原則，下列敘述何者正確？ (A)城市A 中段房價集中但存在極端值；城市C 中位數偏低，資料呈右偏分布； ..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 1,
+        "qnum": 2,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖",
+          "下圖為"
+        ],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 32,
+            "width": 135,
+            "height": 68,
+            "ext": "png"
+          }
+        ],
+        "stem": "下圖為吉尼不純度（Gini Impurity）的計算公式，在決策樹（Decision Tree）中，吉尼不 純度用於評估節點分裂的品質。關於吉尼不純度，下列敘述何者不正確？  (A)公式中的pᵢ代表第 i 類在該節點中的樣本數，並直接帶入公式計算； (B)公式中的k 代表節點內資..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 1,
+        "qnum": 3,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 32,
+            "width": 135,
+            "height": 68,
+            "ext": "png"
+          }
+        ],
+        "stem": "某物流平台要預測「每小時客服來電數量」，資料顯示平均每小時12 通，且來電事件 彼此獨立，並在固定時間區間內發生率穩定。工程師在選擇機率模型時，應優先考慮哪 個分布？若實際資料的變異數明顯大於平均數，應如何調整？ (A)使用常態分布（Normal Distribution）；變異..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 1,
+        "qnum": 4,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 32,
+            "width": 135,
+            "height": 68,
+            "ext": "png"
+          }
+        ],
+        "stem": "某工程師使用MLflow 進行實驗追蹤，評估三種不同學習率（0.001、0.01、0.1）對同 一模型在驗證資料集上的損失表現。每種學習率皆以不同隨機種子重複訓練10 次，形 成三組彼此獨立的樣本資料。經檢查後，這些資料近似常態分布且變異數相近。工程師 希望判斷三組平均損失是否存..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 2,
+        "qnum": 5,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 36,
+            "width": 152,
+            "height": 70,
+            "ext": "png"
+          }
+        ],
+        "stem": "某AI 團隊在模型上線後，透過監控系統持續追蹤輸入特徵的分布變化，系統使用Z- score（Z）作為異常判斷依據，並設定當|Z| ≥ 2 時需觸發警示。假設該特徵近似常態分 布，某次監控中發現某特徵值的Z-score 為-2，請問就實務判讀而言，此數值最可能代 表什麼意義？ (A..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 2,
+        "qnum": 6,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 36,
+            "width": 152,
+            "height": 70,
+            "ext": "png"
+          }
+        ],
+        "stem": "在AI 模型評估的假說檢定框架中，「女士品茶」實驗是理解型一／型二錯誤的經典案 例。實驗中某女士宣稱能分辨8 杯奶茶中哪4 杯先加牛奶，若以顯著水準α=0.05 進行 假說檢定，下列敘述何者不正確？ (A)虛無假說（H₀）為「女士無此能力（隨機猜測）」，對立假說（H₁）為「女士確..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 2,
+        "qnum": 7,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 36,
+            "width": 152,
+            "height": 70,
+            "ext": "png"
+          }
+        ],
+        "stem": "某醫療AI 研究團隊開發了一套個人化用藥劑量推薦系統，並設計實驗評估其效果。研 究團隊招募40 名高血壓患者，分別在導入AI 推薦系統前後各測量一次收縮壓，且資 料近似常態分布。研究目標是判斷同一批患者在依據AI 推薦調整用藥劑量前後，血壓 是否有顯著差異。請問此研究情境應選用哪..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 2,
+        "qnum": 8,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 36,
+            "width": 152,
+            "height": 70,
+            "ext": "png"
+          }
+        ],
+        "stem": "某咖啡店聲稱其平均外送時間為36 分鐘，母體標準差為16 分鐘。顧客保護團體抽樣"
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 2,
+        "qnum": 9,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖",
+          "如下圖"
+        ],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 36,
+            "width": 152,
+            "height": 70,
+            "ext": "png"
+          }
+        ],
+        "stem": "筆訂單，發現平均外送時間為40 分鐘。若採用右尾Z 檢定（H₁: μ > 36），顯著水準 α= 0.05（臨界值 Z₀.₀₅ = 1.645），請問Z 值與檢定結果為何？（參考公式如下圖）  (A)Z ≈ 0.08，拒絕虛無假說； (B)Z ≈ 0.08，不拒絕虛無假說； "
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 5,
+        "qnum": 19,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": "下圖表為電商平台某時段的交易紀錄（共8 筆訂單），對圖表內的資料執行Apriori 演 "
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 6,
+        "qnum": 20,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 46,
+            "width": 328,
+            "height": 406,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "某電信公司的AI 反詐欺模型在正常交易佔99.5%、詐欺交易僅佔0.5%的類別嚴重不 平衡資料集上訓練。若工程師僅以整體準確率（Accuracy）作為模型選擇的唯一指標， 最可能產生什麼嚴重問題？ (A)模型訓練時間會因類別不平衡而大幅增加； (B)一個永遠預測為正常交易的模型即..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 6,
+        "qnum": 21,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 46,
+            "width": 328,
+            "height": 406,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "某AI 平台的資料工程師需要在Apache Spark 叢集上，對包含10 億筆使用者行為紀錄 的RDD/DataFrame 計算整體標準差（Standard Deviation）。請問下列哪種策略在分散式 環境中最正確且有效率？ (A)呼叫collect()將所有資料傳回Dri..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 7,
+        "qnum": 22,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 49,
+            "width": 271,
+            "height": 258,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "某連鎖便利商店集團欲建立門市未來14 天每日銷售額預測模型（500 間門市、3 年歷 史資料）。資料具有明顯的週期性（週末較高）、年度季節性（暑假與年末高峰）及長期 成長趨勢，並包含已知節日與不定期事件（如颱風）。在此情境下，關於資料切分與建 模策略，何者最適當？ (A)採隨機切..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 7,
+        "qnum": 23,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 49,
+            "width": 271,
+            "height": 258,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "Receiver Operating Characteristic（ROC）曲線係由單一分類模型在不同決策閾值下形成， 並以真陽率（True Positive Rate, TPR）為縱軸、假陽率（False Positive Rate, FPR）為橫 軸。請問下圖中四條曲線，何者..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 7,
+        "qnum": 24,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 49,
+            "width": 271,
+            "height": 258,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "某AI 工程師評估客戶滿意度評分（1–5 分，含有明顯離群值）與退款率（連續型比例 變數）之間的相關性，考慮使用皮爾森（Pearson）、斯皮爾曼（Spearman）或肯德爾 （Kendall）相關係數。關於三者的特性比較，下列敘述何者不正確？ (A)皮爾森衡量兩個連續變數間的線..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 12,
+        "qnum": 39,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖"
+        ],
+        "content_images_count": 2,
+        "image_details": [
+          {
+            "xref": 60,
+            "width": 510,
+            "height": 343,
+            "ext": "jpeg"
+          },
+          {
+            "xref": 61,
+            "width": 553,
+            "height": 482,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "在建構自動化資料清洗管線時，工程師撰寫一個用於補齊缺失欄位的Python 函式，如 下圖所示。當此函式連續處理兩筆獨立的資料（row1 與row2）後，請問第二筆資料 row2['tags']的內容會為何？  (A) [\"checked\", \"tags\"]； (B) []； (C..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 12,
+        "qnum": 40,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖",
+          "下圖為",
+          "pseudocode"
+        ],
+        "content_images_count": 2,
+        "image_details": [
+          {
+            "xref": 60,
+            "width": 510,
+            "height": 343,
+            "ext": "jpeg"
+          },
+          {
+            "xref": 61,
+            "width": 553,
+            "height": 482,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "下圖為一段分類演算法的pseudocode，請問最可能對應下列哪一種演算法？  (A) K-近鄰（K-Nearest Neighbors, KNN）； (B) K-means 分群（K-means Clustering）； (C)支援向量機（Support Vector Mach..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 13,
+        "qnum": 41,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 64,
+            "width": 507,
+            "height": 106,
+            "ext": "png"
+          }
+        ],
+        "stem": "資料分析師使用Python 檢視daily_earnings 欄位的基本統計量，執行以下程式碼（Pandas 2 以上版本）：  輸出結果如下： ● mean：223.411306 ● 50%：128.552462 ● max：4500.000000  若團隊進一步發現daily..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 14,
+        "qnum": 42,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 67,
+            "width": 347,
+            "height": 140,
+            "ext": "png"
+          }
+        ],
+        "stem": "承上題，團隊在建立預測模型前，先將region（A、B、C 區）轉換為整數 1、2、3， 即採用標籤編碼（Label Encoding）。模型上線測試後發現，線性迴歸模型對於C 區（編 碼為3）的預測收入出現明顯高估，顯示模型可能將編碼值誤解為具有線性大小關係。 若主管要求不得修..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 14,
+        "qnum": 43,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 67,
+            "width": 347,
+            "height": 140,
+            "ext": "png"
+          }
+        ],
+        "stem": "平台安全部門發現，僅有極少數司機（約占總體0.05%）會利用外掛程式竄改 gps_ping_rate，以騙取里程補貼。某新進資料科學家訓練了一個二元分類模型，並在報 告中指出：「模型整體準確率（Accuracy）高達99.95%，因此可直接上線攔截可疑帳 號。」  然而，資深工程..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 14,
+        "qnum": 44,
+        "has_keyword": false,
+        "keyword_found": [],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 67,
+            "width": 347,
+            "height": 140,
+            "ext": "png"
+          }
+        ],
+        "stem": "針對上述外掛偵測模型，營運長下達最終的商業決策目標如下：「對於作弊行為零容忍。 即使誤凍結部分正常司機帳號，後續仍可交由人工覆核；但不能放過任何一個真正的 外掛司機。」根據上述目標，團隊在調整模型輸出的決策機率門檻（Threshold，預設 為0.5）時，應採取下列何種策略最為合..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 15,
+        "qnum": 45,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": "若分析師想找出「總貢獻營收最高的前3 名客戶」，下列Pandas 程式碼何者最為精確 且高效？ (A) df.sort_values('Revenue', ascending=False).head(3)['CustomerID']； (B) df.groupby('Custom..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 16,
+        "qnum": 48,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 72,
+            "width": 703,
+            "height": 548,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "在進行機器學習建模前，資料分析師需對特徵變數X 進行標準化處理，以消除不同量 尺所造成的影響。已知使用StandardScaler 進行資料轉換，程式碼如下：scaler = StandardScaler()。請問下列哪一種寫法可以正確完成資料標準化？ (A)X_norm = s..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 16,
+        "qnum": 49,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 1,
+        "image_details": [
+          {
+            "xref": 72,
+            "width": 703,
+            "height": 548,
+            "ext": "jpeg"
+          }
+        ],
+        "stem": "在進行機器學習建模前，資料分析師已完成資料前處理（包含遺漏值處理與特徵標準 化），並準備建立分類模型。 已知資料流程如下： 1. 將資料區分為訓練集與測試集 2. 建立羅吉斯迴歸（Logistic Regression）模型 3. 使用訓練資料進行模型擬合（fit） 請問下列哪一..."
+      },
+      {
+        "pdf_file": "115年第一次中級AI應用規劃師_第二科_大數據處理分析與應用_公告試題_20260615003417.pdf",
+        "page": 17,
+        "qnum": 50,
+        "has_keyword": true,
+        "keyword_found": [
+          "下圖",
+          "程式碼"
+        ],
+        "content_images_count": 5,
+        "image_details": [
+          {
+            "xref": 75,
+            "width": 857,
+            "height": 77,
+            "ext": "png"
+          },
+          {
+            "xref": 76,
+            "width": 856,
+            "height": 83,
+            "ext": "png"
+          },
+          {
+            "xref": 77,
+            "width": 858,
+            "height": 81,
+            "ext": "png"
+          },
+          {
+            "xref": 78,
+            "width": 858,
+            "height": 91,
+            "ext": "png"
+          },
+          {
+            "xref": 79,
+            "width": 1586,
+            "height": 704,
+            "ext": "png"
+          }
+        ],
+        "stem": "參考下圖程式碼，下列描述何者正確？  (A)cm 表示混淆矩陣，橫列表測試集的預測值； (B)混淆矩陣對角線數值皆大於非對角線數值表示模型過度擬合； (C)f1_score 參數average=\"weighted\"表示計算平均f1_score； (D)f1_score 計算時採用..."
+      }
+    ]
+  },
+  {
+    "pdf_file": "115年第一次初級AI應用規劃師_第一科_人工智慧基礎概論_公告試題_20260410164304.pdf",
+    "total_image_questions": 1,
+    "questions": [
+      {
+        "pdf_file": "115年第一次初級AI應用規劃師_第一科_人工智慧基礎概論_公告試題_20260410164304.pdf",
+        "page": 3,
+        "qnum": 13,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 根據《金融機構運用人工智慧技術作業規範》，金融機構於使用人工智慧提供金融 服務並直接與消費者互動時，下列何者非必要揭露之資訊？ (A)該服務之 AI 模型原始程式碼； (B)服務適用對象與用途範圍； (C)該服務是否為 AI 自動完成； (D)該服務是否提供替代方案 B"
+      }
+    ]
+  },
+  {
+    "pdf_file": "115年第一次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260410164328.pdf",
+    "total_image_questions": 3,
+    "questions": [
+      {
+        "pdf_file": "115年第一次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260410164328.pdf",
+        "page": 4,
+        "qnum": 18,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 關於ChatGPT、Anthropic Claude、GitHub Copilot 等AI 程式碼輔助工具的運作原 理，下列敘述何者正確？ (A)這些工具基於大型語言模型，經由大量程式碼與文本訓練，透過預測下一個符 號來生成程式碼，但不保證產生程式碼的正確性； (B)GitHu..."
+      },
+      {
+        "pdf_file": "115年第一次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260410164328.pdf",
+        "page": 5,
+        "qnum": 19,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 某新創公司採用MVP（Minimum Viable Product）策略，導入Vibe Coding 以加速 開發，雖然初期能快速產出可運作功能，但技術主管提醒，在正式上線前仍可能 存在程式碼品質與安全風險。下列哪一項措施最合理，以降低品質與安全問題？ (A)直接沿用AI 生成..."
+      },
+      {
+        "pdf_file": "115年第一次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260410164328.pdf",
+        "page": 7,
+        "qnum": 29,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 某農業合作社希望建立一套自動化工作流程，當農民透過手機APP 回報田間病蟲 害照片時，系統能自動通知相關專家、建立案件紀錄並排程現場訪查。該合作社 IT 資訊人力有限，僅有一位具備基礎程式概念的人員。下列哪一種開發方式最適 合此需求？ (A)採用傳統程式開發，從零開始撰寫完整系..."
+      }
+    ]
+  },
+  {
+    "pdf_file": "115年第二次初級AI應用規劃師_第一科_人工智慧基礎概論_公告試題_20260604212644.pdf",
+    "total_image_questions": 1,
+    "questions": [
+      {
+        "pdf_file": "115年第二次初級AI應用規劃師_第一科_人工智慧基礎概論_公告試題_20260604212644.pdf",
+        "page": 11,
+        "qnum": 41,
+        "has_keyword": true,
+        "keyword_found": [
+          "下表"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 某資安公司正在評估導入機器學習模型來偵測網路流量中的異常連線行為。技 術團隊在比較各種演算法時，其中一位工程師建議採用支援向量機（SVM）。請 問下列何者最正確敘述支援向量機的特性？ (A)擅長處理大規模非結構化資料，且模型訓練完成後可自動適應新進資料而無 需重新建模； (B)..."
+      }
+    ]
+  },
+  {
+    "pdf_file": "115年第二次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260604212719.pdf",
+    "total_image_questions": 5,
+    "questions": [
+      {
+        "pdf_file": "115年第二次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260604212719.pdf",
+        "page": 2,
+        "qnum": 6,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 某物流公司評估導入No-Code／Low-Code 平台，希望能與現有的ERP 系統、倉 儲管理系統及客戶通知平台進行資料串接。若主要考量系統整合能力，而非介 面美觀度或功能豐富性，下列哪一項平台特性最能滿足此整合需求？ (A)平台是否提供強制將所有應用程式部署於地端伺服器的選..."
+      },
+      {
+        "pdf_file": "115年第二次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260604212719.pdf",
+        "page": 4,
+        "qnum": 13,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 某新創公司正在評估開發方式，產品負責人希望讓非技術背景的業務同仁也能 參與功能原型的快速開發。團隊討論採用Vibe Coding 與Low-Code 兩種方式。 請問下列哪一項對於Vibe Coding 與Low-Code 的敘述最為正確？ (A)兩者本質相同，差異僅在於Vib..."
+      },
+      {
+        "pdf_file": "115年第二次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260604212719.pdf",
+        "page": 4,
+        "qnum": 14,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 某軟體開發公司評估導入Agentic Coding 工具（如Claude Code），並規劃相應的 人工審核機制。請問下列何者最能正確敘述此類工具在開發流程中，所支援的 核心操作能力？ (A)透過介面提供程式碼建議與修改建議，實際套用仍需由開發者手動確認與操 作，無法直接對專案..."
+      },
+      {
+        "pdf_file": "115年第二次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260604212719.pdf",
+        "page": 9,
+        "qnum": 32,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 某市政府交通局委託系統商開發公車到站預測系統，開發團隊想導入AI 程式設 計助手（如GitHub Copilot、Cursor）來加速開發進度。下列關於AI 程式設計助 手的敘述，何者最正確？ (A)AI 程式設計助手可依需求文件自動產生完整系統架構與程式碼，不用再進行 人工調..."
+      },
+      {
+        "pdf_file": "115年第二次初級AI應用規劃師_第二科_生成式AI應用與規劃_公告試題_20260604212719.pdf",
+        "page": 10,
+        "qnum": 38,
+        "has_keyword": true,
+        "keyword_found": [
+          "程式碼"
+        ],
+        "content_images_count": 0,
+        "image_details": [],
+        "stem": " 某使用者在操作ChatGPT 時，要求系統「產生一張簡報架構圖」。模型隨即輸出 一段具有固定語法規則的結構化文字（例如可用來描述流程或架構的標記語 言），並可進一步渲染為圖表，而非僅生成文字描述。請問此能力最主要源自模 型在預訓練階段大量接觸下列哪一類型的資料？ (A)大量不同..."
+      }
+    ]
+  }
+]
