@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPAS AI應用規劃師 初階電腦機考極速衝刺與勝率指南 (CBT Smart Exam Strategy Center)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --primary-blue: #2563eb;
+            --primary-hover: #1d4ed8;
+            --accent-green: #22c55e;
+            --accent-yellow: #eab308;
+            --accent-red: #ef4444;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            padding-bottom: 80px;
+            line-height: 1.6;
+        }
+
+        /* Header Navigation */
+        .hero-banner {
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #0284c7 100%);
+            padding: 3.5rem 0 3rem 0;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+        }
+
+        .hero-badge {
+            background-color: rgba(37, 99, 235, 0.25);
+            border: 1px solid #60a5fa;
+            color: #93c5fd;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            display: inline-block;
+        }
+
+        /* Section Cards */
+        .strategy-card {
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .strategy-card:hover {
+            border-color: #3b82f6;
+        }
+
+        .card-icon-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.25rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+
+        .icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #2563eb;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* SVG Diagram Boxes */
+        .svg-container {
+            background: #090d16;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .svg-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Interactive Calculator Widget */
+        .calc-widget {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border: 2px solid #3b82f6;
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .score-gauge-box {
+            background: #090d16;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-safe { color: var(--accent-green); }
+        .score-warn { color: var(--accent-yellow); }
+        .score-danger { color: var(--accent-red); }
+
+        /* Tables & Badges */
+        .custom-table {
+            color: var(--text-light);
+            border-color: var(--border-color);
+        }
+
+        .custom-table th {
+            background-color: #0f172a;
+            color: #93c5fd;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .custom-table td {
+            background-color: var(--card-dark);
+            vertical-align: middle;
+        }
+
+        .badge-win {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid #22c55e;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .badge-trap {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid #ef4444;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* Quick Navigation Bar */
+        .quick-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
+        }
+
+        .nav-pill-btn {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .nav-pill-btn:hover, .nav-pill-btn.active {
+            color: #ffffff;
+            background-color: #2563eb;
+        }
+
+        .step-num {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: #ffffff;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header Banner -->
+<header class="hero-banner text-center">
+    <div class="container">
+        <span class="hero-badge mb-3">
+            <i class="bi bi-cpu-fill me-1"></i> iPAS AI應用規劃師 · 初階機考專屬
+        </span>
+        <h1 class="display-6 fw-bold text-white mb-2">初階電腦機考極速衝刺與勝率指南</h1>
+        <p class="text-light opacity-75 lead fs-6 mb-0">
+            結合 300 題大數據相依性統計、官方 CBT 上機介面解密與草稿紙即時期望值試算戰術
+        </p>
+    </div>
+</header>
+
+<!-- Quick Navigation Bar -->
+<div class="quick-nav">
+    <div class="container d-flex flex-wrap align-items-center justify-content-center gap-2">
+        <a href="#sec-cbt-gui" class="nav-pill-btn"><i class="bi bi-display me-1"></i>1. 官方CBT機考介面</a>
+        <a href="#sec-scratchpaper" class="nav-pill-btn"><i class="bi bi-pencil-square me-1"></i>2. 草稿紙與期望值計算器</a>
+        <a href="#sec-matrix" class="nav-pill-btn"><i class="bi bi-lightning-charge me-1"></i>3. 三合一勝率解題矩陣</a>
+        <a href="#sec-bigdata" class="nav-pill-btn"><i class="bi bi-bar-chart-line me-1"></i>4. 300題大數據分析</a>
+        <a href="index.html" class="btn btn-sm btn-outline-info ms-auto"><i class="bi bi-arrow-left me-1"></i>返回練習大廳</a>
+    </div>
+</div>
+
+<div class="container mt-4">
+
+    <!-- SECTION 1: CBT Interface & 3-Color Status Guide -->
+    <section id="sec-cbt-gui" class="strategy-card">
+        <div class="card-icon-title">
+            <div class="icon-box"><i class="bi bi-display"></i></div>
+            <span>1. 官方 CBT 電腦機考介面與三色狀態燈號解密</span>
+        </div>
+
+        <p class="text-light opacity-90">
+            根據經濟部產業人才能力鑑定官方最新發布之《電腦測驗操作說明 (115 公告版)》，考試全程採用電腦實機作答。掌握以下官方介面按鈕與三色狀態燈，是執行高效應試的第一步：
+        </p>
+
+        <!-- SVG 1: CBT GUI Mockup & 3-Color Status Lights -->
+        <div class="svg-container">
+            <svg width="100%" height="240" viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Screen Frame -->
+                <rect x="10" y="10" width="780" height="220" rx="10" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+                <!-- Top Nav Bar -->
+                <rect x="10" y="10" width="780" height="40" fill="#0F172A"/>
+                <text x="25" y="35" fill="#93C5FD" font-size="14" font-weight="bold">iPAS AI應用規劃師 [初階] - 測驗時間剩餘: 42分18秒</text>
+                <rect x="680" y="18" width="95" height="24" rx="4" fill="#2563EB"/>
+                <text x="695" y="34" fill="#FFFFFF" font-size="12" font-weight="bold">試題總覽 ☰</text>
+
+                <!-- Left Content Area -->
+                <rect x="25" y="65" width="520" height="150" rx="8" fill="#090D16" stroke="#334155"/>
+                <text x="40" y="90" fill="#F8FAFC" font-size="13" font-weight="bold">Q18. [單選題] 關於 Prompt 工程中 Few-shot 提示技術之敘述，何者正確？</text>
+                <circle cx="50" cy="115" r="7" fill="#2563EB"/>
+                <text x="65" y="119" fill="#E2E8F0" font-size="12">(1) 提供少量範例輸入與輸出以引導模型理解任務</text>
+                <circle cx="50" cy="138" r="7" fill="#334155" stroke="#64748B"/>
+                <text x="65" y="142" fill="#94A3B8" font-size="12">(2) 完全無需任何輸入即可讓模型達到 100% 準確</text>
+                
+                <!-- Action Buttons -->
+                <rect x="40" y="175" width="75" height="26" rx="4" fill="#334155"/>
+                <text x="52" y="192" fill="#E2E8F0" font-size="11">◀ 上一題</text>
+                <rect x="125" y="175" width="75" height="26" rx="4" fill="#334155"/>
+                <text x="137" y="192" fill="#E2E8F0" font-size="11">下一題 ▶</text>
+                <rect x="210" y="175" width="85" height="26" rx="4" fill="#EAB308"/>
+                <text x="220" y="192" fill="#0F172A" font-size="11" font-weight="bold">🚩 試題標記</text>
+                <rect x="305" y="175" width="75" height="26" rx="4" fill="#334155"/>
+                <text x="317" y="192" fill="#94A3B8" font-size="11">不作答清空</text>
+                <rect x="390" y="175" width="75" height="26" rx="4" fill="#0284C7"/>
+                <text x="400" y="192" fill="#FFFFFF" font-size="11">🔍 查看附圖</text>
+
+                <!-- Right Status Panel -->
+                <rect x="560" y="65" width="215" height="150" rx="8" fill="#090D16" stroke="#334155"/>
+                <text x="575" y="85" fill="#93C5FD" font-size="12" font-weight="bold">試題狀態燈號面板 (50題)</text>
+                
+                <!-- Status Grid Mockup -->
+                <rect x="575" y="98" width="24" height="20" rx="3" fill="#22C55E"/><text x="582" y="112" fill="#FFF" font-size="10">1</text>
+                <rect x="605" y="98" width="24" height="20" rx="3" fill="#22C55E"/><text x="612" y="112" fill="#FFF" font-size="10">2</text>
+                <rect x="635" y="98" width="24" height="20" rx="3" fill="#EAB308"/><text x="642" y="112" fill="#000" font-size="10">3</text>
+                <rect x="665" y="98" width="24" height="20" rx="3" fill="#EF4444"/><text x="672" y="112" fill="#FFF" font-size="10">4</text>
+                <rect x="695" y="98" width="24" height="20" rx="3" fill="#22C55E"/><text x="702" y="112" fill="#FFF" font-size="10">5</text>
+
+                <!-- Status Legend -->
+                <circle cx="585" cy="140" r="5" fill="#22C55E"/>
+                <text x="595" y="144" fill="#4ADE80" font-size="11">綠色：已作答</text>
+                <circle cx="585" cy="160" r="5" fill="#EAB308"/>
+                <text x="595" y="164" fill="#FDE047" font-size="11">黃色：有註記標記 (Flag)</text>
+                <circle cx="585" cy="180" r="5" fill="#EF4444"/>
+                <text x="595" y="184" fill="#F87171" font-size="11">紅色：未作答 (交卷前需為0)</text>
+            </svg>
+            <div class="svg-label">圖 1：iPAS 官方 CBT 上機測驗介面與三色狀態燈號示意圖（可由 Banana / ChatGPT 後續優化）</div>
+        </div>
+
+        <div class="row g-3 mt-2">
+            <div class="col-md-4">
+                <div class="p-3 border border-secondary rounded-3 bg-black bg-opacity-25 h-100">
+                    <h6 class="text-success font-weight-bold mb-2"><i class="bi bi-check-circle-fill me-1"></i>🟢 綠色：已作答</h6>
+                    <p class="small text-muted mb-0">代表該題已點選答案。交卷前請確認全數 50 題皆為綠色（絕不留紅白空白）。</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 border border-secondary rounded-3 bg-black bg-opacity-25 h-100">
+                    <h6 class="text-warning font-weight-bold mb-2"><i class="bi bi-flag-fill me-1"></i>🟡 黃色：有註記標記</h6>
+                    <p class="small text-muted mb-0">官方簡章明訂：「標記內容僅供考生參考，不影響評分結果」。中/低信心題放心按 Flag！</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 border border-secondary rounded-3 bg-black bg-opacity-25 h-100">
+                    <h6 class="text-danger font-weight-bold mb-2"><i class="bi bi-exclamation-triangle-fill me-1"></i>🔴 紅色：未作答</h6>
+                    <p class="small text-muted mb-0">第一輪刷題時未點選答案的題目。交卷前點擊「試題總覽」可快速跳轉補齊答案。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-info border-info text-light bg-black bg-opacity-40 mt-3 mb-0 small">
+            <i class="bi bi-info-circle-fill me-1 text-info"></i>
+            <strong>考場疑義申訴須知：</strong>若考試當下發現題目文字有誤或選項爭議，務必在該科考試結束前、且人在試場內舉手向監試人員反映並填寫《疑義考題紀錄單》，離場後概不受理。
+        </div>
+    </section>
+
+    <!-- SECTION 2: Scratchpaper Strategy & Live Expected Score Calculator -->
+    <section id="sec-scratchpaper" class="strategy-card">
+        <div class="card-icon-title">
+            <div class="icon-box"><i class="bi bi-pencil-square"></i></div>
+            <span>2. 草稿紙三分劃記法與【考場即時期望值試算器】</span>
+        </div>
+
+        <p class="text-light opacity-90">
+            考場會發放 1 張空白草稿紙（離場不可帶走）。這張草稿紙是考生消除考場焦慮、估算通過分數與執行「配比卡位猜題」的最佳工具：
+        </p>
+
+        <!-- SVG 2: Scratchpaper 3-Tier Allocation Card -->
+        <div class="svg-container">
+            <svg width="100%" height="220" viewBox="0 0 800 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Scratchpaper background -->
+                <rect x="200" y="10" width="400" height="200" rx="8" fill="#FEF08A" stroke="#CA8A04" stroke-width="2"/>
+                <text x="320" y="35" fill="#854D0E" font-size="15" font-weight="bold">考場草稿紙 (實體劃記法範例)</text>
+                <line x1="220" y1="45" x2="580" y2="45" stroke="#EAB308" stroke-width="1.5"/>
+
+                <!-- Section 1: 3-Tier Count -->
+                <text x="230" y="70" fill="#1E293B" font-size="13" font-weight="bold">【三分信心分類】</text>
+                <text x="230" y="92" fill="#15803D" font-size="12">⭕ 高度有把握 (90%+): 28 題</text>
+                <text x="230" y="112" fill="#A16207" font-size="12">△ 中度猶豫題 (65%): 14 題 (二選一)</text>
+                <text x="230" y="132" fill="#B91C1C" font-size="12">❓ 低度盲猜題 (25%): 8 題</text>
+
+                <!-- Section 2: Option Tally -->
+                <line x1="400" y1="55" x2="400" y2="195" stroke="#CA8A04" stroke-width="1" stroke-dasharray="4 4"/>
+                <text x="415" y="70" fill="#1E293B" font-size="13" font-weight="bold">【高信心答案 (⭕) 統計】</text>
+                <text x="415" y="95" fill="#1E293B" font-size="12">(1)正正 (10題)</text>
+                <text x="415" y="115" fill="#1E293B" font-size="12">(2)正正 (10題)</text>
+                <text x="415" y="135" fill="#B91C1C" font-size="12" font-weight="bold">(3) T (2題) 🔻 嚴重缺口!</text>
+                <text x="415" y="155" fill="#1E293B" font-size="12">(4)正一 (6題)</text>
+
+                <!-- Section 3: Expected Score Formula -->
+                <rect x="220" y="165" width="165" height="30" rx="4" fill="#FEF3C7" stroke="#F59E0B"/>
+                <text x="230" y="185" fill="#92400E" font-size="11" font-weight="bold">預估得分: 28+9.1+2 = 39.1題 (78.2分) ✅</text>
+            </svg>
+            <div class="svg-label">圖 2：草稿紙三分標記、答案正字劃記與期望值推估視覺示意圖（可由 Banana / ChatGPT 後續優化）</div>
+        </div>
+
+        <!-- Interactive Calculator Widget -->
+        <div class="calc-widget">
+            <h5 class="fw-bold text-white mb-3">
+                <i class="bi bi-calculator-fill text-primary me-2"></i>考場即時期望值分數試算器 (Interactive Score Estimator)
+            </h5>
+            <p class="small text-muted mb-3">可在交卷前輸入您在草稿紙上記錄的題數，系統將為您即時計算預估得分與及格安全指標：</p>
+
+            <div class="row g-4 align-items-center">
+                <div class="col-md-7">
+                    <div class="mb-3">
+                        <label class="form-label text-success fw-bold small mb-1">
+                            🟢 ⭕ 高度有把握題數 (極高概率答對 × 1.0)
+                        </label>
+                        <div class="input-group input-group-sm">
+                            <input type="number" id="input-high" class="form-bg form-control bg-dark text-white border-secondary" value="28" min="0" max="50" oninput="app.calculateScore()">
+                            <span class="input-group-text bg-secondary text-white">題</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-warning fw-bold small mb-1">
+                            🟡 △ 中度有把握題數 (已能二選一 × 0.65)
+                        </label>
+                        <div class="input-group input-group-sm">
+                            <input type="number" id="input-med" class="form-bg form-control bg-dark text-white border-secondary" value="14" min="0" max="50" oninput="app.calculateScore()">
+                            <span class="input-group-text bg-secondary text-white">題</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label text-danger fw-bold small mb-1">
+                            🔴 ❓ 低度無思路題數 (盲猜或純卡位 × 0.25)
+                        </label>
+                        <div class="input-group input-group-sm">
+                            <input type="number" id="input-low" class="form-bg form-control bg-dark text-white border-secondary" value="8" min="0" max="50" oninput="app.calculateScore()">
+                            <span class="input-group-text bg-secondary text-white">題</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="score-gauge-box">
+                        <div class="small text-muted fw-bold mb-1">預估總得分 (滿分100)</div>
+                        <div id="score-display" class="score-number score-safe mb-1">78.2</div>
+                        <div id="score-status-badge" class="badge bg-success fs-6 px-3 py-1">
+                            <i class="bi bi-shield-check me-1"></i>高分安全通過
+                        </div>
+                        <div class="small text-muted mt-2 fs-7" id="score-formula-detail">
+                            計算細節: 28 + (14×0.65) + (8×0.25) = 39.1 題
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Strategic Decision Matrix -->
+    <section id="sec-matrix" class="strategy-card">
+        <div class="card-icon-title">
+            <div class="icon-box"><i class="bi bi-lightning-charge"></i></div>
+            <span>3. 三合一勝率解題矩陣 (統計數據實戰套用)</span>
+        </div>
+
+        <p class="text-light opacity-90 mb-4">
+            當第一輪刷題完成後，在第二輪面對中度猶豫 (△) 與低度盲猜 (❓) 題目時，請套用以下三大統計規律組成的 **高勝率解題矩陣**：
+        </p>
+
+        <!-- Strategy Grid Cards -->
+        <div class="row g-4 mb-4">
+            <!-- Strategy 1 -->
+            <div class="col-md-6">
+                <div class="p-3 border border-primary rounded-3 bg-black bg-opacity-30 h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h6 class="text-primary fw-bold mb-0"><i class="bi bi-text-paragraph me-1"></i>策略 A：最長選項黃金定律</h6>
+                        <span class="badge-win">勝率 50.67%</span>
+                    </div>
+                    <p class="small text-muted mb-2">
+                        <strong>統計依據：</strong>初階 300 題中，正確答案為「最長選項」者高達 152 題 (50.67%)，是隨機盲猜 (25%) 的 2 倍以上！前兩長選項涵蓋了 <strong>73.0%</strong> 的答案。
+                    </p>
+                    <div class="small text-info">
+                        <strong>考場實施：</strong>在二選一猶豫時，無腦選擇字數較長者；除非十分有把握，否則絕不選字數最短者（最短選項正確率僅 11%）。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategy 2 -->
+            <div class="col-md-6">
+                <div class="p-3 border border-danger rounded-3 bg-black bg-opacity-30 h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h6 class="text-danger fw-bold mb-0"><i class="bi bi-x-circle me-1"></i>策略 B：死穴關鍵字排除法</h6>
+                        <span class="badge-trap">踩坑率 > 90%</span>
+                    </div>
+                    <p class="small text-muted mb-2">
+                        <strong>統計依據：</strong>出題委員撰寫錯誤選項時，常使用「`以提升...`」、「`以降低...`」、「`使模型...`」等目的誘答模板，或「`完全`」、「`不需要`」等絕對詞。
+                    </p>
+                    <div class="small text-warning">
+                        <strong>考場實施：</strong>選項中看到「完全」(100%錯)、「不需要」(100%錯)、「以提升」(96.3%錯)、「無法」(92.1%錯)，直接劃掉！
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategy 3 -->
+            <div class="col-md-6">
+                <div class="p-3 border border-success rounded-3 bg-black bg-opacity-30 h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h6 class="text-success fw-bold mb-0"><i class="bi bi-check2-circle me-1"></i>策略 C：正向解答詞優先法</h6>
+                        <span class="badge-win">勝率 44%~66%</span>
+                    </div>
+                    <p class="small text-muted mb-2">
+                        <strong>統計依據：</strong>符合 AI 規範治理、工程權衡與主流技術的選項，勝率為隨機的 1.8~2.6 倍。
+                    </p>
+                    <div class="small text-success">
+                        <strong>考場實施：</strong>優先選擇包含「規範」(66.7%)、「權衡」(66.7%)、「公平」(50%)、「平衡」(50%)、「情境」(47%)、「RAG」(44.4%) 的選項。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategy 4 -->
+            <div class="col-md-6">
+                <div class="p-3 border border-warning rounded-3 bg-black bg-opacity-30 h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h6 class="text-warning fw-bold mb-0"><i class="bi bi-bar-chart-steps me-1"></i>策略 D：配比卡位猜題法</h6>
+                        <span class="badge-win">均勻配比卡位</span>
+                    </div>
+                    <p class="small text-muted mb-2">
+                        <strong>統計依據：</strong>官方 50 題試卷中，(1), (2), (3), (4) 各約出現 12~13 題 (24%~26%)，配比極致平衡。
+                    </p>
+                    <div class="small text-warning">
+                        <strong>考場實施：</strong>清點草稿紙上高信心 (⭕) 答案個數，對完全不會的低信心 (❓) 題目，全猜劃記中最少出現的那個字母！
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keyword Interactive Lookup Filter -->
+        <div class="mt-4">
+            <h6 class="fw-bold text-white mb-2"><i class="bi bi-search me-1"></i>關鍵字踩坑/勝率即時查詢器</h6>
+            <input type="text" id="kw-search" class="form-control form-control-sm bg-dark text-white border-secondary mb-3" placeholder="輸入關鍵字 (例如: 完全, 權衡, 以提升, RAG, 無法)..." oninput="app.filterKeywords()">
+            
+            <div class="table-responsive">
+                <table class="table table-dark table-hover table-bordered custom-table small mb-0">
+                    <thead>
+                        <tr>
+                            <th>關鍵字</th>
+                            <th>分類屬性</th>
+                            <th>300題總出現次數</th>
+                            <th>答對勝率 (%)</th>
+                            <th>踩坑/錯誤率 (%)</th>
+                            <th>實戰建議</th>
+                        </tr>
+                    </thead>
+                    <tbody id="kw-table-body">
+                        <!-- JS Dynamic Population -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: 300-Question Big Data Analysis & Charts -->
+    <section id="sec-bigdata" class="strategy-card">
+        <div class="card-icon-title">
+            <div class="icon-box"><i class="bi bi-bar-chart-line"></i></div>
+            <span>4. 初階前 3 梯次 (300題) 大數據統計圖表</span>
+        </div>
+
+        <p class="text-light opacity-90">
+            本指南全量分析初階 3 個梯次（114年第4梯次、115年第1梯次、115年第2梯次，共 300 題 / 1,200 個選項）之數據庫，為您導出客觀且精確的統計圖表：
+        </p>
+
+        <!-- SVG 3: Option Length Distribution Bar Chart -->
+        <div class="svg-container">
+            <svg width="100%" height="220" viewBox="0 0 800 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="800" height="220" fill="#090D16" rx="8"/>
+                <text x="30" y="30" fill="#93C5FD" font-size="14" font-weight="bold">初階 300 題：正確答案在選項字數長度名次中的分布 (名次由長到短)</text>
+                
+                <!-- Y Axis lines -->
+                <line x1="80" y1="170" x2="750" y2="170" stroke="#334155" stroke-width="1"/>
+                <line x1="80" y1="120" x2="750" y2="120" stroke="#334155" stroke-width="1" stroke-dasharray="2 2"/>
+                <line x1="80" y1="70" x2="750" y2="70" stroke="#334155" stroke-width="1" stroke-dasharray="2 2"/>
+
+                <!-- Bars -->
+                <!-- Bar 1: 46.67% (140題) -->
+                <rect x="120" y="55" width="100" height="115" rx="6" fill="#2563EB"/>
+                <text x="145" y="48" fill="#60A5FA" font-size="13" font-weight="bold">46.67%</text>
+                <text x="145" y="85" fill="#FFF" font-size="11">(140題)</text>
+                <text x="135" y="190" fill="#E2E8F0" font-size="12" font-weight="bold">第 1 長 (最長)</text>
+
+                <!-- Bar 2: 26.33% (79題) -->
+                <rect x="280" y="105" width="100" height="65" rx="6" fill="#3B82F6"/>
+                <text x="305" y="98" fill="#93C5FD" font-size="13" font-weight="bold">26.33%</text>
+                <text x="305" y="125" fill="#FFF" font-size="11">(79題)</text>
+                <text x="305" y="190" fill="#E2E8F0" font-size="12" font-weight="bold">第 2 長</text>
+
+                <!-- Bar 3: 16.00% (48題) -->
+                <rect x="440" y="130" width="100" height="40" rx="6" fill="#64748B"/>
+                <text x="465" y="123" fill="#CBD5E1" font-size="13" font-weight="bold">16.00%</text>
+                <text x="465" y="150" fill="#FFF" font-size="11">(48題)</text>
+                <text x="465" y="190" fill="#E2E8F0" font-size="12" font-weight="bold">第 3 長</text>
+
+                <!-- Bar 4: 11.00% (33題) -->
+                <rect x="600" y="143" width="100" height="27" rx="6" fill="#EF4444"/>
+                <text x="625" y="136" fill="#F87171" font-size="13" font-weight="bold">11.00%</text>
+                <text x="625" y="160" fill="#FFF" font-size="10">(33題)</text>
+                <text x="615" y="190" fill="#E2E8F0" font-size="12" font-weight="bold">第 4 長 (最短)</text>
+
+                <!-- Highlight Box -->
+                <rect x="105" y="15" width="290" height="30" rx="4" fill="#22C55E" fill-opacity="0.15" stroke="#22C55E"/>
+                <text x="115" y="35" fill="#4ADE80" font-size="12" font-weight="bold">🎯 前 2 長選項合計涵蓋 73.00% 的正確答案！</text>
+            </svg>
+            <div class="svg-label">圖 3：正確答案在選項字數長度排序中的名次分布直方圖（可由 Banana / ChatGPT 後續優化）</div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="p-3 border border-secondary rounded-3 bg-black bg-opacity-25">
+                    <h6 class="text-info fw-bold mb-2">📊 科目微幅偏好</h6>
+                    <ul class="small text-muted mb-0 ps-3">
+                        <li class="mb-1"><strong>A1 (人工智慧基礎概論)</strong>：選項 <strong>(3)</strong> 機率稍高 (28.00%)。</li>
+                        <li><strong>A2 (生成式AI應用與規劃)</strong>：選項 <strong>(2)</strong> 機率稍高 (26.67%)，且 A2 盲猜最長選項勝率高達 <strong>52.00%</strong>。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border border-secondary rounded-3 bg-black bg-opacity-25">
+                    <h6 class="text-info fw-bold mb-2">⚖️ 官方答案均勻配比</h6>
+                    <ul class="small text-muted mb-0 ps-3">
+                        <li class="mb-1"><strong>選項 (1)</strong>: 72 題 (24.00%)</li>
+                        <li class="mb-1"><strong>選項 (2)</strong>: 76 題 (25.33%)</li>
+                        <li class="mb-1"><strong>選項 (3)</strong>: 78 題 (26.00%)</li>
+                        <li><strong>選項 (4)</strong>: 74 題 (24.67%)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+const app = {
+    keywordsData: [
+        { kw: "完全", cat: "誘答陷阱", total: 15, win: 0, trap: 100.0, advice: "💀 100% 死穴 Trap，看到直接劃掉排除！" },
+        { kw: "不需要", cat: "誘答陷阱", total: 5, win: 0, trap: 100.0, advice: "💀 100% 死穴 Trap，看到直接劃掉排除！" },
+        { kw: "以提升", cat: "誘答陷阱", total: 27, win: 3.7, trap: 96.3, advice: "🔴 出題者誘答模板，96.3% 均為錯誤干擾項！" },
+        { kw: "使模型", cat: "誘答陷阱", total: 16, win: 6.25, trap: 93.8, advice: "🔴 出題者誘答模板，93.8% 均為錯誤干擾項！" },
+        { kw: "無法", cat: "誘答陷阱", total: 38, win: 7.89, trap: 92.1, advice: "🔴 92.1% 均為錯誤選項，極高機率踩坑！" },
+        { kw: "以降低", cat: "誘答陷阱", total: 23, win: 8.7, trap: 91.3, advice: "🔴 91.3% 均為錯誤選項，優先排除！" },
+        { kw: "以避免", cat: "誘答陷阱", total: 11, win: 18.2, trap: 81.8, advice: "🔴 81.8% 為錯誤選項，謹慎評估。" },
+        { kw: "規範", cat: "正向解答", total: 6, win: 66.7, trap: 33.3, advice: "🟢 勝率達 66.7% (2.67倍)，優先考慮選取！" },
+        { kw: "權衡", cat: "正向解答", total: 3, win: 66.7, trap: 33.3, advice: "🟢 勝率達 66.7% (2.67倍)，符合 AI 工程思維！" },
+        { kw: "公平", cat: "正向解答", total: 6, win: 50.0, trap: 50.0, advice: "🟢 勝率 50.0% (2.0倍)，符合 AI 倫理治理！" },
+        { kw: "平衡", cat: "正向解答", total: 6, win: 50.0, trap: 50.0, advice: "🟢 勝率 50.0% (2.0倍)，高機率為正確解答！" },
+        { kw: "情境", cat: "正向解答", total: 17, win: 47.1, trap: 52.9, advice: "🟢 勝率 47.1% (1.88倍)，因地制宜高勝率詞！" },
+        { kw: "RAG", cat: "技術主流", total: 18, win: 44.4, trap: 55.6, advice: "🟢 勝率 44.4% (1.78倍)，生成式 AI 當紅主流！" }
+    ],
+
+    init: function() {
+        this.renderKeywordsTable(this.keywordsData);
+        this.calculateScore();
+    },
+
+    calculateScore: function() {
+        const high = parseFloat(document.getElementById('input-high').value) || 0;
+        const med = parseFloat(document.getElementById('input-med').value) || 0;
+        const low = parseFloat(document.getElementById('input-low').value) || 0;
+
+        const score = (high * 1.0) + (med * 0.65) + (low * 0.25);
+        const scorePct = (score / 50 * 100).toFixed(1);
+
+        const scoreDisp = document.getElementById('score-display');
+        const badge = document.getElementById('score-status-badge');
+        const detail = document.getElementById('score-formula-detail');
+
+        scoreDisp.textContent = scorePct;
+
+        if (scorePct >= 70.0) {
+            scoreDisp.className = "score-number score-safe mb-1";
+            badge.className = "badge bg-success fs-6 px-3 py-1";
+            badge.innerHTML = `<i class="bi bi-shield-check me-1"></i>高分安全通過 (≥70分)`;
+        } else if (scorePct >= 60.0) {
+            scoreDisp.className = "score-number score-warn mb-1";
+            badge.className = "badge bg-warning text-dark fs-6 px-3 py-1";
+            badge.innerHTML = `<i class="bi bi-exclamation-triangle me-1"></i>壓線邊緣 (60~69分)`;
+        } else {
+            scoreDisp.className = "score-number score-danger mb-1";
+            badge.className = "badge bg-danger fs-6 px-3 py-1";
+            badge.innerHTML = `<i class="bi bi-x-circle me-1"></i>有不及格風險 (<60分)`;
+        }
+
+        detail.innerHTML = `計算細節: ${high} + (${med}×0.65) + (${low}×0.25) = ${score.toFixed(1)} 題 (相當於 ${scorePct} 分)`;
+    },
+
+    renderKeywordsTable: function(data) {
+        const tbody = document.getElementById('kw-table-body');
+        if (!tbody) return;
+
+        let html = '';
+        data.forEach(item => {
+            const isWin = item.win >= 40.0;
+            const badgeClass = isWin ? 'badge-win' : 'badge-trap';
+            
+            html += `
+                <tr>
+                    <td class="fw-bold text-white">${item.kw}</td>
+                    <td><span class="${badgeClass}">${item.cat}</span></td>
+                    <td>${item.total} 次</td>
+                    <td class="fw-bold ${isWin ? 'text-success' : 'text-danger'}">${item.win.toFixed(1)}%</td>
+                    <td class="fw-bold ${item.trap >= 80.0 ? 'text-danger' : 'text-muted'}">${item.trap.toFixed(1)}%</td>
+                    <td>${item.advice}</td>
+                </tr>
+            `;
+        });
+
+        tbody.innerHTML = html;
+    },
+
+    filterKeywords: function() {
+        const q = (document.getElementById('kw-search').value || '').trim().toLowerCase();
+        if (!q) {
+            this.renderKeywordsTable(this.keywordsData);
+            return;
+        }
+
+        const filtered = this.keywordsData.filter(item => 
+            item.kw.toLowerCase().includes(q) || 
+            item.cat.toLowerCase().includes(q) ||
+            item.advice.toLowerCase().includes(q)
+        );
+
+        this.renderKeywordsTable(filtered);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    app.init();
+});
+</script>
+
+</body>
+</html>
