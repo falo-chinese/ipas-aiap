@@ -260,6 +260,25 @@
             根據經濟部產業人才能力鑑定官方最新發布之《電腦測驗操作說明 (115 公告版)》，考試全程採用電腦實機作答。掌握以下官方介面按鈕與三色狀態燈，是執行高效應試的第一步：
         </p>
 
+        
+        <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between p-3 border border-info rounded-3 bg-black bg-opacity-40 mb-3">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-file-earmark-pdf-fill text-danger fs-3"></i>
+                <div>
+                    <div class="fw-bold text-white">官方《電腦測驗操作說明 (115 公告版)》原檔 PDF</div>
+                    <div class="small text-muted">包含登入、作答、試題標記、查看附圖與結束測驗全流程官方簡報</div>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="official_cbt_instruction_115.pdf" target="_blank" class="btn btn-sm btn-info text-dark font-weight-bold">
+                    <i class="bi bi-eye-fill me-1"></i>線上瀏覽 PDF
+                </a>
+                <a href="official_cbt_instruction_115.pdf" download class="btn btn-sm btn-outline-info">
+                    <i class="bi bi-download me-1"></i>下載原檔 (1.76MB)
+                </a>
+            </div>
+        </div>
+
         <!-- SVG 1: CBT GUI Mockup & 3-Color Status Lights -->
         <div class="svg-container">
             <svg width="100%" height="240" viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -351,33 +370,72 @@
             考場會發放 1 張空白草稿紙（離場不可帶走）。這張草稿紙是考生消除考場焦慮、估算通過分數與執行「配比卡位猜題」的最佳工具：
         </p>
 
-        <!-- SVG 2: Scratchpaper 3-Tier Allocation Card -->
+        
+        <!-- SVG 2: Scratchpaper 4-Option x 3-Tier Realistic Allocation System -->
         <div class="svg-container">
-            <svg width="100%" height="220" viewBox="0 0 800 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Scratchpaper background -->
-                <rect x="200" y="10" width="400" height="200" rx="8" fill="#FEF08A" stroke="#CA8A04" stroke-width="2"/>
-                <text x="320" y="35" fill="#854D0E" font-size="15" font-weight="bold">考場草稿紙 (實體劃記法範例)</text>
-                <line x1="220" y1="45" x2="580" y2="45" stroke="#EAB308" stroke-width="1.5"/>
+            <svg width="100%" height="340" viewBox="0 0 800 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Background Paper -->
+                <rect x="10" y="10" width="780" height="320" rx="12" fill="#FEF08A" stroke="#CA8A04" stroke-width="2"/>
+                
+                <!-- Title Header -->
+                <rect x="10" y="10" width="780" height="40" fill="#FEF3C7" rx="12"/>
+                <text x="260" y="36" fill="#854D0E" font-size="16" font-weight="bold">考場草稿紙 (實務 4 選項 × 3 分類最佳劃記法範例)</text>
+                <line x1="10" y1="50" x2="790" y2="50" stroke="#F59E0B" stroke-width="1.5"/>
 
-                <!-- Section 1: 3-Tier Count -->
-                <text x="230" y="70" fill="#1E293B" font-size="13" font-weight="bold">【三分信心分類】</text>
-                <text x="230" y="92" fill="#15803D" font-size="12">⭕ 高度有把握 (90%+): 28 題</text>
-                <text x="230" y="112" fill="#A16207" font-size="12">△ 中度猶豫題 (65%): 14 題 (二選一)</text>
-                <text x="230" y="132" fill="#B91C1C" font-size="12">❓ 低度盲猜題 (25%): 8 題</text>
+                <!-- LEFT COLUMN: 3 Confidence Tiers Definition & Step 1 -->
+                <rect x="25" y="65" width="235" height="250" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5"/>
+                <text x="35" y="88" fill="#92400E" font-size="13" font-weight="bold">【三大分類標記標籤】</text>
+                
+                <rect x="35" y="100" width="215" height="55" rx="6" fill="#DCFCE7" stroke="#86EFAC"/>
+                <text x="45" y="120" fill="#166534" font-size="12" font-weight="bold">🟢 ⭕ 高信心 (90%~100%確定)</text>
+                <text x="45" y="142" fill="#15803D" font-size="11">➜ 答案劃記至右側 (1)(2)(3)(4) 正字框</text>
 
-                <!-- Section 2: Option Tally -->
-                <line x1="400" y1="55" x2="400" y2="195" stroke="#CA8A04" stroke-width="1" stroke-dasharray="4 4"/>
-                <text x="415" y="70" fill="#1E293B" font-size="13" font-weight="bold">【高信心答案 (⭕) 統計】</text>
-                <text x="415" y="95" fill="#1E293B" font-size="12">(1)正正 (10題)</text>
-                <text x="415" y="115" fill="#1E293B" font-size="12">(2)正正 (10題)</text>
-                <text x="415" y="135" fill="#B91C1C" font-size="12" font-weight="bold">(3) T (2題) 🔻 嚴重缺口!</text>
-                <text x="415" y="155" fill="#1E293B" font-size="12">(4)正一 (6題)</text>
+                <rect x="35" y="165" width="215" height="55" rx="6" fill="#FEF9C3" stroke="#FDE047"/>
+                <text x="45" y="185" fill="#854D0E" font-size="12" font-weight="bold">🟡 △ 中信心 (已二選一猶豫)</text>
+                <text x="45" y="207" fill="#A16207" font-size="11">➜ 螢幕按 Flag 標記，第2輪套最長選項</text>
 
-                <!-- Section 3: Expected Score Formula -->
-                <rect x="220" y="165" width="165" height="30" rx="4" fill="#FEF3C7" stroke="#F59E0B"/>
-                <text x="230" y="185" fill="#92400E" font-size="11" font-weight="bold">預估得分: 28+9.1+2 = 39.1題 (78.2分) ✅</text>
+                <rect x="35" y="230" width="215" height="55" rx="6" fill="#FEE2E2" stroke="#FCA5A5"/>
+                <text x="45" y="250" fill="#991B1B" font-size="12" font-weight="bold">🔴 ❓ 低信心 (完全無思路盲猜)</text>
+                <text x="45" y="272" fill="#B91C1C" font-size="11">➜ 螢幕按 Flag 標記，第2輪套卡位法</text>
+
+                <!-- MIDDLE COLUMN: 4 Option (1/2/3/4) Tally Box -->
+                <rect x="275" y="65" width="245" height="250" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5"/>
+                <text x="285" y="88" fill="#92400E" font-size="13" font-weight="bold">【四選項正字劃記框 (⭕高信心計數)】</text>
+
+                <rect x="285" y="100" width="225" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="295" y="125" fill="#1E293B" font-size="13" font-weight="bold">選項 (1) / A : 正正一 (11題)</text>
+
+                <rect x="285" y="150" width="225" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="295" y="175" fill="#1E293B" font-size="13" font-weight="bold">選項 (2) / B : 正正 (10題)</text>
+
+                <rect x="285" y="200" width="225" height="42" rx="6" fill="#FEE2E2" stroke="#EF4444" stroke-width="2"/>
+                <text x="295" y="225" fill="#B91C1C" font-size="13" font-weight="bold">選項 (3) / C : T (2題) 🔻 缺口 9題!</text>
+
+                <rect x="285" y="250" width="225" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="295" y="275" fill="#1E293B" font-size="13" font-weight="bold">選項 (4) / D : 正一 (6題)</text>
+
+                <!-- RIGHT COLUMN: Real-Time Score & Guess Strategy Execution -->
+                <rect x="535" y="65" width="240" height="250" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5"/>
+                <text x="545" y="88" fill="#92400E" font-size="13" font-weight="bold">【考場實務執行與計算】</text>
+
+                <text x="545" y="112" fill="#1E293B" font-size="11" font-weight="bold">1. 50 題題數分配紀錄：</text>
+                <text x="555" y="130" fill="#166534" font-size="11">🟢 ⭕ 高信心: 29 題 (劃記完成)</text>
+                <text x="555" y="148" fill="#A16207" font-size="11">🟡 △ 中信心: 13 題 (二選一)</text>
+                <text x="555" y="166" fill="#B91C1C" font-size="11">🔴 ❓ 低信心: 8 題 (盲猜)</text>
+
+                <line x1="545" y1="178" x2="765" y2="178" stroke="#F59E0B" stroke-width="1"/>
+
+                <text x="545" y="195" fill="#1E293B" font-size="11" font-weight="bold">2. 即時期望值分數算式：</text>
+                <text x="555" y="215" fill="#1E293B" font-size="12" font-weight="bold">29 + (13×0.65) + (8×0.25)</text>
+                <text x="555" y="235" fill="#15803D" font-size="13" font-weight="bold">= 39.4 題 ➜ 78.8 分 ✅ (安全!)</text>
+
+                <rect x="545" y="248" width="220" height="55" rx="6" fill="#FEF3C7" stroke="#F59E0B"/>
+                <text x="553" y="268" fill="#92400E" font-size="11" font-weight="bold">🎯 低信心 8 題卡位執行：</text>
+                <text x="553" y="288" fill="#B91C1C" font-size="11" font-weight="bold">全數盲猜最欠缺之 (3) 選項！</text>
             </svg>
-            <div class="svg-label">圖 2：草稿紙三分標記、答案正字劃記與期望值推估視覺示意圖（可由 Banana / ChatGPT 後續優化）</div>
+            <div class="svg-label">圖 2：實務版草稿紙「4 選項 (1/2/3/4) × 3 分類 (高/中/低) 與期望值公式」完整結構圖（可由 Banana / ChatGPT 後續優化）</div>
+        </div>
+
         </div>
 
         <!-- Interactive Calculator Widget -->
