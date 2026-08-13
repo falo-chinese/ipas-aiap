@@ -205,6 +205,64 @@
             background-color: rgba(9, 13, 22, 0.9) !important;
         }
 
+    
+        /* Bulletproof Vanilla JS Modal Styling */
+        .custom-modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 99999;
+            overflow-y: auto;
+            padding: 1.5rem 1rem;
+        }
+        .custom-modal-backdrop.active {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-modal-card {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+        .custom-modal-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .custom-modal-body {
+            padding: 1.25rem;
+            overflow-y: auto;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+            word-break: break-word;
+            background: #090d16;
+        }
+        .custom-modal-footer {
+            padding: 0.85rem 1.25rem;
+            border-top: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            background: #0f172a;
+        }
+
     </style>
 </head>
 <body>
@@ -296,7 +354,7 @@
                     <h6 class="fw-bold text-warning mb-0" style="font-size:0.95rem;">Claude Fable 5.0 獨立審核報告</h6>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-sm btn-warning text-dark font-weight-bold py-1 px-3" data-bs-toggle="modal" data-bs-target="#modal-claude" style="font-size:0.78rem;">
+                    <button class="btn btn-sm btn-warning text-dark font-weight-bold py-1 px-3" onclick="openCustomModal('modal-claude')" style="font-size:0.78rem;">
                         <i class="bi bi-book-half me-1"></i>閱讀 Claude 完整回覆
                     </button>
                     <a href="Claude_Fable5_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-warning text-nowrap py-1 px-2" style="font-size:0.78rem;">
@@ -321,7 +379,7 @@
                     <h6 class="fw-bold text-success mb-0" style="font-size:0.95rem;">ChatGPT 5.6 Sol 獨立審核報告</h6>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-sm btn-success text-dark font-weight-bold py-1 px-3" data-bs-toggle="modal" data-bs-target="#modal-chatgpt" style="font-size:0.78rem;">
+                    <button class="btn btn-sm btn-success text-dark font-weight-bold py-1 px-3" onclick="openCustomModal('modal-chatgpt')" style="font-size:0.78rem;">
                         <i class="bi bi-book-half me-1"></i>閱讀 ChatGPT 完整回覆
                     </button>
                     <a href="ChatGPT_5.6_Sol_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-success text-nowrap py-1 px-2" style="font-size:0.78rem;">
@@ -340,16 +398,17 @@
     </section>
 
     <!-- Modal for Claude Full Report -->
-    <div class="modal fade" id="modal-claude" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-            <div class="modal-content bg-dark text-white border-warning">
-                <div class="modal-header border-secondary">
-                    <h6 class="modal-title font-weight-bold text-warning">
-                        <i class="bi bi-robot me-1"></i>Claude Fable 5.0 獨立審核與驗算原始回覆 (全量無刪減)
-                    </h6>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body raw-review-box" style="background:#090d16; font-size:0.82rem; line-height:1.7;">我把 tips/index.html 全文讀完，並且直接用你同資料夾裡的 600 題 Master 題庫 CSV 把頁面上的統計全部重算了一遍。以下是我的審核觀點。
+    
+    <!-- Custom Modal for Claude Full Report -->
+    <div class="custom-modal-backdrop" id="modal-claude">
+        <div class="custom-modal-card" style="border-color:#f59e0b;">
+            <div class="custom-modal-header">
+                <h6 class="fw-bold text-warning mb-0" style="font-size:0.95rem;">
+                    <i class="bi bi-robot me-1"></i>Claude Fable 5.0 獨立審核與驗算原始回覆 (全量無刪減)
+                </h6>
+                <button type="button" class="btn-close btn-close-white" onclick="closeCustomModal('modal-claude')"></button>
+            </div>
+            <div class="custom-modal-body">我把 tips/index.html 全文讀完，並且直接用你同資料夾裡的 600 題 Master 題庫 CSV 把頁面上的統計全部重算了一遍。以下是我的審核觀點。
 
 先說好消息：大部分數據是真的、可重現的
 我用 A1+A2 共 300 題實際驗算，這些全部吻合：關鍵字表 13 個詞（完全 15次/0勝、無法 38次/92.1%踩坑、以提升 27次/96.3%、RAG 18次/44.4%⋯）逐一命中；A1/A2 死穴詞拆分（完全 5/5 與 10/10、以提升 15/16 與 11/11、無法 14/16 與 21/22）也完全正確；「最長選項 152 題 (50.67%)」正確；四選項答案配比大致平衡也屬實。這比市面上多數「猜題攻略」扎實得多，值得肯定。
@@ -375,27 +434,25 @@
 
 【其他觀察】
 內容定位上，CBT 介面與三色燈解說、先導向官方資源的做法都很好；但整頁以「猜題」為敘事主軸，對教學品牌是兩面刃，建議加一句「策略為輔、實力為本」之類的定位聲明。技術面上，建議讓所有數字由單一 JS 資料物件驅動。題庫下載區建議註明「試題來源為 iPAS 官方公告、僅供教學使用」以降低著作權疑慮。</div>
-                <div class="modal-footer border-secondary">
-                    <a href="Claude_Fable5_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-warning text-nowrap">
-                        <i class="bi bi-download me-1"></i>下載 Claude 獨立 TXT 檔
-                    </a>
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">關閉</button>
-                </div>
+            <div class="custom-modal-footer">
+                <a href="Claude_Fable5_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-warning text-nowrap">
+                    <i class="bi bi-download me-1"></i>下載 Claude 獨立 TXT
+                </a>
+                <button type="button" class="btn btn-sm btn-secondary" onclick="closeCustomModal('modal-claude')">關閉</button>
             </div>
         </div>
     </div>
 
-    <!-- Modal for ChatGPT Full Report -->
-    <div class="modal fade" id="modal-chatgpt" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-            <div class="modal-content bg-dark text-white border-success">
-                <div class="modal-header border-secondary">
-                    <h6 class="modal-title font-weight-bold text-success">
-                        <i class="bi bi-robot me-1"></i>ChatGPT 5.6 Sol 獨立審核與評估原始回覆 (全量無刪減)
-                    </h6>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body raw-review-box" style="background:#090d16; font-size:0.82rem; line-height:1.7;">總評：這份補帖有實戰吸引力，但目前「統計觀察」被寫成了「可保證的解題規則」。我的評價是：
+    <!-- Custom Modal for ChatGPT Full Report -->
+    <div class="custom-modal-backdrop" id="modal-chatgpt">
+        <div class="custom-modal-card" style="border-color:#10b981;">
+            <div class="custom-modal-header">
+                <h6 class="fw-bold text-success mb-0" style="font-size:0.95rem;">
+                    <i class="bi bi-robot me-1"></i>ChatGPT 5.6 Sol 獨立審核與評估原始回覆 (全量無刪減)
+                </h6>
+                <button type="button" class="btn-close btn-close-white" onclick="closeCustomModal('modal-chatgpt')"></button>
+            </div>
+            <div class="custom-modal-body">總評：這份補帖有實戰吸引力，但目前「統計觀察」被寫成了「可保證的解題規則」。我的評價是：
 實用性：7/10 ｜ 資料基礎：7/10 ｜ 統計嚴謹度：4/10
 發布建議：重大修訂後再強推
 
@@ -419,12 +476,11 @@
 2. 關鍵字、選項長度：猶豫時的次要線索。
 3. 答案配比：完全無法判斷時的最後弱參考。
 最後，建議立即替換「大數據、證明、100%、勝率、安全通過、無腦、絕不」等過度承諾詞。資料中的傾向很有意思，但最需要做的是把「有趣且可重現的歷史相關性」，誠實地留在它應有的位置，不要包裝成已驗證的未來命中率。</div>
-                <div class="modal-footer border-secondary">
-                    <a href="ChatGPT_5.6_Sol_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-success text-nowrap">
-                        <i class="bi bi-download me-1"></i>下載 ChatGPT 獨立 TXT 檔
-                    </a>
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">關閉</button>
-                </div>
+            <div class="custom-modal-footer">
+                <a href="ChatGPT_5.6_Sol_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-success text-nowrap">
+                    <i class="bi bi-download me-1"></i>下載 ChatGPT 獨立 TXT
+                </a>
+                <button type="button" class="btn btn-sm btn-secondary" onclick="closeCustomModal('modal-chatgpt')">關閉</button>
             </div>
         </div>
     </div>
@@ -491,5 +547,30 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/bootstrap.bundle.min.js"></script>
+
+    <script>
+    function openCustomModal(modalId) {
+        var el = document.getElementById(modalId);
+        if (el) {
+            el.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    function closeCustomModal(modalId) {
+        var el = document.getElementById(modalId);
+        if (el) {
+            el.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    // Close modal when clicking outside content box
+    window.addEventListener('click', function(e) {
+        if (e.target.classList.contains('custom-modal-backdrop')) {
+            e.target.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+    </script>
+
 </body>
 </html>
