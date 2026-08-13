@@ -371,69 +371,121 @@
         </p>
 
         
-        <!-- SVG 2: Scratchpaper 4-Option x 3-Tier Realistic Allocation System -->
+        
+        <!-- SVG 2: Scratchpaper 3-Interval x 4-Option Matrix with Row Totals -->
         <div class="svg-container">
-            <svg width="100%" height="340" viewBox="0 0 800 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="100%" height="360" viewBox="0 0 800 360" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Outer Background Paper -->
-                <rect x="10" y="10" width="780" height="320" rx="12" fill="#FEF08A" stroke="#CA8A04" stroke-width="2"/>
+                <rect x="10" y="10" width="780" height="340" rx="12" fill="#FEF08A" stroke="#CA8A04" stroke-width="2"/>
                 
                 <!-- Title Header -->
                 <rect x="10" y="10" width="780" height="40" fill="#FEF3C7" rx="12"/>
-                <text x="260" y="36" fill="#854D0E" font-size="16" font-weight="bold">考場草稿紙 (實務 4 選項 × 3 分類最佳劃記法範例)</text>
+                <text x="220" y="36" fill="#854D0E" font-size="16" font-weight="bold">考場草稿紙 (實務 3 區間 × 4 選項正字與【選項總數】雙向矩陣)</text>
                 <line x1="10" y1="50" x2="790" y2="50" stroke="#F59E0B" stroke-width="1.5"/>
 
-                <!-- LEFT COLUMN: 3 Confidence Tiers Definition & Step 1 -->
-                <rect x="25" y="65" width="235" height="250" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5"/>
-                <text x="35" y="88" fill="#92400E" font-size="13" font-weight="bold">【三大分類標記標籤】</text>
+                <!-- Grid Column Headers -->
+                <rect x="25" y="60" width="160" height="32" rx="4" fill="#0F172A"/>
+                <text x="55" y="81" fill="#93C5FD" font-size="12" font-weight="bold">選項字母 / 標號</text>
+
+                <rect x="195" y="60" width="170" height="32" rx="4" fill="#166534"/>
+                <text x="210" y="81" fill="#DCFCE7" font-size="12" font-weight="bold">🟢 ⭕【區間1】高信心 (90%+)</text>
+
+                <rect x="375" y="60" width="170" height="32" rx="4" fill="#854D0E"/>
+                <text x="390" y="81" fill="#FEF9C3" font-size="12" font-weight="bold">🟡 △【區間2】中信心 (二選一)</text>
+
+                <rect x="555" y="60" width="100" height="32" rx="4" fill="#991B1B"/>
+                <text x="563" y="81" fill="#FEE2E2" font-size="12" font-weight="bold">🔴 ❓【區間3】盲猜</text>
+
+                <rect x="665" y="60" width="110" height="32" rx="4" fill="#CA8A04"/>
+                <text x="672" y="81" fill="#FFF" font-size="12" font-weight="bold">👉【選項總數】</text>
+
+                <!-- Grid Row 1: Option (1)/A -->
+                <rect x="25" y="100" width="160" height="36" rx="4" fill="#FFFBEB" stroke="#CBD5E1"/>
+                <text x="35" y="123" fill="#1E293B" font-size="12" font-weight="bold">選項 (1) / A</text>
                 
-                <rect x="35" y="100" width="215" height="55" rx="6" fill="#DCFCE7" stroke="#86EFAC"/>
-                <text x="45" y="120" fill="#166534" font-size="12" font-weight="bold">🟢 ⭕ 高信心 (90%~100%確定)</text>
-                <text x="45" y="142" fill="#15803D" font-size="11">➜ 答案劃記至右側 (1)(2)(3)(4) 正字框</text>
+                <rect x="195" y="100" width="170" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="210" y="123" fill="#1E293B" font-size="12">正 正 一 (11題)</text>
 
-                <rect x="35" y="165" width="215" height="55" rx="6" fill="#FEF9C3" stroke="#FDE047"/>
-                <text x="45" y="185" fill="#854D0E" font-size="12" font-weight="bold">🟡 △ 中信心 (已二選一猶豫)</text>
-                <text x="45" y="207" fill="#A16207" font-size="11">➜ 螢幕按 Flag 標記，第2輪套最長選項</text>
+                <rect x="375" y="100" width="170" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="390" y="123" fill="#1E293B" font-size="12">正 一 (6題)</text>
 
-                <rect x="35" y="230" width="215" height="55" rx="6" fill="#FEE2E2" stroke="#FCA5A5"/>
-                <text x="45" y="250" fill="#991B1B" font-size="12" font-weight="bold">🔴 ❓ 低信心 (完全無思路盲猜)</text>
-                <text x="45" y="272" fill="#B91C1C" font-size="11">➜ 螢幕按 Flag 標記，第2輪套卡位法</text>
+                <rect x="555" y="100" width="100" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="580" y="123" fill="#1E293B" font-size="12">一 (1題)</text>
 
-                <!-- MIDDLE COLUMN: 4 Option (1/2/3/4) Tally Box -->
-                <rect x="275" y="65" width="245" height="250" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5"/>
-                <text x="285" y="88" fill="#92400E" font-size="13" font-weight="bold">【四選項正字劃記框 (⭕高信心計數)】</text>
+                <rect x="665" y="100" width="110" height="36" rx="4" fill="#FEF3C7" stroke="#F59E0B"/>
+                <text x="690" y="123" fill="#1E293B" font-size="13" font-weight="bold">18 題</text>
 
-                <rect x="285" y="100" width="225" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
-                <text x="295" y="125" fill="#1E293B" font-size="13" font-weight="bold">選項 (1) / A : 正正一 (11題)</text>
+                <!-- Grid Row 2: Option (2)/B -->
+                <rect x="25" y="145" width="160" height="36" rx="4" fill="#FFFBEB" stroke="#CBD5E1"/>
+                <text x="35" y="168" fill="#1E293B" font-size="12" font-weight="bold">選項 (2) / B</text>
+                
+                <rect x="195" y="145" width="170" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="210" y="168" fill="#1E293B" font-size="12">正 正 (10題)</text>
 
-                <rect x="285" y="150" width="225" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
-                <text x="295" y="175" fill="#1E293B" font-size="13" font-weight="bold">選項 (2) / B : 正正 (10題)</text>
+                <rect x="375" y="145" width="170" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="390" y="168" fill="#1E293B" font-size="12">正 (5題)</text>
 
-                <rect x="285" y="200" width="225" height="42" rx="6" fill="#FEE2E2" stroke="#EF4444" stroke-width="2"/>
-                <text x="295" y="225" fill="#B91C1C" font-size="13" font-weight="bold">選項 (3) / C : T (2題) 🔻 缺口 9題!</text>
+                <rect x="555" y="145" width="100" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="580" y="168" fill="#1E293B" font-size="12">一 (1題)</text>
 
-                <rect x="285" y="250" width="225" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
-                <text x="295" y="275" fill="#1E293B" font-size="13" font-weight="bold">選項 (4) / D : 正一 (6題)</text>
+                <rect x="665" y="145" width="110" height="36" rx="4" fill="#FEF3C7" stroke="#F59E0B"/>
+                <text x="690" y="168" fill="#1E293B" font-size="13" font-weight="bold">16 題</text>
 
-                <!-- RIGHT COLUMN: Real-Time Score & Guess Strategy Execution -->
-                <rect x="535" y="65" width="240" height="250" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5"/>
-                <text x="545" y="88" fill="#92400E" font-size="13" font-weight="bold">【考場實務執行與計算】</text>
+                <!-- Grid Row 3: Option (3)/C - Highlight Gap -->
+                <rect x="25" y="190" width="160" height="36" rx="4" fill="#FEE2E2" stroke="#EF4444"/>
+                <text x="35" y="213" fill="#B91C1C" font-size="12" font-weight="bold">選項 (3) / C 🔻</text>
+                
+                <rect x="195" y="190" width="170" height="36" rx="4" fill="#FEE2E2" stroke="#EF4444"/>
+                <text x="210" y="213" fill="#B91C1C" font-size="12" font-weight="bold">T (2題) 🔻嚴重缺口!</text>
 
-                <text x="545" y="112" fill="#1E293B" font-size="11" font-weight="bold">1. 50 題題數分配紀錄：</text>
-                <text x="555" y="130" fill="#166534" font-size="11">🟢 ⭕ 高信心: 29 題 (劃記完成)</text>
-                <text x="555" y="148" fill="#A16207" font-size="11">🟡 △ 中信心: 13 題 (二選一)</text>
-                <text x="555" y="166" fill="#B91C1C" font-size="11">🔴 ❓ 低信心: 8 題 (盲猜)</text>
+                <rect x="375" y="190" width="170" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="390" y="213" fill="#1E293B" font-size="12">一 (1題)</text>
 
-                <line x1="545" y1="178" x2="765" y2="178" stroke="#F59E0B" stroke-width="1"/>
+                <rect x="555" y="190" width="100" height="36" rx="4" fill="#DCFCE7" stroke="#22C55E" stroke-width="2"/>
+                <text x="570" y="213" fill="#15803D" font-size="12" font-weight="bold">正 (5題) 🎯</text>
 
-                <text x="545" y="195" fill="#1E293B" font-size="11" font-weight="bold">2. 即時期望值分數算式：</text>
-                <text x="555" y="215" fill="#1E293B" font-size="12" font-weight="bold">29 + (13×0.65) + (8×0.25)</text>
-                <text x="555" y="235" fill="#15803D" font-size="13" font-weight="bold">= 39.4 題 ➜ 78.8 分 ✅ (安全!)</text>
+                <rect x="665" y="190" width="110" height="36" rx="4" fill="#FEE2E2" stroke="#EF4444" stroke-width="2"/>
+                <text x="680" y="213" fill="#B91C1C" font-size="13" font-weight="bold">8 題 🔻缺口!</text>
 
-                <rect x="545" y="248" width="220" height="55" rx="6" fill="#FEF3C7" stroke="#F59E0B"/>
-                <text x="553" y="268" fill="#92400E" font-size="11" font-weight="bold">🎯 低信心 8 題卡位執行：</text>
-                <text x="553" y="288" fill="#B91C1C" font-size="11" font-weight="bold">全數盲猜最欠缺之 (3) 選項！</text>
+                <!-- Grid Row 4: Option (4)/D -->
+                <rect x="25" y="235" width="160" height="36" rx="4" fill="#FFFBEB" stroke="#CBD5E1"/>
+                <text x="35" y="258" fill="#1E293B" font-size="12" font-weight="bold">選項 (4) / D</text>
+                
+                <rect x="195" y="235" width="170" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="210" y="258" fill="#1E293B" font-size="12">正 一 (6題)</text>
+
+                <rect x="375" y="235" width="170" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="390" y="258" fill="#1E293B" font-size="12">一 (1題)</text>
+
+                <rect x="555" y="235" width="100" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="580" y="258" fill="#1E293B" font-size="12">一 (1題)</text>
+
+                <rect x="665" y="235" width="110" height="36" rx="4" fill="#FEF3C7" stroke="#F59E0B"/>
+                <text x="690" y="258" fill="#1E293B" font-size="13" font-weight="bold">8 題</text>
+
+                <!-- Bottom Summary Row -->
+                <rect x="25" y="280" width="160" height="30" rx="4" fill="#0F172A"/>
+                <text x="55" y="300" fill="#93C5FD" font-size="12" font-weight="bold">👉【區間小計】</text>
+
+                <rect x="195" y="280" width="170" height="30" rx="4" fill="#DCFCE7"/>
+                <text x="235" y="300" fill="#15803D" font-size="12" font-weight="bold">29 題 (高信心)</text>
+
+                <rect x="375" y="280" width="170" height="30" rx="4" fill="#FEF9C3"/>
+                <text x="415" y="300" fill="#854D0E" font-size="12" font-weight="bold">13 題 (中信心)</text>
+
+                <rect x="555" y="280" width="100" height="30" rx="4" fill="#FEE2E2"/>
+                <text x="570" y="300" fill="#991B1B" font-size="12" font-weight="bold">8 題 (盲猜)</text>
+
+                <rect x="665" y="280" width="110" height="30" rx="4" fill="#FEF3C7"/>
+                <text x="675" y="300" fill="#854D0E" font-size="12" font-weight="bold">總計 50 題 ✅</text>
+
+                <!-- Footer Calc Note -->
+                <rect x="25" y="318" width="750" height="28" rx="4" fill="#FEF9C3" stroke="#F59E0B"/>
+                <text x="35" y="336" fill="#92400E" font-size="11" font-weight="bold">🧮 算式: 29題×1.0 + 13題×0.65 + 8題×0.25 = 39.4 題 (78.8分安全及格!) ｜ 🎯 對照【選項總數】，(3)僅8題最落後，第四層盲猜全投 (3)！</text>
             </svg>
-            <div class="svg-label">圖 2：實務版草稿紙「4 選項 (1/2/3/4) × 3 分類 (高/中/低) 與期望值公式」完整結構圖（可由 Banana / ChatGPT 後續優化）</div>
+            <div class="svg-label">圖 2：實務版草稿紙「3 區間 (高/中/低) × 4 選項 (1/2/3/4) 正字與【選項總數】雙向劃記矩陣圖」（可由 Banana / ChatGPT 後續優化）</div>
+        </div>
+
         </div>
 
         </div>
@@ -495,23 +547,45 @@
     </section>
 
     <!-- SECTION 3: Strategic Decision Matrix -->
+    
+    <!-- SECTION 3: Sequential 4-in-1 Strategy Matrix -->
     <section id="sec-matrix" class="strategy-card">
         <div class="card-icon-title">
             <div class="icon-box"><i class="bi bi-lightning-charge"></i></div>
-            <span>3. 三合一勝率解題矩陣 (統計數據實戰套用)</span>
+            <span>3. 四合一順序遞進解題與猜題矩陣 (最好用的放優先 ➔ 第四層配比卡位兜底)</span>
         </div>
 
         <p class="text-light opacity-90 mb-4">
-            當第一輪刷題完成後，在第二輪面對中度猶豫 (△) 與低度盲猜 (❓) 題目時，請套用以下三大統計規律組成的 <strong>高勝率解題矩陣</strong>：
+            當第一輪刷題完成後，在第二輪面對中度猶豫 (△) 與低度盲猜 (❓) 題目時，請依據<strong>「最好用的放優先」</strong>原則，按順序遞進套用以下四合一策略矩陣：
         </p>
 
-        <!-- Strategy Grid Cards -->
+        <!-- Strategy Grid Cards in Priority Order -->
         <div class="row g-4 mb-4">
-            <!-- Strategy 1 -->
+            <!-- Priority 1 (Best & Fastest) -->
+            <div class="col-md-6">
+                <div class="p-3 border border-danger rounded-3 bg-black bg-opacity-30 h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h6 class="text-danger fw-bold mb-0">
+                            <span class="badge bg-danger me-1">優先級 1 (最好用)</span>死穴關鍵字排除法
+                        </h6>
+                        <span class="badge-trap">踩坑率 > 90%</span>
+                    </div>
+                    <p class="small text-muted mb-2">
+                        <strong>統計依據：</strong>出題委員撰寫錯誤選項時，常使用「`以提升...`」、「`以降低...`」、「`使模型...`」等目的誘答模板，或「`完全`」、「`不需要`」等絕對詞。
+                    </p>
+                    <div class="small text-warning">
+                        <strong>考場實施：</strong>選項中看到「完全」(100%錯)、「不需要」(100%錯)、「以提升」(96.3%錯)、「無法」(92.1%錯)，直接劃掉一秒排除！
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority 2 (Highest Win Rate) -->
             <div class="col-md-6">
                 <div class="p-3 border border-primary rounded-3 bg-black bg-opacity-30 h-100">
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <h6 class="text-primary fw-bold mb-0"><i class="bi bi-text-paragraph me-1"></i>策略 A：最長選項黃金定律</h6>
+                        <h6 class="text-primary fw-bold mb-0">
+                            <span class="badge bg-primary me-1">優先級 2 (高勝率)</span>最長選項黃金定律
+                        </h6>
                         <span class="badge-win">勝率 50.67%</span>
                     </div>
                     <p class="small text-muted mb-2">
@@ -523,27 +597,13 @@
                 </div>
             </div>
 
-            <!-- Strategy 2 -->
-            <div class="col-md-6">
-                <div class="p-3 border border-danger rounded-3 bg-black bg-opacity-30 h-100">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                        <h6 class="text-danger fw-bold mb-0"><i class="bi bi-x-circle me-1"></i>策略 B：死穴關鍵字排除法</h6>
-                        <span class="badge-trap">踩坑率 > 90%</span>
-                    </div>
-                    <p class="small text-muted mb-2">
-                        <strong>統計依據：</strong>出題委員撰寫錯誤選項時，常使用「`以提升...`」、「`以降低...`」、「`使模型...`」等目的誘答模板，或「`完全`」、「`不需要`」等絕對詞。
-                    </p>
-                    <div class="small text-warning">
-                        <strong>考場實施：</strong>選項中看到「完全」(100%錯)、「不需要」(100%錯)、「以提升」(96.3%錯)、「無法」(92.1%錯)，直接劃掉！
-                    </div>
-                </div>
-            </div>
-
-            <!-- Strategy 3 -->
+            <!-- Priority 3 (Positive Guidance) -->
             <div class="col-md-6">
                 <div class="p-3 border border-success rounded-3 bg-black bg-opacity-30 h-100">
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <h6 class="text-success fw-bold mb-0"><i class="bi bi-check2-circle me-1"></i>策略 C：正向解答詞優先法</h6>
+                        <h6 class="text-success fw-bold mb-0">
+                            <span class="badge bg-success me-1">優先級 3 (正向導向)</span>正向解答詞優先法
+                        </h6>
                         <span class="badge-win">勝率 44%~66%</span>
                     </div>
                     <p class="small text-muted mb-2">
@@ -555,25 +615,25 @@
                 </div>
             </div>
 
-            <!-- Strategy 4 -->
+            <!-- Priority 4 (Final Fallback Safety Net) -->
             <div class="col-md-6">
                 <div class="p-3 border border-warning rounded-3 bg-black bg-opacity-30 h-100">
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <h6 class="text-warning fw-bold mb-0"><i class="bi bi-bar-chart-steps me-1"></i>策略 D：配比卡位猜題法</h6>
-                        <span class="badge-win">均勻配比卡位</span>
+                        <h6 class="text-warning fw-bold mb-0">
+                            <span class="badge bg-warning text-dark me-1">優先級 4 (最後兜底)</span>配比卡位猜題法
+                        </h6>
+                        <span class="badge-win">前三者之後套用</span>
                     </div>
                     <p class="small text-muted mb-2">
                         <strong>統計依據：</strong>官方 50 題試卷中，(1), (2), (3), (4) 各約出現 12~13 題 (24%~26%)，配比極致平衡。
                     </p>
                     <div class="small text-warning">
-                        <strong>考場實施：</strong>清點草稿紙上高信心 (⭕) 答案個數，對完全不會的低信心 (❓) 題目，全猜劃記中最少出現的那個字母！
+                        <strong>考場實施：</strong>前三層用完後，針對剩餘完全無思路的低信心 (❓) 題目，對照草稿紙【選項總數】，全猜最缺口落後之字母！
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Keyword Interactive Lookup Filter -->
-        <div class="mt-4">
+<div class="mt-4">
             <h6 class="fw-bold text-white mb-2"><i class="bi bi-search me-1"></i>關鍵字踩坑/勝率即時查詢器</h6>
             <input type="text" id="kw-search" class="form-control form-control-sm bg-dark text-white border-secondary mb-3" placeholder="輸入關鍵字 (例如: 完全, 權衡, 以提升, RAG, 無法)..." oninput="app.filterKeywords()">
             
