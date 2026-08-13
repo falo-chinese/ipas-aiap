@@ -703,40 +703,51 @@
             本指南全量分析初階 3 個梯次（114年第4梯次、115年第1梯次、115年第2梯次，共 300 題 / 1,200 個選項）之數據庫，為您導出客觀且精確的統計圖表：
         </p>
 
-        <!-- SVG 3: Option Length Distribution Bar Chart -->
+        
+        <!-- SVG 3: Option Length Distribution Bar Chart (Fixed Layout No Overlap) -->
         <div class="svg-container">
-            <svg viewBox="0 0 800 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0" y="0" width="800" height="220" fill="#090D16" rx="8"/>
-                <text x="30" y="30" fill="#93C5FD" font-size="14" font-weight="bold">初階 300 題：正確答案在選項字數長度名次中的分布 (名次由長到短)</text>
+            <svg viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="800" height="240" fill="#090D16" rx="8"/>
                 
-                <line x1="80" y1="170" x2="750" y2="170" stroke="#334155" stroke-width="1"/>
-                <line x1="80" y1="120" x2="750" y2="120" stroke="#334155" stroke-width="1" stroke-dasharray="2 2"/>
-                <line x1="80" y1="70" x2="750" y2="70" stroke="#334155" stroke-width="1" stroke-dasharray="2 2"/>
+                <!-- Chart Title -->
+                <text x="25" y="30" fill="#93C5FD" font-size="13" font-weight="bold">初階 300 題：正確答案在選項字數長度名次中的分布 (名次由長到短)</text>
+                
+                <!-- Highlights Badge Top Right -->
+                <rect x="470" y="12" width="305" height="26" rx="4" fill="#22C55E" fill-opacity="0.15" stroke="#22C55E"/>
+                <text x="480" y="29" fill="#4ADE80" font-size="11" font-weight="bold">🎯 前 2 長選項合計涵蓋 73.00% 的正確答案！</text>
 
-                <rect x="120" y="55" width="100" height="115" rx="6" fill="#2563EB"/>
-                <text x="145" y="48" fill="#60A5FA" font-size="13" font-weight="bold">46.67%</text>
-                <text x="145" y="85" fill="#FFF" font-size="11">(140題)</text>
-                <text x="135" y="190" fill="#E2E8F0" font-size="12" font-weight="bold">第 1 長 (最長)</text>
+                <!-- Grid Lines -->
+                <line x1="70" y1="180" x2="760" y2="180" stroke="#334155" stroke-width="1"/>
+                <line x1="70" y1="130" x2="760" y2="130" stroke="#334155" stroke-width="1" stroke-dasharray="2 2"/>
+                <line x1="70" y1="80" x2="760" y2="80" stroke="#334155" stroke-width="1" stroke-dasharray="2 2"/>
 
-                <rect x="280" y="105" width="100" height="65" rx="6" fill="#3B82F6"/>
-                <text x="305" y="98" fill="#93C5FD" font-size="13" font-weight="bold">26.33%</text>
-                <text x="305" y="125" fill="#FFF" font-size="11">(79題)</text>
-                <text x="305" y="190" fill="#E2E8F0" font-size="12" font-weight="bold">第 2 長</text>
+                <!-- Bar 1: Rank 1 (Longest) -->
+                <rect x="110" y="65" width="100" height="115" rx="6" fill="#2563EB"/>
+                <text x="135" y="58" fill="#60A5FA" font-size="13" font-weight="bold">46.67%</text>
+                <text x="135" y="95" fill="#FFF" font-size="11">(140題)</text>
+                <text x="125" y="200" fill="#E2E8F0" font-size="12" font-weight="bold">第 1 長 (最長)</text>
 
-                <rect x="440" y="130" width="100" height="40" rx="6" fill="#64748B"/>
-                <text x="465" y="123" fill="#CBD5E1" font-size="13" font-weight="bold">16.00%</text>
-                <text x="465" y="150" fill="#FFF" font-size="11">(48題)</text>
-                <text x="465" y="190" fill="#E2E8F0" font-size="12" font-weight="bold">第 3 長</text>
+                <!-- Bar 2: Rank 2 -->
+                <rect x="270" y="115" width="100" height="65" rx="6" fill="#3B82F6"/>
+                <text x="295" y="108" fill="#93C5FD" font-size="13" font-weight="bold">26.33%</text>
+                <text x="295" y="135" fill="#FFF" font-size="11">(79題)</text>
+                <text x="295" y="200" fill="#E2E8F0" font-size="12" font-weight="bold">第 2 長</text>
 
-                <rect x="600" y="143" width="100" height="27" rx="6" fill="#EF4444"/>
-                <text x="625" y="136" fill="#F87171" font-size="13" font-weight="bold">11.00%</text>
-                <text x="625" y="160" fill="#FFF" font-size="10">(33題)</text>
-                <text x="615" y="190" fill="#E2E8F0" font-size="12" font-weight="bold">第 4 長 (最短)</text>
+                <!-- Bar 3: Rank 3 -->
+                <rect x="430" y="140" width="100" height="40" rx="6" fill="#64748B"/>
+                <text x="455" y="133" fill="#CBD5E1" font-size="13" font-weight="bold">16.00%</text>
+                <text x="455" y="160" fill="#FFF" font-size="11">(48題)</text>
+                <text x="455" y="200" fill="#E2E8F0" font-size="12" font-weight="bold">第 3 長</text>
 
-                <rect x="105" y="15" width="290" height="30" rx="4" fill="#22C55E" fill-opacity="0.15" stroke="#22C55E"/>
-                <text x="115" y="35" fill="#4ADE80" font-size="12" font-weight="bold">🎯 前 2 長選項合計涵蓋 73.00% 的正確答案！</text>
+                <!-- Bar 4: Rank 4 (Shortest) -->
+                <rect x="590" y="153" width="100" height="27" rx="6" fill="#EF4444"/>
+                <text x="615" y="146" fill="#F87171" font-size="13" font-weight="bold">11.00%</text>
+                <text x="615" y="170" fill="#FFF" font-size="10">(33題)</text>
+                <text x="605" y="200" fill="#E2E8F0" font-size="12" font-weight="bold">第 4 長 (最短)</text>
             </svg>
             <div class="svg-label">圖 3：正確答案在選項字數長度排序中的名次分布直方圖</div>
+        </div>
+
         </div>
 
         <!-- A1 vs A2 Comparative Analysis Section -->
