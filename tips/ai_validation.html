@@ -277,34 +277,32 @@
         </div>
     </section>
 
-        <!-- SECTION 2: AI Reviews Summary & Full Report Modal/Download -->
+            <!-- SECTION 2: AI Reviews Summary & Separate Independent Full Reports -->
     <section class="strategy-card">
-        <div class="card-icon-title d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-2">
-                <div class="icon-box" style="background:#d97706;"><i class="bi bi-chat-left-quote-fill"></i></div>
-                <span>2. 兩大頂級 AI 審核報告 (重點摘要與完整檢視)</span>
-            </div>
-            <div>
-                <a href="AI_Peer_Review_Full_Reports.txt" download class="btn btn-sm btn-outline-warning text-nowrap py-1 px-2" style="font-size:0.78rem;">
-                    <i class="bi bi-download me-1"></i>下載完整 TXT 報告
-                </a>
-            </div>
+        <div class="card-icon-title mb-2">
+            <div class="icon-box" style="background:#d97706;"><i class="bi bi-chat-left-quote-fill"></i></div>
+            <span>2. 兩大頂級 AI 獨立原始審核報告 (獨立閱讀與獨立下載)</span>
         </div>
 
         <p class="small text-muted mb-3" style="font-size:0.82rem;">
-            以下為兩大 AI 獨立重算數據後導出的重點摘要。點擊卡片右上方按鈕即可展開查看無刪減之完整原始對話與審核細節：
+            以下為兩大 AI 獨立重算數據導出之重點摘要。兩者內容均獨立拆分，可個別展開線上閱讀或下載專屬 TXT 報告檔：
         </p>
 
-        <!-- Claude Executive Summary Card -->
+        <!-- Claude Fable 5.0 Card -->
         <div class="p-3 border border-warning rounded-3 bg-black bg-opacity-40 mb-3">
-            <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2 mb-2">
                 <div class="d-flex align-items-center gap-2">
                     <span class="badge-model-claude">Claude Fable 5.0</span>
-                    <h6 class="fw-bold text-warning mb-0" style="font-size:0.95rem;">Claude 重點摘要審核報告</h6>
+                    <h6 class="fw-bold text-warning mb-0" style="font-size:0.95rem;">Claude Fable 5.0 獨立審核報告</h6>
                 </div>
-                <button class="btn btn-sm btn-warning text-dark font-weight-bold py-1 px-3" data-bs-toggle="modal" data-bs-target="#modal-claude" style="font-size:0.78rem;">
-                    <i class="bi bi-book-half me-1"></i>閱讀完整回覆
-                </button>
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-sm btn-warning text-dark font-weight-bold py-1 px-3" data-bs-toggle="modal" data-bs-target="#modal-claude" style="font-size:0.78rem;">
+                        <i class="bi bi-book-half me-1"></i>閱讀 Claude 完整回覆
+                    </button>
+                    <a href="Claude_Fable5_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-warning text-nowrap py-1 px-2" style="font-size:0.78rem;">
+                        <i class="bi bi-download me-1"></i>下載 Claude TXT
+                    </a>
+                </div>
             </div>
             
             <ul class="small text-muted mb-0 ps-3" style="font-size:0.8rem; line-height:1.6;">
@@ -315,16 +313,21 @@
             </ul>
         </div>
 
-        <!-- ChatGPT Executive Summary Card -->
+        <!-- ChatGPT 5.6 Sol Card -->
         <div class="p-3 border border-success rounded-3 bg-black bg-opacity-40">
-            <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2 mb-2">
                 <div class="d-flex align-items-center gap-2">
                     <span class="badge-model-chatgpt">ChatGPT 5.6 Sol</span>
-                    <h6 class="fw-bold text-success mb-0" style="font-size:0.95rem;">ChatGPT 重點摘要審核報告</h6>
+                    <h6 class="fw-bold text-success mb-0" style="font-size:0.95rem;">ChatGPT 5.6 Sol 獨立審核報告</h6>
                 </div>
-                <button class="btn btn-sm btn-success text-dark font-weight-bold py-1 px-3" data-bs-toggle="modal" data-bs-target="#modal-chatgpt" style="font-size:0.78rem;">
-                    <i class="bi bi-book-half me-1"></i>閱讀完整回覆
-                </button>
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-sm btn-success text-dark font-weight-bold py-1 px-3" data-bs-toggle="modal" data-bs-target="#modal-chatgpt" style="font-size:0.78rem;">
+                        <i class="bi bi-book-half me-1"></i>閱讀 ChatGPT 完整回覆
+                    </button>
+                    <a href="ChatGPT_5.6_Sol_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-success text-nowrap py-1 px-2" style="font-size:0.78rem;">
+                        <i class="bi bi-download me-1"></i>下載 ChatGPT TXT
+                    </a>
+                </div>
             </div>
             
             <ul class="small text-muted mb-0 ps-3" style="font-size:0.8rem; line-height:1.6;">
@@ -342,14 +345,16 @@
             <div class="modal-content bg-dark text-white border-warning">
                 <div class="modal-header border-secondary">
                     <h6 class="modal-title font-weight-bold text-warning">
-                        <i class="bi bi-robot me-1"></i>Claude Fable 5.0 完整審核與驗算原始回覆
+                        <i class="bi bi-robot me-1"></i>Claude Fable 5.0 獨立審核與驗算原始回覆 (全量無刪減)
                     </h6>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body raw-review-box" style="background:#090d16; font-size:0.82rem; line-height:1.7;">【好消息：大部分數據是真的、可重現的】
+                <div class="modal-body raw-review-box" style="background:#090d16; font-size:0.82rem; line-height:1.7;">我把 tips/index.html 全文讀完，並且直接用你同資料夾裡的 600 題 Master 題庫 CSV 把頁面上的統計全部重算了一遍。以下是我的審核觀點。
+
+先說好消息：大部分數據是真的、可重現的
 我用 A1+A2 共 300 題實際驗算，這些全部吻合：關鍵字表 13 個詞（完全 15次/0勝、無法 38次/92.1%踩坑、以提升 27次/96.3%、RAG 18次/44.4%⋯）逐一命中；A1/A2 死穴詞拆分（完全 5/5 與 10/10、以提升 15/16 與 11/11、無法 14/16 與 21/22）也完全正確；「最長選項 152 題 (50.67%)」正確；四選項答案配比大致平衡也屬實。這比市面上多數「猜題攻略」扎實得多，值得肯定。
 
-【最大的問題：選項長度統計「平手處理」三套算法混用，導致頁面自相矛盾】
+最大的問題：選項長度統計「平手處理」三套算法混用，導致頁面自相矛盾
 300 題中有 27 題的正解與其他選項字數平手，所以平手怎麼算影響很大。我重算後發現頁面同時混用了三套規則：
 1. 圖 3 直方圖（140題/46.67%、前2長73.00%、最短33題/11%）＝平手時按選項序號排先後
 2. 優先級 2 卡片的「152 題 (50.67%)」＝平手也算最長；但同一張卡片又引用 73.0% ——注意 50.67% + 26.33% ≠ 73%，同一張卡片內部就對不起來
@@ -371,8 +376,8 @@
 【其他觀察】
 內容定位上，CBT 介面與三色燈解說、先導向官方資源的做法都很好；但整頁以「猜題」為敘事主軸，對教學品牌是兩面刃，建議加一句「策略為輔、實力為本」之類的定位聲明。技術面上，建議讓所有數字由單一 JS 資料物件驅動。題庫下載區建議註明「試題來源為 iPAS 官方公告、僅供教學使用」以降低著作權疑慮。</div>
                 <div class="modal-footer border-secondary">
-                    <a href="AI_Peer_Review_Full_Reports.txt" download class="btn btn-sm btn-outline-warning text-nowrap">
-                        <i class="bi bi-download me-1"></i>下載 TXT 檔
+                    <a href="Claude_Fable5_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-warning text-nowrap">
+                        <i class="bi bi-download me-1"></i>下載 Claude 獨立 TXT 檔
                     </a>
                     <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">關閉</button>
                 </div>
@@ -386,7 +391,7 @@
             <div class="modal-content bg-dark text-white border-success">
                 <div class="modal-header border-secondary">
                     <h6 class="modal-title font-weight-bold text-success">
-                        <i class="bi bi-robot me-1"></i>ChatGPT 5.6 Sol 完整審核與評估原始回覆
+                        <i class="bi bi-robot me-1"></i>ChatGPT 5.6 Sol 獨立審核與評估原始回覆 (全量無刪減)
                     </h6>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -415,8 +420,8 @@
 3. 答案配比：完全無法判斷時的最後弱參考。
 最後，建議立即替換「大數據、證明、100%、勝率、安全通過、無腦、絕不」等過度承諾詞。資料中的傾向很有意思，但最需要做的是把「有趣且可重現的歷史相關性」，誠實地留在它應有的位置，不要包裝成已驗證的未來命中率。</div>
                 <div class="modal-footer border-secondary">
-                    <a href="AI_Peer_Review_Full_Reports.txt" download class="btn btn-sm btn-outline-success text-nowrap">
-                        <i class="bi bi-download me-1"></i>下載 TXT 檔
+                    <a href="ChatGPT_5.6_Sol_Peer_Review_Report.txt" download class="btn btn-sm btn-outline-success text-nowrap">
+                        <i class="bi bi-download me-1"></i>下載 ChatGPT 獨立 TXT 檔
                     </a>
                     <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">關閉</button>
                 </div>
