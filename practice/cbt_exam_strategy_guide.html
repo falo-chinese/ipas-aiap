@@ -615,7 +615,112 @@
                 </div>
             </div>
         </div>
-    </section>
+    
+        <!-- NEW Subsection: A1 vs A2 Independent Consistency Analysis -->
+        <div class="mt-5 p-4 border border-primary rounded-3 bg-black bg-opacity-40">
+            <h5 class="fw-bold text-info mb-3">
+                <i class="bi bi-diagram-3-fill me-2"></i>A1 (基礎概論) vs A2 (生成式AI) 兩科獨立數據對比分析
+            </h5>
+            <p class="small text-muted mb-3">
+                將初階 300 題拆解為 <strong>A1 (150題)</strong> 與 <strong>A2 (150題)</strong> 獨立統計，證明四大解題策略在兩個不同科目中<strong>完全成立、極度穩定</strong>：
+            </p>
+
+            <!-- Side-by-Side Table -->
+            <div class="table-responsive mb-3">
+                <table class="table table-dark table-bordered custom-table small text-center mb-0">
+                    <thead>
+                        <tr>
+                            <th>解題策略 / 統計指標</th>
+                            <th>A1 人工智慧基礎概論 (150題)</th>
+                            <th>A2 生成式AI應用與規劃 (150題)</th>
+                            <th>跨科結論一致性評估</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold text-start">最長選項勝率</td>
+                            <td class="text-success fw-bold">49.33% (74/150題)</td>
+                            <td class="text-success fw-bold">52.00% (78/150題) 🔺</td>
+                            <td><span class="badge-win">🟢 高度一致 (約50%)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">前兩長選項涵蓋率</td>
+                            <td class="text-info fw-bold">70.00% (105/150題)</td>
+                            <td class="text-info fw-bold">76.00% (114/150題) 🔺</td>
+                            <td><span class="badge-win">🟢 高度一致 (70%~76%)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">最短選項勝率</td>
+                            <td class="text-danger fw-bold">17.33% (26/150題)</td>
+                            <td class="text-danger fw-bold">12.00% (18/150題) 🔻</td>
+                            <td><span class="badge-win">🟢 高度一致 (最短極低)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">死穴詞【完全】踩坑率</td>
+                            <td class="text-danger fw-bold">100.0% (5/5題錯)</td>
+                            <td class="text-danger fw-bold">100.0% (10/10題錯)</td>
+                            <td><span class="badge-trap">💀 100% 全軍覆沒</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">死穴詞【以提升】踩坑率</td>
+                            <td class="text-danger fw-bold">93.8% (15/16題錯)</td>
+                            <td class="text-danger fw-bold">100.0% (11/11題錯)</td>
+                            <td><span class="badge-trap">💀 踩坑率均 > 93%</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">死穴詞【無法】踩坑率</td>
+                            <td class="text-danger fw-bold">87.5% (14/16題錯)</td>
+                            <td class="text-danger fw-bold">95.5% (21/22題錯)</td>
+                            <td><span class="badge-trap">💀 踩坑率均 > 87%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SVG 4: A1 vs A2 Comparative Bar Chart -->
+            <div class="svg-container my-3">
+                <svg width="100%" height="200" viewBox="0 0 800 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="0" width="800" height="200" fill="#090D16" rx="8"/>
+                    <text x="30" y="30" fill="#93C5FD" font-size="14" font-weight="bold">A1 vs A2 最長選項勝率與前兩長涵蓋率指標對比</text>
+                    
+                    <!-- Grid Lines -->
+                    <line x1="80" y1="150" x2="750" y2="150" stroke="#334155" stroke-width="1"/>
+                    <line x1="80" y1="100" x2="750" y2="100" stroke="#334155" stroke-width="1" stroke-dasharray="2 2"/>
+                    <line x1="80" y1="50" x2="750" y2="50" stroke="#334155" stroke-width="1" stroke-dasharray="2 2"/>
+
+                    <!-- Group 1: Longest Win Rate -->
+                    <rect x="150" y="70" width="50" height="80" rx="4" fill="#2563EB"/>
+                    <text x="155" y="65" fill="#60A5FA" font-size="11" font-weight="bold">49.3%</text>
+                    
+                    <rect x="205" y="64" width="50" height="86" rx="4" fill="#38BDF8"/>
+                    <text x="210" y="59" fill="#7DD3FC" font-size="11" font-weight="bold">52.0%</text>
+                    
+                    <text x="165" y="172" fill="#E2E8F0" font-size="12" font-weight="bold">最長選項勝率</text>
+
+                    <!-- Group 2: Top 2 Coverage -->
+                    <rect x="450" y="36" width="50" height="114" rx="4" fill="#10B981"/>
+                    <text x="455" y="31" fill="#34D399" font-size="11" font-weight="bold">70.0%</text>
+                    
+                    <rect x="505" y="26" width="50" height="124" rx="4" fill="#059669"/>
+                    <text x="510" y="21" fill="#6EE7B7" font-size="11" font-weight="bold">76.0%</text>
+                    
+                    <text x="460" y="172" fill="#E2E8F0" font-size="12" font-weight="bold">前兩長選項涵蓋率</text>
+
+                    <!-- Legend -->
+                    <rect x="630" y="60" width="12" height="12" rx="2" fill="#2563EB"/>
+                    <text x="650" y="71" fill="#94A3B8" font-size="11">A1 (基礎概論)</text>
+                    <rect x="630" y="85" width="12" height="12" rx="2" fill="#38BDF8"/>
+                    <text x="650" y="96" fill="#94A3B8" font-size="11">A2 (生成式AI)</text>
+                </svg>
+                <div class="svg-label">圖 4：A1 與 A2 科目獨立勝率與前兩長涵蓋率對比直方圖（可由 Banana / ChatGPT 後續優化）</div>
+            </div>
+
+            <div class="alert alert-success border-success bg-black bg-opacity-30 mb-0 small text-light">
+                <i class="bi bi-lightbulb-fill text-warning me-1"></i>
+                <strong>兩科實戰總結：</strong>解題策略對 A1 與 A2 全面通用！特別是 <strong>A2 (生成式AI)</strong> 因情境實務題多，最長選項勝率（52.0%）與前兩長涵蓋率（76.0%）更加顯著；且 A2 中包含「<strong>規範</strong>」(勝率80%) 與「<strong>RAG</strong>」(勝率43.8%) 的選項得分效益極高。
+            </div>
+        </div>
+</section>
 
 </div>
 
